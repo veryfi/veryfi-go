@@ -25,7 +25,7 @@ type httpClient struct {
 func NewClientV7(opts *Options) (Client, error) {
 	c, err := createClient(opts)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to create a client")
+		return nil, errors.Wrap(err, "fail to create a client")
 	}
 
 	return &httpClient{
@@ -102,13 +102,22 @@ func (c *httpClient) setBaseURL() *resty.Client {
 // check validates returned response from Veryfi.
 func check(err error, errResp *scheme.Error) error {
 	if err != nil {
-		return errors.Wrap(err, "failed to make a request to Veryfi")
+		return errors.Wrap(err, "fail to make a request to Veryfi")
 	}
 
+	// Parse down to a more meaningful error.
 	if *errResp != (scheme.Error{}) {
+		ctx := ""
+		if len(errResp.Error) > 0 {
+			ctx = errResp.Error
+		}
+		if len(errResp.Message) > 0 {
+			ctx = errResp.Message
+		}
+
 		return errors.Errorf(
-			"got a %v error response from Veryfi at %v, saying %v, with context: %v",
-			errResp.HTTPCode, errResp.Timestamp, errResp.Description, errResp.Context,
+			"get a response from Veryfi with status=%s and context=%s",
+			errResp.Status, ctx,
 		)
 	}
 
