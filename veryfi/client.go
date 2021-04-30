@@ -68,14 +68,6 @@ func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme
 	return *out, nil
 }
 
-// get performs a GET request against Veryfi API.
-// func (c *httpClient) get(uri string, params map[string]string, okScheme interface{}) error {
-// 	errScheme := new(scheme.Error)
-// 	_, err := c.setBaseURL().R().SetQueryParams(params).SetResult(okScheme).SetError(errScheme).Get(uri)
-// 	return check(err, errScheme)
-
-// }
-
 // post performs a POST request against Veryfi API.
 func (c *httpClient) post(uri string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
