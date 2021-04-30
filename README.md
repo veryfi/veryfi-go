@@ -16,6 +16,20 @@ go get github.com/hoanhan101/veryfi-go
 
 If you don't have an account with Veryfi, please go ahead and register here: [https://hub.veryfi.com/signup/api/](https://hub.veryfi.com/signup/api/)
 
+### Setting up the project
+
+For the ease of developing, a `Makefile` is included for several handy commands. Simply issue `make help` for more informations.
+```
+clean                Remove temporary files and build artifacts
+cover                Run unit tests and open the coverage report
+fmt                  Run gofmt on all files
+help                 Print usage information
+lint                 Lint project source files
+test-integration     Run integration tests
+test-unit            Run unit tests
+version              Print the version
+```
+
 ### Go API Client Library
 
 The **veryfi** library can be used to communicate with Veryfi API. All available functionality is described here <https://veryfi.github.io/veryfi-python/reference/veryfi/#client>
