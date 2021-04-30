@@ -27,6 +27,10 @@ lint:  ## Lint project source files
 test-unit:  ## Run unit tests
 	go test -race -cover -run Unit -coverprofile=coverage.out -covermode=atomic ./...
 
+.PHONY: test-integration
+test-integration:  ## Run integration tests
+	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
+
 .PHONY: version
 version: ## Print the version
 	@echo "${PKG_VERSION}"
