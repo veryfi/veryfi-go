@@ -7,6 +7,13 @@ type DocumentUploadOptions struct {
 	DocumentSharedOptions
 }
 
+// DocumentUploadBase64Options describes the query parameters to process a Base64 encoded document.
+type DocumentUploadBase64Options struct {
+	FileData string `json:"file_data,omitempty"`
+
+	DocumentSharedOptions
+}
+
 // DocumentURLOptions describes the query parameters to process a file using a URL.
 type DocumentURLOptions struct {
 	FileURL  string   `json:"file_url,omitempty"`

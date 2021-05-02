@@ -68,6 +68,16 @@ func (c *httpClient) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*
 	return *out, nil
 }
 
+// ProcessDocumentUploadBase64 returns the processed base64 encoded document.
+func (c *httpClient) ProcessDocumentUploadBase64(opts scheme.DocumentUploadBase64Options) (*scheme.Document, error) {
+	out := new(*scheme.Document)
+	if err := c.post(documentURI, "", opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // ProcessDocumentURL returns the processed document using URL.
 func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)

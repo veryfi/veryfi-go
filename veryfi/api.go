@@ -12,6 +12,9 @@ type Client interface {
 	// ProcessDocumentUpload processes a file using a multipart/form-data file upload.
 	ProcessDocumentUpload(scheme.DocumentUploadOptions) (*scheme.Document, error)
 
+	// ProcessDocumentUploadBase64 processes a Base64 encoded document.
+	ProcessDocumentUploadBase64(scheme.DocumentUploadBase64Options) (*scheme.Document, error)
+
 	// ProcessDocumentURL processes a file using a URL.
 	ProcessDocumentURL(scheme.DocumentURLOptions) (*scheme.Document, error)
 }
