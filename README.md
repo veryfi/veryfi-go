@@ -82,3 +82,17 @@ func main() {
 	fmt.Printf("%+v", resp)
 }
 ```
+
+### Testing
+
+To run unit tests:
+```
+make test-unit
+```
+
+To run integration tests, supply your `CLIENT_ID`, `USERNAME`, and `API_KEY` environment variables in [Makefile](Makefile) and run `make test-integration`:
+```
+.PHONY: test-integration
+test-integration:  ## Run integration tests
+	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
+```
