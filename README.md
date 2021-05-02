@@ -4,10 +4,10 @@ The Go client for communicating with the Veryfi OCR API.
 
 ## Installing 
 
-This package can be installed via go get
+This package can be installed by cloning this directory:
 
 ```
-go get github.com/hoanhan101/veryfi-go
+git clone https://github.com/hoanhan101/veryfi-go.git
 ```
 
 ## Developing
