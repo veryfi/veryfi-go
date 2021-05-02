@@ -88,3 +88,26 @@ func TestIntegrationFailInvalidDocument(t *testing.T) {
 	assert.Nil(t, resp)
 	assert.Error(t, err)
 }
+
+func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
+	timeout, _ := time.ParseDuration("10s")
+	client, err := NewClientV7(&Options{
+		ClientID: os.Getenv("CLIENT_ID"),
+		Username: os.Getenv("USERNAME"),
+		APIKey:   os.Getenv("API_KEY"),
+		HTTP: HTTPOptions{
+			Timeout: timeout,
+		},
+	})
+	assert.NotNil(t, client)
+	assert.NoError(t, err)
+
+	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
+		FileURL: "https://templates.invoicehome.com/invoice-template-us-neat-750px.png",
+		DocumentSharedOptions: scheme.DocumentSharedOptions{
+			Tags: []string{"integration", "test"},
+		},
+	})
+	assert.NotNil(t, resp)
+	assert.NoError(t, err)
+}
