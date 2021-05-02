@@ -58,10 +58,20 @@ func (c *httpClient) Config() *Options {
 	return c.options
 }
 
+// ProcessDocumentUpload returns the processed document using file upload.
+func (c *httpClient) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*scheme.Document, error) {
+	out := new(*scheme.Document)
+	if err := c.post(documentURI, opts.FilePath, opts.DocumentSharedOptions, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // ProcessDocumentURL returns the processed document using URL.
 func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
-	if err := c.post(documentURI, opts, out); err != nil {
+	if err := c.post(documentURI, "", opts, out); err != nil {
 		return nil, err
 	}
 
@@ -69,9 +79,9 @@ func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme
 }
 
 // post performs a POST request against Veryfi API.
-func (c *httpClient) post(uri string, body interface{}, okScheme interface{}) error {
+func (c *httpClient) post(uri string, filePath string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
-	_, err := c.setBaseURL().R().
+	request := c.setBaseURL().R().
 		SetBody(body).
 		SetHeaders(map[string]string{
 			"Content-Type":  "application/json",
@@ -80,8 +90,13 @@ func (c *httpClient) post(uri string, body interface{}, okScheme interface{}) er
 			"AUTHORIZATION": fmt.Sprintf("apikey %s:%s", c.options.Username, c.options.APIKey),
 		}).
 		SetResult(okScheme).
-		SetError(errScheme).
-		Post(uri)
+		SetError(errScheme)
+
+	if len(filePath) != 0 {
+		request.SetFile("file", filePath)
+	}
+
+	_, err := request.Post(uri)
 
 	return check(err, errScheme)
 }

@@ -2,8 +2,7 @@ package scheme
 
 // DocumentUploadOptions describes the query parameters to process a multipart/form-data file upload.
 type DocumentUploadOptions struct {
-	FileName string `json:"file_name,omitempty"`
-	File     []byte `json:"file,omitempty"`
+	FilePath string
 
 	DocumentSharedOptions
 }
@@ -18,6 +17,7 @@ type DocumentURLOptions struct {
 
 // DocumentSharedOptions describes the shared query parameters among the processing API.
 type DocumentSharedOptions struct {
+	FileName          string   `json:"file_name,omitempty"`
 	Categories        []string `json:"categories,omitempty"`
 	Tags              []string `json:"tags,omitempty"`
 	MaxPagesToProcess int      `json:"max_pages_to_process,omitempty"`
