@@ -88,11 +88,19 @@ func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme
 	return *out, nil
 }
 
-// post performs a POST request against Veryfi API.
-func (c *httpClient) post(uri string, filePath string, body interface{}, okScheme interface{}) error {
-	errScheme := new(scheme.Error)
-	request := c.setBaseURL().R().
-		SetBody(body).
+// UpdateDocument updates and returns the processed document.
+func (c *httpClient) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {
+	out := new(*scheme.Document)
+	if err := c.put(fmt.Sprintf("%s%s", documentURI, documentID), opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
+// request returns an authorized request to Veryfi API.
+func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
+	return c.setBaseURL().R().
 		SetHeaders(map[string]string{
 			"Content-Type":  "application/json",
 			"Accept":        "application/json",
@@ -101,6 +109,17 @@ func (c *httpClient) post(uri string, filePath string, body interface{}, okSchem
 		}).
 		SetResult(okScheme).
 		SetError(errScheme)
+}
+
+// setBaseURL returns a client that uses Veryfi's base URL.
+func (c *httpClient) setBaseURL() *resty.Client {
+	return c.client.SetHostURL(buildURL(c.options.EnvironmentURL, "api", c.apiVersion))
+}
+
+// post performs a POST request against Veryfi API.
+func (c *httpClient) post(uri string, filePath string, body interface{}, okScheme interface{}) error {
+	errScheme := new(scheme.Error)
+	request := c.request(okScheme, errScheme).SetBody(body)
 
 	if len(filePath) != 0 {
 		request.SetFile("file", filePath)
@@ -111,9 +130,13 @@ func (c *httpClient) post(uri string, filePath string, body interface{}, okSchem
 	return check(err, errScheme)
 }
 
-// setBaseURL returns a client that uses Veryfi's base URL.
-func (c *httpClient) setBaseURL() *resty.Client {
-	return c.client.SetHostURL(buildURL(c.options.EnvironmentURL, "api", c.apiVersion))
+// put performs a PUT request against Veryfi API.
+func (c *httpClient) put(uri string, body interface{}, okScheme interface{}) error {
+	errScheme := new(scheme.Error)
+	request := c.request(okScheme, errScheme).SetBody(body)
+	_, err := request.Put(uri)
+
+	return check(err, errScheme)
 }
 
 // check validates returned response from Veryfi.

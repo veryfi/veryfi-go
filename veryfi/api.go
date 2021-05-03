@@ -17,4 +17,7 @@ type Client interface {
 
 	// ProcessDocumentURL processes a file using a URL.
 	ProcessDocumentURL(scheme.DocumentURLOptions) (*scheme.Document, error)
+
+	// UpdateDocument updates a previously processed document.
+	UpdateDocument(string, scheme.DocumentUpdateOptions) (*scheme.Document, error)
 }

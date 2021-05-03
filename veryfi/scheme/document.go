@@ -33,61 +33,83 @@ type DocumentSharedOptions struct {
 	Async             int      `json:"async,omitempty"`
 }
 
+// DocumentUpdateOptions describes the query parameters to update a document.
+type DocumentUpdateOptions struct {
+	BillToName    string              `json:"bill_to_name,omitempty"`
+	BillToAddress string              `json:"bill_to_address,omitempty"`
+	Category      string              `json:"category,omitempty"`
+	Date          string              `json:"date,omitempty"`
+	DueDate       string              `json:"due_date,omitempty"`
+	InvoiceNumber string              `json:"invoice_number,omitempty"`
+	Subtotal      float64             `json:"subtotal,omitempty"`
+	Tax           float64             `json:"tax,omitempty"`
+	Tip           float64             `json:"tip,omitempty"`
+	Total         float64             `json:"total,omitempty"`
+	Vendor        VendorUpdateOptions `json:"vendor,omitempty"`
+	ExternalID    string              `json:"external_id,omitempty"`
+}
+
+// VendorUpdateOptions describes the update options for vendor.
+type VendorUpdateOptions struct {
+	Name    string `json:"name,omitempty"`
+	Address string `json:"address,omitempty"`
+}
+
 // Document describes the response.
 type Document struct {
-	ABNNumber               string  `json:"abn_number"`
-	AccountNumber           string  `json:"account_number"`
-	BillToAddress           string  `json:"bill_to_address"`
-	BillToName              string  `json:"bill_to_name"`
-	BillToVATNumber         string  `json:"bill_to_vat_number"`
-	CardNumber              string  `json:"card_number"`
-	Category                string  `json:"category"`
-	Created                 string  `json:"created"`
-	CurrencyCode            string  `json:"currency_code"`
-	Date                    string  `json:"date"`
-	DeliveryDate            string  `json:"delivery_date"`
-	Discount                float64 `json:"discount"`
-	DocumentReferenceNumber string  `json:"document_reference_number"`
-	DueDate                 string  `json:"due_date"`
-	ExternalID              string  `json:"external_id"`
-	ID                      int     `json:"id"`
-	ImgFileName             string  `json:"img_file_name"`
-	ImgThumbnailURL         string  `json:"img_thumbnail_url"`
-	ImgURL                  string  `json:"img_url"`
-	Insurance               string  `json:"insurance"`
-	InvoiceNumber           string  `json:"invoice_number"`
-	IsDuplicate             int     `json:"is_duplicate"`
-	LineItems               []LineDocument
-	OCRText                 string  `json:"ocr_text"`
-	OrderDate               string  `json:"order_date"`
-	PaymentDisplayName      string  `json:"payment_display_name"`
-	PaymentTerms            string  `json:"payment_terms"`
-	PaymentType             string  `json:"payment_type"`
-	PhoneNumber             string  `json:"phone_number"`
-	PurchaseOrderNumber     string  `json:"purchase_order_number"`
-	Rounding                float64 `json:"rounding"`
-	ServiceEndDate          string  `json:"service_end_date"`
-	ServiceStartDate        string  `json:"service_start_date"`
-	ShipDate                string  `json:"ship_date"`
-	ShipToAddress           string  `json:"ship_to_address"`
-	ShipToName              string  `json:"ship_to_name"`
-	Shipping                float64 `json:"shipping"`
-	StoreNumber             string  `json:"store_number"`
-	Subtotal                float64 `json:"subtotal"`
-	Tax                     float64 `json:"tax"`
-	TaxLines                []TaxLine
-	Tip                     float64 `json:"tip"`
-	Total                   float64 `json:"total"`
-	TotalWeight             string  `json:"total_weight"`
-	TrackingNumber          string  `json:"tracking_number"`
-	Updated                 string  `json:"updated"`
-	VATNumber               string  `json:"vat_number"`
-	Vendor                  Vendor
-	VendorAccountNumber     string `json:"vendor_account_number"`
-	VendorBankName          string `json:"vendor_bank_name"`
-	VendorBankNumber        string `json:"vendor_bank_number"`
-	VendorBankSwift         string `json:"vendor_bank_swift"`
-	VendorIban              string `json:"vendor_iban"`
+	ABNNumber               string         `json:"abn_number"`
+	AccountNumber           string         `json:"account_number"`
+	BillToAddress           string         `json:"bill_to_address"`
+	BillToName              string         `json:"bill_to_name"`
+	BillToVATNumber         string         `json:"bill_to_vat_number"`
+	CardNumber              string         `json:"card_number"`
+	Category                string         `json:"category"`
+	Created                 string         `json:"created"`
+	CurrencyCode            string         `json:"currency_code"`
+	Date                    string         `json:"date"`
+	DeliveryDate            string         `json:"delivery_date"`
+	Discount                float64        `json:"discount"`
+	DocumentReferenceNumber string         `json:"document_reference_number"`
+	DueDate                 string         `json:"due_date"`
+	ExternalID              string         `json:"external_id"`
+	ID                      int            `json:"id"`
+	ImgFileName             string         `json:"img_file_name"`
+	ImgThumbnailURL         string         `json:"img_thumbnail_url"`
+	ImgURL                  string         `json:"img_url"`
+	Insurance               string         `json:"insurance"`
+	InvoiceNumber           string         `json:"invoice_number"`
+	IsDuplicate             int            `json:"is_duplicate"`
+	LineItems               []LineDocument `json:"line_items"`
+	OCRText                 string         `json:"ocr_text"`
+	OrderDate               string         `json:"order_date"`
+	PaymentDisplayName      string         `json:"payment_display_name"`
+	PaymentTerms            string         `json:"payment_terms"`
+	PaymentType             string         `json:"payment_type"`
+	PhoneNumber             string         `json:"phone_number"`
+	PurchaseOrderNumber     string         `json:"purchase_order_number"`
+	Rounding                float64        `json:"rounding"`
+	ServiceEndDate          string         `json:"service_end_date"`
+	ServiceStartDate        string         `json:"service_start_date"`
+	ShipDate                string         `json:"ship_date"`
+	ShipToAddress           string         `json:"ship_to_address"`
+	ShipToName              string         `json:"ship_to_name"`
+	Shipping                float64        `json:"shipping"`
+	StoreNumber             string         `json:"store_number"`
+	Subtotal                float64        `json:"subtotal"`
+	Tax                     float64        `json:"tax"`
+	TaxLines                []TaxLine      `json:"tax_lines"`
+	Tip                     float64        `json:"tip"`
+	Total                   float64        `json:"total"`
+	TotalWeight             string         `json:"total_weight"`
+	TrackingNumber          string         `json:"tracking_number"`
+	Updated                 string         `json:"updated"`
+	VATNumber               string         `json:"vat_number"`
+	Vendor                  Vendor         `json:"vendor"`
+	VendorAccountNumber     string         `json:"vendor_account_number"`
+	VendorBankName          string         `json:"vendor_bank_name"`
+	VendorBankNumber        string         `json:"vendor_bank_number"`
+	VendorBankSwift         string         `json:"vendor_bank_swift"`
+	VendorIban              string         `json:"vendor_iban"`
 }
 
 // LineDocument describes the line document response.
@@ -98,7 +120,7 @@ type LineDocument struct {
 	ID            int     `json:"id"`
 	Order         int     `json:"order"`
 	Price         float64 `json:"price"`
-	Quantity      int     `json:"quantity"`
+	Quantity      float64 `json:"quantity"`
 	Reference     string  `json:"reference"`
 	Section       string  `json:"section"`
 	SKU           string  `json:"sku"`
