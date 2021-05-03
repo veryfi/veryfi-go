@@ -56,4 +56,13 @@ func main() {
 	for _, doc := range *docs {
 		fmt.Printf("ID: %v\tBill To Name: %v\n", doc.ID, doc.BillToName)
 	}
+
+	// Get a Document
+	resp, err = client.GetDocument(documentID, scheme.DocumentGetOptions{
+		ReturnAuditTrail: "1",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("ID: %v\tBill To Name: %v\n", resp.ID, resp.BillToName)
 }

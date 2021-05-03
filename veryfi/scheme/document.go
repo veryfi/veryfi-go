@@ -66,6 +66,11 @@ type DocumentSearchOptions struct {
 	CreatedLTE string `json:"created__lte"`
 }
 
+// DocumentGetOptions describes the query parameters to get a document.
+type DocumentGetOptions struct {
+	ReturnAuditTrail string `json:"return_audit_trail"`
+}
+
 // Document describes the response.
 type Document struct {
 	ABNNumber               string         `json:"abn_number"`
