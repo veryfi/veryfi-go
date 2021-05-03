@@ -35,12 +35,9 @@ func main() {
 	}
 
 	client, err := veryfi.NewClientV7(&veryfi.Options{
-		// ClientID: "YOUR_CLIENT_ID",
-		// Username: "YOUR_USERNAME",
-		// APIKey:   "YOUR_API_KEY",
-		ClientID: "vrfZz1LVPAlaGpTb9Co29t0yerWpLsc3o0JXgxA",
-		Username: "hoanhan101",
-		APIKey:   "5745c55a456b752ba0d78d673c7c095b",
+		ClientID: "YOUR_CLIENT_ID",
+		Username: "YOUR_USERNAME",
+		APIKey:   "YOUR_API_KEY",
 		HTTP: veryfi.HTTPOptions{
 			Timeout: timeout,
 			Retry: veryfi.RetryOptions{
