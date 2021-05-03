@@ -17,6 +17,11 @@ cover: test-unit  ## Run unit tests and open the coverage report
 fmt:  ## Run gofmt on all files
 	gofmt -s -w .
 
+.PHONY: github-tag
+github-tag:  ## Create and push a tag with the current client version
+	git tag -a ${PKG_VERSION} -m "Veryfi Go Client v${PKG_VERSION}"
+	git push -u origin ${PKG_VERSION}
+
 .PHONY: lint
 lint:  ## Lint project source files
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:v1.39.0 golangci-lint run

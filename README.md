@@ -23,6 +23,7 @@ For the ease of developing, a `Makefile` is included for several handy commands.
 clean                Remove temporary files and build artifacts
 cover                Run unit tests and open the coverage report
 fmt                  Run gofmt on all files
+github-tag           Create and push a tag with the current client version
 help                 Print usage information
 lint                 Lint project source files
 test-integration     Run integration tests
