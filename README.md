@@ -87,7 +87,7 @@ func main() {
 }
 ```
 
-For more examples about different methods to process documents, refer to `examples` directory, or [examples/process.go](examples/process.go) specifically.
+For more examples about different methods to process documents, refer to `examples` directory, or [examples/process/main.go](examples/process/main.go) specifically.
 
 ### Testing
 
