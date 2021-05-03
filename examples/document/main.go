@@ -31,6 +31,7 @@ func main() {
 	}
 
 	documentID := "35239377"
+	deleteDocumentID := "35238926"
 
 	// Update Document
 	resp, err := client.UpdateDocument(documentID, scheme.DocumentUpdateOptions{
@@ -66,7 +67,7 @@ func main() {
 	}
 	fmt.Printf("ID: %v\tBill To Name: %v\n", resp.ID, resp.BillToName)
 
-	deleteDocumentID := "35238926"
+	// Delete a Document
 	err = client.DeleteDocument(deleteDocumentID)
 	if err != nil {
 		log.Fatal(err)
