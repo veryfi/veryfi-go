@@ -65,4 +65,11 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("ID: %v\tBill To Name: %v\n", resp.ID, resp.BillToName)
+
+	deleteDocumentID := "35238926"
+	err = client.DeleteDocument(deleteDocumentID)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Successfully deleted %s\n", deleteDocumentID)
 }

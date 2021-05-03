@@ -26,4 +26,7 @@ type Client interface {
 
 	// GetDocument retrieves a previously processed document.
 	GetDocument(string, scheme.DocumentGetOptions) (*scheme.Document, error)
+
+	// DeleteDocument delete a previously processed document.
+	DeleteDocument(string) error
 }

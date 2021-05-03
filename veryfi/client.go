@@ -118,6 +118,16 @@ func (c *httpClient) GetDocument(documentID string, opts scheme.DocumentGetOptio
 	return *out, nil
 }
 
+// DeleteDocument deletes a processed document.
+func (c *httpClient) DeleteDocument(documentID string) error {
+	err := c.rdelete(fmt.Sprintf("%s%s", documentURI, documentID))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().
@@ -168,6 +178,15 @@ func (c *httpClient) get(uri string, queryParams interface{}, okScheme interface
 	}
 
 	_, err := request.Get(uri)
+
+	return check(err, errScheme)
+}
+
+// rdelete performs a DELETE request against Veryfi API.
+func (c *httpClient) rdelete(uri string) error {
+	errScheme := new(scheme.Error)
+	request := c.request(map[string]string{}, errScheme)
+	_, err := request.Delete(uri)
 
 	return check(err, errScheme)
 }
