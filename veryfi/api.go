@@ -29,4 +29,7 @@ type Client interface {
 
 	// DeleteDocument delete a previously processed document.
 	DeleteDocument(string) error
+
+	// GetLineItems retrieves all line items for a document.
+	GetLineItems(string) (*scheme.Document, error)
 }

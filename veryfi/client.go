@@ -128,6 +128,16 @@ func (c *httpClient) DeleteDocument(documentID string) error {
 	return nil
 }
 
+// GetLineItems returns all line times for a processed document.
+func (c *httpClient) GetLineItems(documentID string) (*scheme.Document, error) {
+	out := new(*scheme.Document)
+	if err := c.get(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), nil, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().
