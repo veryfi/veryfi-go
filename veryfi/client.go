@@ -148,6 +148,16 @@ func (c *httpClient) AddLineItem(documentID string, opts scheme.LineItemOptions)
 	return *out, nil
 }
 
+// GetLineItem returns a line item for a processed document.
+func (c *httpClient) GetLineItem(documentID string, lineItemID string) (*scheme.LineItem, error) {
+	out := new(*scheme.LineItem)
+	if err := c.get(fmt.Sprintf("%s%s%s%s", documentURI, documentID, lineItemURI, lineItemID), nil, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().

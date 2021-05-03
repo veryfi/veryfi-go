@@ -35,4 +35,7 @@ type Client interface {
 
 	// AddLineItem adds a line item to a document.
 	AddLineItem(string, scheme.LineItemOptions) (*scheme.LineItem, error)
+
+	// GetLineItem retrieves a specific line item for a document.
+	GetLineItem(string, string) (*scheme.LineItem, error)
 }
