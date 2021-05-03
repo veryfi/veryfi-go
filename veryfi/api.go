@@ -38,4 +38,7 @@ type Client interface {
 
 	// GetLineItem retrieves a specific line item for a document.
 	GetLineItem(string, string) (*scheme.LineItem, error)
+
+	// UpdateLineItem update an existing line item on a document.
+	UpdateLineItem(string, string, scheme.LineItemOptions) (*scheme.LineItem, error)
 }
