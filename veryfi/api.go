@@ -31,7 +31,7 @@ type Client interface {
 	DeleteDocument(string) error
 
 	// GetLineItems retrieves all line items for a document.
-	GetLineItems(string) (*scheme.Document, error)
+	GetLineItems(string) (*scheme.LineItems, error)
 
 	// AddLineItem adds a line item to a document.
 	AddLineItem(string, scheme.LineItemOptions) (*scheme.LineItem, error)
@@ -44,4 +44,7 @@ type Client interface {
 
 	// DeleteLineItem deletes a line item from a document.
 	DeleteLineItem(string, string) error
+
+	// GetTags retrieves all tags for a document.
+	GetTags(string) (*scheme.Tags, error)
 }

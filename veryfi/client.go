@@ -129,8 +129,8 @@ func (c *httpClient) DeleteDocument(documentID string) error {
 }
 
 // GetLineItems returns all line items for a processed document.
-func (c *httpClient) GetLineItems(documentID string) (*scheme.Document, error) {
-	out := new(*scheme.Document)
+func (c *httpClient) GetLineItems(documentID string) (*scheme.LineItems, error) {
+	out := new(*scheme.LineItems)
 	if err := c.get(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), nil, out); err != nil {
 		return nil, err
 	}
@@ -176,6 +176,16 @@ func (c *httpClient) DeleteLineItem(documentID string, lineItemID string) error 
 	}
 
 	return nil
+}
+
+// GetTags returns all tags for a processed document.
+func (c *httpClient) GetTags(documentID string) (*scheme.Tags, error) {
+	out := new(*scheme.Tags)
+	if err := c.get(fmt.Sprintf("%s%s%s", documentURI, documentID, tagURI), nil, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
 }
 
 // request returns an authorized request to Veryfi API.

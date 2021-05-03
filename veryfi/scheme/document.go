@@ -141,6 +141,11 @@ type Document struct {
 	VendorIban              string     `json:"vendor_iban"`
 }
 
+// LineItems describes the line items in a document response.
+type LineItems struct {
+	LineItems []LineItem `json:"line_items"`
+}
+
 // LineItem describes the line item in a document response.
 type LineItem struct {
 	Date          string  `json:"date"`
@@ -181,4 +186,15 @@ type Vendor struct {
 	VendorRegNumber string `json:"vendor_reg_number"`
 	VendorType      string `json:"vendor_type"`
 	Web             string `json:"web"`
+}
+
+// Tags describes the tags response.
+type Tags struct {
+	Tags []Tag `json:"tags"`
+}
+
+// Tag describes the tag response.
+type Tag struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
