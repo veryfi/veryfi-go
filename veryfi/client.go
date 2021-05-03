@@ -168,6 +168,16 @@ func (c *httpClient) UpdateLineItem(documentID string, lineItemID string, opts s
 	return *out, nil
 }
 
+// DeleteLineItem deletes a line item in a document.
+func (c *httpClient) DeleteLineItem(documentID string, lineItemID string) error {
+	err := c.rdelete(fmt.Sprintf("%s%s%s%s", documentURI, documentID, lineItemURI, lineItemID))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().

@@ -27,7 +27,7 @@ type Client interface {
 	// GetDocument retrieves a previously processed document.
 	GetDocument(string, scheme.DocumentGetOptions) (*scheme.Document, error)
 
-	// DeleteDocument delete a previously processed document.
+	// DeleteDocument deletes a previously processed document.
 	DeleteDocument(string) error
 
 	// GetLineItems retrieves all line items for a document.
@@ -41,4 +41,7 @@ type Client interface {
 
 	// UpdateLineItem update an existing line item on a document.
 	UpdateLineItem(string, string, scheme.LineItemOptions) (*scheme.LineItem, error)
+
+	// DeleteLineItem deletes a line item from a document.
+	DeleteLineItem(string, string) error
 }
