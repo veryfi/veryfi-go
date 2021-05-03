@@ -36,9 +36,9 @@ version              Print the version
 
 ### Go API Client Library
 
-The **veryfi** library can be used to communicate with Veryfi API. All available functionality is described here <https://veryfi.github.io/veryfi-python/reference/veryfi/#client>
+The **Veryfi** library can be used to communicate with Veryfi API. All available functionality is described here <https://pkg.go.dev/github.com/hoanhan101/veryfi-go/veryfi>.
 
-Below is the sample script using **veryfi** to OCR and extract data from a document:
+Below is the sample script using **Veryfi** to OCR and extract data from a document:
 
 ```go
 package main
