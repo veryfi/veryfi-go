@@ -137,3 +137,30 @@ func TestIntegrationSuccessProcessDocumentUpload(t *testing.T) {
 	assert.NotNil(t, resp)
 	assert.NoError(t, err)
 }
+
+func TestIntegrationSuccessProcessDocumentUploadBase64(t *testing.T) {
+	timeout, _ := time.ParseDuration("10s")
+	client, err := NewClientV7(&Options{
+		ClientID: os.Getenv("CLIENT_ID"),
+		Username: os.Getenv("USERNAME"),
+		APIKey:   os.Getenv("API_KEY"),
+		HTTP: HTTPOptions{
+			Timeout: timeout,
+		},
+	})
+	assert.NotNil(t, client)
+	assert.NoError(t, err)
+
+	testpath, _ := os.Getwd()
+	encodedFile, err := Base64EncodeFile(fmt.Sprintf("%s/testdata/invoice1.png", testpath))
+	resp, err := client.ProcessDocumentUploadBase64(scheme.DocumentUploadBase64Options{
+		FileData: encodedFile,
+		DocumentSharedOptions: scheme.DocumentSharedOptions{
+			FileName: "invoice1.png",
+			Tags:     []string{"integration", "test", "upload", "base64"},
+		},
+	})
+
+	assert.NotNil(t, resp)
+	assert.NoError(t, err)
+}

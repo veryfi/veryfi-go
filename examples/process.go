@@ -1,32 +1,13 @@
 package main
 
 import (
-	"bufio"
-	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"os"
 	"time"
 
 	"github.com/hoanhan101/veryfi-go/veryfi"
 	"github.com/hoanhan101/veryfi-go/veryfi/scheme"
 )
-
-func base64EncodeFile(filePath string) (string, error) {
-	f, err := os.Open(filePath)
-	if err != nil {
-		return "", err
-	}
-
-	reader := bufio.NewReader(f)
-	content, err := ioutil.ReadAll(reader)
-	if err != nil {
-		return "", err
-	}
-
-	return base64.StdEncoding.EncodeToString(content), nil
-}
 
 func main() {
 	timeout, err := time.ParseDuration("10s")
@@ -65,7 +46,7 @@ func main() {
 	fmt.Printf("Method 1 - ID: %v\tTotal: %v %v\n", resp.ID, resp.Total, resp.CurrencyCode)
 
 	// Method 2: Process Base64 Encoded Document
-	encodedFile, err := base64EncodeFile(testfile)
+	encodedFile, err := veryfi.Base64EncodeFile(testfile)
 	resp, err = client.ProcessDocumentUploadBase64(scheme.DocumentUploadBase64Options{
 		FileData: encodedFile,
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
