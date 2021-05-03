@@ -1,3 +1,6 @@
+[![Godoc](https://godoc.org/github.com/hoanhan101/veryfi-go/veryfi?status.svg)](https://godoc.org/github.com/hoanhan101/veryfi-go/veryfi)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hoanhan101/veryfi-go)](https://goreportcard.com/report/github.com/hoanhan101/veryfi-go)
+
 # veryfi-go
 
 The Go client for communicating with the Veryfi OCR API.
