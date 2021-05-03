@@ -56,7 +56,7 @@ func main() {
 		FilePath: testfile,
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
 			FileName: "invoice1.png",
-			Tags:     []string{"example", "test", "upload", "base64"},
+			Tags:     []string{"example", "test", "upload"},
 		},
 	})
 	if err != nil {
@@ -82,7 +82,7 @@ func main() {
 	resp, err = client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "https://templates.invoicehome.com/invoice-template-us-neat-750px.png",
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
-			Tags: []string{"electric", "repair", "ny"},
+			Tags: []string{"example", "test", "url"},
 		},
 	})
 	if err != nil {
