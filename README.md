@@ -1,4 +1,4 @@
-[![Godoc](https://godoc.org/github.com/hoanhan101/veryfi-go/veryfi?status.svg)](https://godoc.org/github.com/hoanhan101/veryfi-go/veryfi)
+[![Go Reference](https://pkg.go.dev/badge/github.com/hoanhan101/veryfi-go/veryfi.svg)](https://pkg.go.dev/github.com/hoanhan101/veryfi-go/veryfi)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hoanhan101/veryfi-go)](https://goreportcard.com/report/github.com/hoanhan101/veryfi-go)
 
 # veryfi-go
