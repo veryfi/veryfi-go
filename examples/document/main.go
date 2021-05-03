@@ -31,6 +31,8 @@ func main() {
 	}
 
 	documentID := "35239377"
+
+	// Update Document
 	resp, err := client.UpdateDocument(documentID, scheme.DocumentUpdateOptions{
 		BillToName:    "Hoanh An",
 		BillToAddress: "NY",
@@ -43,4 +45,15 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("ID: %v\tBill To Name: %v\n", resp.ID, resp.BillToName)
+
+	// Search Documents
+	docs, err := client.SearchDocuments(scheme.DocumentSearchOptions{
+		Tag: "example",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, doc := range *docs {
+		fmt.Printf("ID: %v\tBill To Name: %v\n", doc.ID, doc.BillToName)
+	}
 }

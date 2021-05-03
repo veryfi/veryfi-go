@@ -98,6 +98,16 @@ func (c *httpClient) UpdateDocument(documentID string, opts scheme.DocumentUpdat
 	return *out, nil
 }
 
+// SearchDocuments returns processed document with matching queries.
+func (c *httpClient) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.Document, error) {
+	out := new(*[]scheme.Document)
+	if err := c.get(documentURI, opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().
@@ -135,6 +145,15 @@ func (c *httpClient) put(uri string, body interface{}, okScheme interface{}) err
 	errScheme := new(scheme.Error)
 	request := c.request(okScheme, errScheme).SetBody(body)
 	_, err := request.Put(uri)
+
+	return check(err, errScheme)
+}
+
+// get performs a GET request against Veryfi API.
+func (c *httpClient) get(uri string, queryParams interface{}, okScheme interface{}) error {
+	errScheme := new(scheme.Error)
+	request := c.request(okScheme, errScheme).SetQueryParams(structToMap(queryParams))
+	_, err := request.Get(uri)
 
 	return check(err, errScheme)
 }

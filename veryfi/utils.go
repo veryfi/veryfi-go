@@ -3,9 +3,11 @@ package veryfi
 import (
 	"bufio"
 	"encoding/base64"
+	"fmt"
 	"io/ioutil"
 	"net/url"
 	"os"
+	"reflect"
 	"strings"
 )
 
@@ -34,4 +36,22 @@ func buildURL(host string, path ...string) string {
 	}
 
 	return u.String()
+}
+
+// structToMap converts a struct of string fields to a map[string]string.
+func structToMap(s interface{}) map[string]string {
+	out := map[string]string{}
+
+	fields := reflect.TypeOf(s)
+	values := reflect.ValueOf(s)
+
+	for i := 0; i < fields.NumField(); i++ {
+		field := fields.Field(i).Tag.Get("json")
+		value := fmt.Sprint(values.Field(i))
+		if len(value) > 0 {
+			out[field] = value
+		}
+	}
+
+	return out
 }

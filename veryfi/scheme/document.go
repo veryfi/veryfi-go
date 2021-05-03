@@ -55,6 +55,17 @@ type VendorUpdateOptions struct {
 	Address string `json:"address,omitempty"`
 }
 
+// DocumentSearchOptions describes the query parameters to search document.
+type DocumentSearchOptions struct {
+	Q          string `json:"q"`
+	ExternalID string `json:"external_id"`
+	Tag        string `json:"tag"`
+	CreatedGT  string `json:"created__gt"`
+	CreatedGTE string `json:"created__gte"`
+	CreatedLT  string `json:"created__lt"`
+	CreatedLTE string `json:"created__lte"`
+}
+
 // Document describes the response.
 type Document struct {
 	ABNNumber               string         `json:"abn_number"`

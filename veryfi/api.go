@@ -20,4 +20,7 @@ type Client interface {
 
 	// UpdateDocument updates a previously processed document.
 	UpdateDocument(string, scheme.DocumentUpdateOptions) (*scheme.Document, error)
+
+	// SearchDocuments retrieve previously processed documents.
+	SearchDocuments(scheme.DocumentSearchOptions) (*[]scheme.Document, error)
 }
