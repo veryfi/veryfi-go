@@ -128,10 +128,20 @@ func (c *httpClient) DeleteDocument(documentID string) error {
 	return nil
 }
 
-// GetLineItems returns all line times for a processed document.
+// GetLineItems returns all line items for a processed document.
 func (c *httpClient) GetLineItems(documentID string) (*scheme.Document, error) {
 	out := new(*scheme.Document)
 	if err := c.get(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), nil, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
+// AddLineItem returns a added line item for a processed document.
+func (c *httpClient) AddLineItem(documentID string, opts scheme.LineItemOptions) (*scheme.LineItem, error) {
+	out := new(*scheme.LineItem)
+	if err := c.post(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), "", opts, out); err != nil {
 		return nil, err
 	}
 

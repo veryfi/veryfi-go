@@ -32,4 +32,7 @@ type Client interface {
 
 	// GetLineItems retrieves all line items for a document.
 	GetLineItems(string) (*scheme.Document, error)
+
+	// AddLineItem adds a line item to a document.
+	AddLineItem(string, scheme.LineItemOptions) (*scheme.LineItem, error)
 }

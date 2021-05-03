@@ -71,6 +71,19 @@ type DocumentGetOptions struct {
 	ReturnAuditTrail string `json:"return_audit_trail"`
 }
 
+// LineItemOptions describes the query parameters to add a line to a document.
+type LineItemOptions struct {
+	Order         int     `json:"order"`
+	SKU           string  `json:"sku"`
+	Description   string  `json:"description"`
+	Category      string  `json:"category"`
+	Total         float64 `json:"total"`
+	Tax           float64 `json:"tax"`
+	Price         float64 `json:"price"`
+	UnitOfMeasure string  `json:"unit_of_measure"`
+	Quantity      float64 `json:"quantity"`
+}
+
 // Document describes the response.
 type Document struct {
 	ABNNumber               string     `json:"abn_number"`
