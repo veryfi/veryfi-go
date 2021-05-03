@@ -83,6 +83,8 @@ func main() {
 }
 ```
 
+For more examples about different methods to process documents, refer to `examples` directory, or [examples/process.go](examples/process.go) specifically.
+
 ### Testing
 
 To run unit tests:
