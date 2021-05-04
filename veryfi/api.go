@@ -50,4 +50,7 @@ type Client interface {
 
 	// GetGlobalTags retrieves all globally existing tags
 	GetGlobalTags() (*scheme.Tags, error)
+
+	// AddTag adds a tag to a document.
+	AddTag(string, scheme.TagOptions) (*scheme.Tag, error)
 }

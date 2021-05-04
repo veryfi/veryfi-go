@@ -198,3 +198,8 @@ type Tag struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
+
+// TagOptions describes query parameters to update a tag in a document.
+type TagOptions struct {
+	Name string `json:"name"`
+}

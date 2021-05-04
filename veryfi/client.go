@@ -198,6 +198,16 @@ func (c *httpClient) GetGlobalTags() (*scheme.Tags, error) {
 	return *out, nil
 }
 
+// AddTag returns an added tag for a processed document.
+func (c *httpClient) AddTag(documentID string, opts scheme.TagOptions) (*scheme.Tag, error) {
+	out := new(*scheme.Tag)
+	if err := c.put(fmt.Sprintf("%s%s%s", documentURI, documentID, tagURI), opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().
