@@ -53,4 +53,10 @@ type Client interface {
 
 	// AddTag adds a tag to a document.
 	AddTag(string, scheme.TagOptions) (*scheme.Tag, error)
+
+	// DeleteTag deletes a tag from a document.
+	DeleteTag(string, string) error
+
+	// DeleteGlobalTag deletes a tag from all documentx.
+	DeleteGlobalTag(string) error
 }

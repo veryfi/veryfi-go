@@ -208,6 +208,26 @@ func (c *httpClient) AddTag(documentID string, opts scheme.TagOptions) (*scheme.
 	return *out, nil
 }
 
+// DeleteTag deletes a tag from a document.
+func (c *httpClient) DeleteTag(documentID string, tagID string) error {
+	err := c.rdelete(fmt.Sprintf("%s%s%s%s", documentURI, documentID, tagURI, tagID))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// DeleteGlobalTag deletes a tag from all documents.
+func (c *httpClient) DeleteGlobalTag(tagID string) error {
+	err := c.rdelete(fmt.Sprintf("%s%s", globalTagURI, tagID))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().
