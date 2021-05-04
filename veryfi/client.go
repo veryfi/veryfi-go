@@ -188,6 +188,16 @@ func (c *httpClient) GetTags(documentID string) (*scheme.Tags, error) {
 	return *out, nil
 }
 
+// GetGlobalTags returns all globally existing tags.
+func (c *httpClient) GetGlobalTags() (*scheme.Tags, error) {
+	out := new(*scheme.Tags)
+	if err := c.get(globalTagURI, nil, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().

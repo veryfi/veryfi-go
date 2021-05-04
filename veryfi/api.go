@@ -47,4 +47,7 @@ type Client interface {
 
 	// GetTags retrieves all tags for a document.
 	GetTags(string) (*scheme.Tags, error)
+
+	// GetGlobalTags retrieves all globally existing tags
+	GetGlobalTags() (*scheme.Tags, error)
 }

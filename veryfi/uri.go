@@ -9,4 +9,7 @@ const (
 
 	// tagURI is the URI for the `/partner/documents/{DOCUMENT_ID}/tags/` route.
 	tagURI = "/tags/"
+
+	// globalTagURI is the URI for the `/partner/tags/` route.
+	globalTagURI = "/partner/tags/"
 )
