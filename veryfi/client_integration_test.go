@@ -152,7 +152,7 @@ func TestIntegrationSuccessProcessDocumentUploadBase64(t *testing.T) {
 	assert.NoError(t, err)
 
 	testpath, _ := os.Getwd()
-	encodedFile, err := Base64EncodeFile(fmt.Sprintf("%s/testdata/invoice1.png", testpath))
+	encodedFile, _ := Base64EncodeFile(fmt.Sprintf("%s/testdata/invoice1.png", testpath))
 	resp, err := client.ProcessDocumentUploadBase64(scheme.DocumentUploadBase64Options{
 		FileData: encodedFile,
 		DocumentSharedOptions: scheme.DocumentSharedOptions{

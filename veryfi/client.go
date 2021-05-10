@@ -8,8 +8,8 @@ import (
 	"github.com/hoanhan101/veryfi-go/veryfi/scheme"
 )
 
-// httpClient implements a Veryfi API Client.
-type httpClient struct {
+// Client implements a Veryfi API Client.
+type Client struct {
 	// options is the global config options of the client.
 	options *Options
 
@@ -22,13 +22,13 @@ type httpClient struct {
 }
 
 // NewClientV7 returns a new instance of a client for v7 API.
-func NewClientV7(opts *Options) (Client, error) {
+func NewClientV7(opts *Options) (*Client, error) {
 	c, err := createClient(opts)
 	if err != nil {
 		return nil, errors.Wrap(err, "fail to create a client")
 	}
 
-	return &httpClient{
+	return &Client{
 		options:    opts,
 		client:     c,
 		apiVersion: "v7",
@@ -54,12 +54,12 @@ func createClient(opts *Options) (*resty.Client, error) {
 }
 
 // Config returns the client configuration options.
-func (c *httpClient) Config() *Options {
+func (c *Client) Config() *Options {
 	return c.options
 }
 
 // ProcessDocumentUpload returns the processed document using file upload.
-func (c *httpClient) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*scheme.Document, error) {
+func (c *Client) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
 	if err := c.post(documentURI, opts.FilePath, opts.DocumentSharedOptions, out); err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (c *httpClient) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*
 }
 
 // ProcessDocumentUploadBase64 returns the processed base64 encoded document.
-func (c *httpClient) ProcessDocumentUploadBase64(opts scheme.DocumentUploadBase64Options) (*scheme.Document, error) {
+func (c *Client) ProcessDocumentUploadBase64(opts scheme.DocumentUploadBase64Options) (*scheme.Document, error) {
 	out := new(*scheme.Document)
 	if err := c.post(documentURI, "", opts, out); err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func (c *httpClient) ProcessDocumentUploadBase64(opts scheme.DocumentUploadBase6
 }
 
 // ProcessDocumentURL returns the processed document using URL.
-func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
+func (c *Client) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
 	if err := c.post(documentURI, "", opts, out); err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *httpClient) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme
 }
 
 // UpdateDocument updates and returns the processed document.
-func (c *httpClient) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {
+func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
 	if err := c.put(fmt.Sprintf("%s%s", documentURI, documentID), opts, out); err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *httpClient) UpdateDocument(documentID string, opts scheme.DocumentUpdat
 }
 
 // SearchDocuments returns a list of processed documents with matching queries.
-func (c *httpClient) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.Document, error) {
+func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.Document, error) {
 	out := new(*[]scheme.Document)
 	if err := c.get(documentURI, opts, out); err != nil {
 		return nil, err
@@ -109,7 +109,7 @@ func (c *httpClient) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]sche
 }
 
 // GetDocument returns a processed document with matching queries.
-func (c *httpClient) GetDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.Document, error) {
+func (c *Client) GetDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
 	if err := c.get(fmt.Sprintf("%s%s", documentURI, documentID), opts, out); err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *httpClient) GetDocument(documentID string, opts scheme.DocumentGetOptio
 }
 
 // DeleteDocument deletes a processed document.
-func (c *httpClient) DeleteDocument(documentID string) error {
+func (c *Client) DeleteDocument(documentID string) error {
 	err := c.rdelete(fmt.Sprintf("%s%s", documentURI, documentID))
 	if err != nil {
 		return err
@@ -129,7 +129,7 @@ func (c *httpClient) DeleteDocument(documentID string) error {
 }
 
 // GetLineItems returns all line items for a processed document.
-func (c *httpClient) GetLineItems(documentID string) (*scheme.LineItems, error) {
+func (c *Client) GetLineItems(documentID string) (*scheme.LineItems, error) {
 	out := new(*scheme.LineItems)
 	if err := c.get(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), nil, out); err != nil {
 		return nil, err
@@ -139,7 +139,7 @@ func (c *httpClient) GetLineItems(documentID string) (*scheme.LineItems, error) 
 }
 
 // AddLineItem returns a added line item for a processed document.
-func (c *httpClient) AddLineItem(documentID string, opts scheme.LineItemOptions) (*scheme.LineItem, error) {
+func (c *Client) AddLineItem(documentID string, opts scheme.LineItemOptions) (*scheme.LineItem, error) {
 	out := new(*scheme.LineItem)
 	if err := c.post(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), "", opts, out); err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *httpClient) AddLineItem(documentID string, opts scheme.LineItemOptions)
 }
 
 // GetLineItem returns a line item for a processed document.
-func (c *httpClient) GetLineItem(documentID string, lineItemID string) (*scheme.LineItem, error) {
+func (c *Client) GetLineItem(documentID string, lineItemID string) (*scheme.LineItem, error) {
 	out := new(*scheme.LineItem)
 	if err := c.get(fmt.Sprintf("%s%s%s%s", documentURI, documentID, lineItemURI, lineItemID), nil, out); err != nil {
 		return nil, err
@@ -159,7 +159,7 @@ func (c *httpClient) GetLineItem(documentID string, lineItemID string) (*scheme.
 }
 
 // UpdateLineItem returns an updated line item for a processed document.
-func (c *httpClient) UpdateLineItem(documentID string, lineItemID string, opts scheme.LineItemOptions) (*scheme.LineItem, error) {
+func (c *Client) UpdateLineItem(documentID string, lineItemID string, opts scheme.LineItemOptions) (*scheme.LineItem, error) {
 	out := new(*scheme.LineItem)
 	if err := c.put(fmt.Sprintf("%s%s%s%s", documentURI, documentID, lineItemURI, lineItemID), opts, out); err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (c *httpClient) UpdateLineItem(documentID string, lineItemID string, opts s
 }
 
 // DeleteLineItem deletes a line item in a document.
-func (c *httpClient) DeleteLineItem(documentID string, lineItemID string) error {
+func (c *Client) DeleteLineItem(documentID string, lineItemID string) error {
 	err := c.rdelete(fmt.Sprintf("%s%s%s%s", documentURI, documentID, lineItemURI, lineItemID))
 	if err != nil {
 		return err
@@ -179,7 +179,7 @@ func (c *httpClient) DeleteLineItem(documentID string, lineItemID string) error 
 }
 
 // GetTags returns all tags for a processed document.
-func (c *httpClient) GetTags(documentID string) (*scheme.Tags, error) {
+func (c *Client) GetTags(documentID string) (*scheme.Tags, error) {
 	out := new(*scheme.Tags)
 	if err := c.get(fmt.Sprintf("%s%s%s", documentURI, documentID, tagURI), nil, out); err != nil {
 		return nil, err
@@ -189,7 +189,7 @@ func (c *httpClient) GetTags(documentID string) (*scheme.Tags, error) {
 }
 
 // GetGlobalTags returns all globally existing tags.
-func (c *httpClient) GetGlobalTags() (*scheme.Tags, error) {
+func (c *Client) GetGlobalTags() (*scheme.Tags, error) {
 	out := new(*scheme.Tags)
 	if err := c.get(globalTagURI, nil, out); err != nil {
 		return nil, err
@@ -199,7 +199,7 @@ func (c *httpClient) GetGlobalTags() (*scheme.Tags, error) {
 }
 
 // AddTag returns an added tag for a processed document.
-func (c *httpClient) AddTag(documentID string, opts scheme.TagOptions) (*scheme.Tag, error) {
+func (c *Client) AddTag(documentID string, opts scheme.TagOptions) (*scheme.Tag, error) {
 	out := new(*scheme.Tag)
 	if err := c.put(fmt.Sprintf("%s%s%s", documentURI, documentID, tagURI), opts, out); err != nil {
 		return nil, err
@@ -209,7 +209,7 @@ func (c *httpClient) AddTag(documentID string, opts scheme.TagOptions) (*scheme.
 }
 
 // DeleteTag deletes a tag from a document.
-func (c *httpClient) DeleteTag(documentID string, tagID string) error {
+func (c *Client) DeleteTag(documentID string, tagID string) error {
 	err := c.rdelete(fmt.Sprintf("%s%s%s%s", documentURI, documentID, tagURI, tagID))
 	if err != nil {
 		return err
@@ -219,7 +219,7 @@ func (c *httpClient) DeleteTag(documentID string, tagID string) error {
 }
 
 // DeleteGlobalTag deletes a tag from all documents.
-func (c *httpClient) DeleteGlobalTag(tagID string) error {
+func (c *Client) DeleteGlobalTag(tagID string) error {
 	err := c.rdelete(fmt.Sprintf("%s%s", globalTagURI, tagID))
 	if err != nil {
 		return err
@@ -229,7 +229,7 @@ func (c *httpClient) DeleteGlobalTag(tagID string) error {
 }
 
 // request returns an authorized request to Veryfi API.
-func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty.Request {
+func (c *Client) request(okScheme interface{}, errScheme interface{}) *resty.Request {
 	return c.setBaseURL().R().
 		SetHeaders(map[string]string{
 			"Content-Type":  "application/json",
@@ -242,12 +242,12 @@ func (c *httpClient) request(okScheme interface{}, errScheme interface{}) *resty
 }
 
 // setBaseURL returns a client that uses Veryfi's base URL.
-func (c *httpClient) setBaseURL() *resty.Client {
+func (c *Client) setBaseURL() *resty.Client {
 	return c.client.SetHostURL(buildURL(c.options.EnvironmentURL, "api", c.apiVersion))
 }
 
 // post performs a POST request against Veryfi API.
-func (c *httpClient) post(uri string, filePath string, body interface{}, okScheme interface{}) error {
+func (c *Client) post(uri string, filePath string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
 	request := c.request(okScheme, errScheme).SetBody(body)
 
@@ -261,7 +261,7 @@ func (c *httpClient) post(uri string, filePath string, body interface{}, okSchem
 }
 
 // put performs a PUT request against Veryfi API.
-func (c *httpClient) put(uri string, body interface{}, okScheme interface{}) error {
+func (c *Client) put(uri string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
 	request := c.request(okScheme, errScheme).SetBody(body)
 	_, err := request.Put(uri)
@@ -270,7 +270,7 @@ func (c *httpClient) put(uri string, body interface{}, okScheme interface{}) err
 }
 
 // get performs a GET request against Veryfi API.
-func (c *httpClient) get(uri string, queryParams interface{}, okScheme interface{}) error {
+func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
 	request := c.request(okScheme, errScheme)
 	if queryParams != nil {
@@ -283,7 +283,7 @@ func (c *httpClient) get(uri string, queryParams interface{}, okScheme interface
 }
 
 // rdelete performs a DELETE request against Veryfi API.
-func (c *httpClient) rdelete(uri string) error {
+func (c *Client) rdelete(uri string) error {
 	errScheme := new(scheme.Error)
 	request := c.request(map[string]string{}, errScheme)
 	_, err := request.Delete(uri)
