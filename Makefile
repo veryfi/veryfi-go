@@ -1,4 +1,4 @@
-PKG_VERSION := 0.1.5
+PKG_VERSION := 0.1.6
 GIT_COMMIT  ?= $(shell git rev-parse --short HEAD 2> /dev/null || true)
 BUILD_DATE  := $(shell date -u +%Y-%m-%dT%T 2> /dev/null)
 
