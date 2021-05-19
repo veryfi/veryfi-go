@@ -92,7 +92,7 @@ func main() {
 }
 ```
 
-For more examples about different methods to process documents, refer to `examples` directory, or [examples/process/main.go](examples/process/main.go) specifically.
+For more examples about different methods to process documents, refer to the [documentation's examples](https://pkg.go.dev/github.com/hoanhan101/veryfi-go/veryfi#pkg-examples).
 
 ### Testing
 
