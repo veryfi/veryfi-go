@@ -13,6 +13,11 @@ This package can be installed by cloning this directory:
 git clone https://github.com/hoanhan101/veryfi-go.git
 ```
 
+or using `go get`:
+```
+go get github.com/hoanhan101/veryfi-go
+```
+
 ## Developing
 
 ### Obtaining Client ID and user keys
