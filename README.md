@@ -3,7 +3,7 @@
 
 ![Veryfi Logo](https://cdn.veryfi.com/logos/veryfi-logo-wide-github.png)
 
-**veryfi** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/)
+**veryfi-go** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/)
 
 ## Installing 
 
@@ -79,7 +79,7 @@ func main() {
 	}
 
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
-		FileURL: "https://templates.invoicehome.com/invoice-template-us-neat-750px.png",
+		FileURL: "YOUR_HOSTED_FILE_URL",
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
 			Tags: []string{"electric", "repair", "ny"},
 		},
