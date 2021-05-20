@@ -1,9 +1,9 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/veryfi/veryfi-go/veryfi.svg)](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi)
 [![Go Report Card](https://goreportcard.com/badge/github.com/veryfi/veryfi-go)](https://goreportcard.com/report/github.com/veryfi/veryfi-go)
 
-# veryfi-go
+![Veryfi Logo](https://cdn.veryfi.com/logos/veryfi-logo-wide-github.png)
 
-The Go client for communicating with the Veryfi OCR API.
+**veryfi** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/)
 
 ## Installing 
 
@@ -18,7 +18,7 @@ or using `go get`:
 go get github.com/veryfi/veryfi-go
 ```
 
-## Developing
+## Getting Started
 
 ### Obtaining Client ID and user keys
 
@@ -107,3 +107,11 @@ To run integration tests, supply your `CLIENT_ID`, `USERNAME`, and `API_KEY` env
 test-integration:  ## Run integration tests
 	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
 ```
+
+## Need help?
+
+If you run into any issue or need help installing or using the library, please contact <support@veryfi.com>.
+
+If you found a bug in this library or would like new features added, then open an issue or pull requests against this repo!
+
+To learn more about Veryfi visit <https://www.veryfi.com/>.
