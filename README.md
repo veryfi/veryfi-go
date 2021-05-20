@@ -92,6 +92,37 @@ func main() {
 }
 ```
 
+A successful response will look something like this:
+```
+&{ABNNumber: AccountNumber: BillToAddress: BillToName: BillToVATNumber: CardNumber: Category: Created:2021-05-20 19:21:38 CurrencyCode:USD Date:2019-02-26 00:00:00 DeliveryDate: Discount:0 DocumentReferenceNumber: DueDate:2019-02-26 ExternalID: ID:23002226 ImgFileName:3947f571-a41b-4b79-abc7-c0d9805c8610.png ImgThumbnailURL:https://scdn.veryfi.com/receipts/3947f571-a41b-4b79-abc7-c0d9805c8610_1_t.png?Expires=1621538559&Signature=BokBYv9jyJcXbCXu49DqxHwRdAWEgG8xfMw7LHujXSCA5y4kGd-QaBDwMzMCgCuM0Ezdrv3lgAZa0Cr8A5DKAzymXxnfdEiV46w~iy1zGPRgx6IkqvllB4bWqHFdwuu88CJarfIjvkcaygcECiFHg3RSKuuN4eGUYDP~fK8ER~Awb9Cr5FpTbTMc9kOfyc~vii2Mikg3TBiTbcdshhjgD2oRI4nFh1fpwRpfHAArIR-ijYAetjFEOQycUiu6WnzWAyEV9RCP9KcrKOnY5eKD-mm5mKuGQGXX1OT2AGw80klF1epx7XppeER9kALF1s8Dq87s8gdnnVsrstEF3~e8Yg__&Key-Pair-Id=APKAJCILBXEJFZF4DCHQ ImgURL:https://scdn.veryfi.com/receipts/3947f571-a41b-4b79-abc7-c0d9805c8610.png?Expires=1621538559&Signature=G7T6n7~Gpr1Pi5rfPRn1GoOeTlKZnVxLbWSZf~svnNpytILXvN9tg7y-Ib39lcifHeM6vjVfm4Pa4k63-ri~SySGFq-RWtF4IjQGM3Hw4~8wHB-sPhorn4JeVd~e~CpaUgFJbGSRnbb1cmBDFdkuBMbLkdC7m5ifwE10kanUU87Q~vpDYLkQINzfylHJk21rwtSPvIiEX8rudLK1F1BGl7TWvx-o7BT~PTCJ-RsA~j4eGuOprDXpt5Achpf-LMUa-iRCpMFupWVOZFPGln8rDqp-TcpryTawTbNlajg0nFDtF1eqBlbfoEycb-ZECtV4KECZtle5T7rBqhGQsmUxNQ__&Key-Pair-Id=APKAJCILBXEJFZF4DCHQ Insurance: InvoiceNumber:   US-001 IsDuplicate:0 LineItems:[] OCRText:
+
+INVOICE                         LOGO
+East Repair Inc.
+1912 Harvest Lane
+New York, NY 12210
+BILL TO SHIP TO INVOICE #       US-001
+John Smith      John Smith      INVOICE DATE    11/02/2019
+2 Court Square  3787 Pineview Drive
+New York, NY 12210      Cambridge, MA 12210     P.O.    2312/2019
+        DUE DATE        26/02/2019
+
+QTY     DESCRIPTION     UNIT PRICE      AMOUNT
+
+1       Front and rear brake cables             100.00  100.00
+2 New set of pedal arms         15.00   30.00
+3       Labor 3hrs                      5.00    15.00
+
+        Subtotal        145.00
+        Sales Tax 6.25% 9.06
+        TOTAL   $154.06
+
+        TERMS & CONDITIONS
+Thank you       , Please make checks payable to: East Repair Inc.
+        Payment is due within 15 days
+        John Smith
+ OrderDate: PaymentDisplayName:No Payment, PaymentTerms: PaymentType:no_payment, PhoneNumber: PurchaseOrderNumber: Rounding:0 ServiceEndDate: ServiceStartDate: ShipDate: ShipToAddress: ShipToName: Shipping:0 StoreNumber: Subtotal:145 Tax:9.06 TaxLines:[] Tip:0 Total:154.06 TotalWeight: TrackingNumber: Updated:2021-05-20 19:21:39 VATNumber: Vendor:{Address:1912 harvest lane new york, ny 12210 2 court square    3787 pineview drive Category: Email: FaxNumber: Name: PhoneNumber: RawName: VendorLogo: VendorRegNumber: VendorType: Web:} VendorAccountNumber: VendorBankName: VendorBankNumber: VendorBankSwift: VendorIban:}%
+```
+
 For more examples about different methods to process documents, refer to the [documentation's examples](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi#pkg-examples).
 
 ### Testing
