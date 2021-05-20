@@ -1,5 +1,5 @@
-[![Go Reference](https://pkg.go.dev/badge/github.com/hoanhan101/veryfi-go/veryfi.svg)](https://pkg.go.dev/github.com/hoanhan101/veryfi-go/veryfi)
-[![Go Report Card](https://goreportcard.com/badge/github.com/hoanhan101/veryfi-go)](https://goreportcard.com/report/github.com/hoanhan101/veryfi-go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/veryfi/veryfi-go/veryfi.svg)](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi)
+[![Go Report Card](https://goreportcard.com/badge/github.com/veryfi/veryfi-go)](https://goreportcard.com/report/github.com/veryfi/veryfi-go)
 
 # veryfi-go
 
@@ -10,12 +10,12 @@ The Go client for communicating with the Veryfi OCR API.
 This package can be installed by cloning this directory:
 
 ```
-git clone https://github.com/hoanhan101/veryfi-go.git
+git clone https://github.com/veryfi/veryfi-go.git
 ```
 
 or using `go get`:
 ```
-go get github.com/hoanhan101/veryfi-go
+go get github.com/veryfi/veryfi-go
 ```
 
 ## Developing
@@ -41,7 +41,7 @@ version              Print the version
 
 ### Go API Client Library
 
-The **Veryfi** library can be used to communicate with Veryfi API. All available functionality is described here <https://pkg.go.dev/github.com/hoanhan101/veryfi-go/veryfi>.
+The **Veryfi** library can be used to communicate with Veryfi API. All available functionality is described here <https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi>.
 
 Below is the sample script using **Veryfi** to OCR and extract data from a document:
 
@@ -53,8 +53,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/hoanhan101/veryfi-go/veryfi"
-	"github.com/hoanhan101/veryfi-go/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/veryfi"
+	"github.com/veryfi/veryfi-go/veryfi/scheme"
 )
 
 func main() {
@@ -92,7 +92,7 @@ func main() {
 }
 ```
 
-For more examples about different methods to process documents, refer to the [documentation's examples](https://pkg.go.dev/github.com/hoanhan101/veryfi-go/veryfi#pkg-examples).
+For more examples about different methods to process documents, refer to the [documentation's examples](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi#pkg-examples).
 
 ### Testing
 

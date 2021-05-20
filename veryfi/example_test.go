@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/hoanhan101/veryfi-go/veryfi"
-	"github.com/hoanhan101/veryfi-go/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/veryfi"
+	"github.com/veryfi/veryfi-go/veryfi/scheme"
 )
 
 func ExampleClient_processDocument() {

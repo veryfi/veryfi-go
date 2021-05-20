@@ -1,4 +1,4 @@
-module github.com/hoanhan101/veryfi-go
+module github.com/veryfi/veryfi-go
 
 go 1.16
 

@@ -3,8 +3,8 @@ package veryfi
 import (
 	"testing"
 
-	"github.com/hoanhan101/veryfi-go/veryfi/scheme"
 	"github.com/stretchr/testify/assert"
+	"github.com/veryfi/veryfi-go/veryfi/scheme"
 )
 
 func TestUnitBuildURL(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/hoanhan101/veryfi-go/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/veryfi/scheme"
 )
 
 // Client implements a Veryfi API Client.
