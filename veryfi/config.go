@@ -47,7 +47,7 @@ type RetryOptions struct {
 
 	// MaxWaitTime specifies the maximum wait time, the cap, of all retry
 	// requests that are made.
-	MaxWaitTime time.Duration `default:"3s"`
+	MaxWaitTime time.Duration `default:"120s"`
 }
 
 // setDefaults setups default options.
