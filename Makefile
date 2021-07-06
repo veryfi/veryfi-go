@@ -1,4 +1,4 @@
-PKG_VERSION := v0.1.8
+PKG_VERSION := v0.1.9
 GIT_COMMIT  ?= $(shell git rev-parse --short HEAD 2> /dev/null || true)
 BUILD_DATE  := $(shell date -u +%Y-%m-%dT%T 2> /dev/null)
 
@@ -19,7 +19,7 @@ fmt:  ## Run gofmt on all files
 
 .PHONY: github-tag
 github-tag:  ## Create and push a tag with the current client version
-	git tag -a ${PKG_VERSION} -m "Veryfi Go Client v${PKG_VERSION}"
+	git tag -a ${PKG_VERSION} -m "Veryfi Go Client ${PKG_VERSION}"
 	git push -u origin ${PKG_VERSION}
 
 .PHONY: lint
