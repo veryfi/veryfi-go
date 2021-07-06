@@ -28,7 +28,7 @@ type Options struct {
 // HTTPOptions is the config options for http protocol,
 type HTTPOptions struct {
 	// Timeout specifies a time limit for a http request.
-	Timeout time.Duration `default:"3s"`
+	Timeout time.Duration `default:"120s"`
 
 	// Retry specifies the options for retry mechanism.
 	Retry RetryOptions
@@ -47,7 +47,7 @@ type RetryOptions struct {
 
 	// MaxWaitTime specifies the maximum wait time, the cap, of all retry
 	// requests that are made.
-	MaxWaitTime time.Duration `default:"120s"`
+	MaxWaitTime time.Duration `default:"360s"`
 }
 
 // setDefaults setups default options.
