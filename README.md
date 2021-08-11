@@ -5,7 +5,20 @@
 
 **veryfi-go** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/).
 
+
+## Table of Contents
+- [Installing](#installing)
+- [Getting Started](#getting-started)
+  - [Obtaining Client ID and user keys](#obtaining-client-id-and-user-keys)
+  - [Setting up the project](#setting-up-the-project)
+  - [Go API Client Library](#go-api-client-library)
+  - [Testing](#testing)
+- [Need Help?](#need-help)
+- [Tutorial](#tutorial)
+
+
 ## Installing 
+
 
 This package can be installed by cloning this directory:
 
@@ -18,11 +31,14 @@ or using `go get`:
 go get github.com/veryfi/veryfi-go
 ```
 
+
 ## Getting Started
+
 
 ### Obtaining Client ID and user keys
 
 If you don't have an account with Veryfi, please go ahead and register here: [https://hub.veryfi.com/signup/api/](https://hub.veryfi.com/signup/api/)
+
 
 ### Setting up the project
 
@@ -39,7 +55,9 @@ test-unit            Run unit tests
 version              Print the version
 ```
 
+
 ### Go API Client Library
+
 
 The **Veryfi** library can be used to communicate with Veryfi API. All available functionality is described here <https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi>.
 
@@ -125,7 +143,9 @@ Thank you       , Please make checks payable to: East Repair Inc.
 
 For more examples about different methods to process documents, refer to the [documentation's examples](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi#pkg-examples).
 
+
 ### Testing
+
 
 To run unit tests:
 ```
@@ -139,7 +159,9 @@ test-integration:  ## Run integration tests
 	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
 ```
 
-## Need help?
+
+## Need Help?
+
 
 If you run into any issue or need help installing or using the library, please contact <support@veryfi.com>.
 
@@ -147,7 +169,9 @@ If you found a bug in this library or would like new features added, then open a
 
 To learn more about Veryfi visit <https://www.veryfi.com/>.
 
+
 ## Tutorial
+
 
 Below is a introduction to the Go SDK. We're gonna walkthrough a problem and solve it together:
 
