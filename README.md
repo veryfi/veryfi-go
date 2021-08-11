@@ -3,7 +3,7 @@
 
 ![Veryfi Logo](https://cdn.veryfi.com/logos/veryfi-logo-wide-github.png)
 
-**veryfi-go** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/)
+**veryfi-go** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/).
 
 ## Installing 
 
@@ -146,3 +146,15 @@ If you run into any issue or need help installing or using the library, please c
 If you found a bug in this library or would like new features added, then open an issue or pull requests against this repo!
 
 To learn more about Veryfi visit <https://www.veryfi.com/>.
+
+## Tutorial
+
+Below is a introduction to the Go SDK. We're gonna walkthrough a problem and solve it together:
+
+> Let’s say we are faced with a challenge where we have to capture and extract data from thousands (or even millions) of backlogged receipts. We don’t want to do it manually because copying and pasting from files to files takes a lot of time and is often error-prone. Also, different receipts have different forms and styles, finding the meaningful data across a huge pile of files can be a tedious task. What is even better is if we could extract the receipts and see the processing in real-time where the results can be returned almost immediately in seconds, not hours. So now, what is the best way that we can solve this?
+
+[Link to blog post →](https://www.veryfi.com/go/)
+
+If you prefer a video format, here is the link to our Youtube channel →
+
+[![Watch 'Code with Matt' Video](https://img.youtube.com/vi/HK-7lvY5J9E/0.jpg)](https://www.youtube.com/watch?v=HK-7lvY5J9E)
