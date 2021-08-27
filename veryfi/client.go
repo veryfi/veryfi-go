@@ -1,6 +1,7 @@
 package veryfi
 
 import (
+	"crypto/tls"
 	"fmt"
 
 	"github.com/pkg/errors"
@@ -57,6 +58,11 @@ func createClient(opts *Options) (*resty.Client, error) {
 // Config returns the client configuration options.
 func (c *Client) Config() *Options {
 	return c.options
+}
+
+// SetTLSConfig sets the TLS configurations for underling transportation layer.
+func (c *Client) SetTLSConfig(config *tls.Config) {
+	c.client.SetTLSClientConfig(config)
 }
 
 // ProcessDocumentUpload returns the processed document.
