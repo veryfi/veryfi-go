@@ -1,5 +1,6 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/veryfi/veryfi-go/veryfi.svg)](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi)
 [![Go Report Card](https://goreportcard.com/badge/github.com/veryfi/veryfi-go)](https://goreportcard.com/report/github.com/veryfi/veryfi-go)
+[![Test](https://github.com/veryfi/veryfi-go/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/veryfi/veryfi-go/actions/workflows/test.yml)
 
 ![Veryfi Logo](https://cdn.veryfi.com/logos/veryfi-logo-wide-github.png)
 
