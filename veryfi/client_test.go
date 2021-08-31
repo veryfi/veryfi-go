@@ -25,7 +25,7 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 	assert.NoError(t, err)
 
 	mockRespStr := string(mockResp)
-	server.Serve(t, "/api/v7/partner/documents/36966934", 200, mockRespStr)
+	server.Serve(t, "/api/v7/partner/documents/36966934/", 200, mockRespStr)
 	server.Serve(t, "/api/v7/partner/documents/", 200, mockRespStr)
 
 	expected := &scheme.Document{
