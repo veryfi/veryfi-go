@@ -47,21 +47,7 @@ func ExampleClient_processDocument() {
 	}
 	fmt.Printf("Method 1 - ID: %v\tTotal: %v %v\n", resp.ID, resp.Total, resp.CurrencyCode)
 
-	// Method 2: Process a base64 encoded document.
-	encodedFile, _ := veryfi.Base64EncodeFile(testfile)
-	resp, err = client.ProcessDocumentUploadBase64(scheme.DocumentUploadBase64Options{
-		FileData: encodedFile,
-		DocumentSharedOptions: scheme.DocumentSharedOptions{
-			FileName: "invoice1.png",
-			Tags:     []string{"example", "test", "upload", "base64"},
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Method 2 - ID: %v\tTotal: %v %v\n", resp.ID, resp.Total, resp.CurrencyCode)
-
-	// Method 3: Process a document via an URL.
+	// Method 2: Process a document via an URL.
 	resp, err = client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "YOUR_INVOICE_URL",
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
@@ -71,7 +57,7 @@ func ExampleClient_processDocument() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Method 3 - ID: %v\tTotal: %v %v\n", resp.ID, resp.Total, resp.CurrencyCode)
+	fmt.Printf("Method 2 - ID: %v\tTotal: %v %v\n", resp.ID, resp.Total, resp.CurrencyCode)
 }
 
 func ExampleClient_manageDocument() {

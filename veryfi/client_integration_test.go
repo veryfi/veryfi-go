@@ -3,12 +3,25 @@ package veryfi
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/veryfi/veryfi-go/veryfi/scheme"
 )
+
+func cleanUp(t *testing.T, documentID int) {
+	client, err := NewClientV7(&Options{
+		ClientID: os.Getenv("CLIENT_ID"),
+		Username: os.Getenv("USERNAME"),
+		APIKey:   os.Getenv("API_KEY"),
+	})
+	assert.NotNil(t, client)
+	assert.NoError(t, err)
+
+	err = client.DeleteDocument(strconv.Itoa(documentID))
+	assert.NoError(t, err)
+}
 
 func TestIntegrationFailNoAuth(t *testing.T) {
 	client, err := NewClientV7(&Options{})
@@ -18,8 +31,8 @@ func TestIntegrationFailNoAuth(t *testing.T) {
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "foo.com",
 	})
-	assert.Nil(t, resp)
 	assert.Error(t, err)
+	assert.Nil(t, resp)
 }
 
 func TestIntegrationFailInvalidClientID(t *testing.T) {
@@ -34,8 +47,8 @@ func TestIntegrationFailInvalidClientID(t *testing.T) {
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "foo.com",
 	})
-	assert.Nil(t, resp)
 	assert.Error(t, err)
+	assert.Nil(t, resp)
 }
 
 func TestIntegrationFailInvalidUsername(t *testing.T) {
@@ -44,14 +57,14 @@ func TestIntegrationFailInvalidUsername(t *testing.T) {
 		Username: "foo",
 		APIKey:   os.Getenv("API_KEY"),
 	})
-	assert.NotNil(t, client)
 	assert.NoError(t, err)
+	assert.NotNil(t, client)
 
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "foo.com",
 	})
-	assert.Nil(t, resp)
 	assert.Error(t, err)
+	assert.Nil(t, resp)
 }
 
 func TestIntegrationFailInvalidAPIKey(t *testing.T) {
@@ -60,25 +73,21 @@ func TestIntegrationFailInvalidAPIKey(t *testing.T) {
 		Username: os.Getenv("USERNAME"),
 		APIKey:   "foo",
 	})
-	assert.NotNil(t, client)
 	assert.NoError(t, err)
+	assert.NotNil(t, client)
 
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "foo.com",
 	})
-	assert.Nil(t, resp)
 	assert.Error(t, err)
+	assert.Nil(t, resp)
 }
 
 func TestIntegrationFailInvalidDocument(t *testing.T) {
-	timeout, _ := time.ParseDuration("10s")
 	client, err := NewClientV7(&Options{
 		ClientID: os.Getenv("CLIENT_ID"),
 		Username: os.Getenv("USERNAME"),
 		APIKey:   os.Getenv("API_KEY"),
-		HTTP: HTTPOptions{
-			Timeout: timeout,
-		},
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
@@ -86,19 +95,15 @@ func TestIntegrationFailInvalidDocument(t *testing.T) {
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "foo.com",
 	})
-	assert.Nil(t, resp)
 	assert.Error(t, err)
+	assert.Nil(t, resp)
 }
 
 func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
-	timeout, _ := time.ParseDuration("10s")
 	client, err := NewClientV7(&Options{
 		ClientID: os.Getenv("CLIENT_ID"),
 		Username: os.Getenv("USERNAME"),
 		APIKey:   os.Getenv("API_KEY"),
-		HTTP: HTTPOptions{
-			Timeout: timeout,
-		},
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
@@ -109,58 +114,31 @@ func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
 			Tags: []string{"integration", "test", "url"},
 		},
 	})
-	assert.NotNil(t, resp)
+	defer cleanUp(t, resp.ID)
 	assert.NoError(t, err)
+	assert.NotNil(t, resp)
 }
 
 func TestIntegrationSuccessProcessDocumentUpload(t *testing.T) {
-	timeout, _ := time.ParseDuration("10s")
 	client, err := NewClientV7(&Options{
 		ClientID: os.Getenv("CLIENT_ID"),
 		Username: os.Getenv("USERNAME"),
 		APIKey:   os.Getenv("API_KEY"),
-		HTTP: HTTPOptions{
-			Timeout: timeout,
-		},
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
 
-	testpath, _ := os.Getwd()
+	testpath, err := os.Getwd()
+	assert.NoError(t, err)
+
 	resp, err := client.ProcessDocumentUpload(scheme.DocumentUploadOptions{
-		FilePath: fmt.Sprintf("%s/testdata/invoice1.png", testpath),
+		FilePath: fmt.Sprintf("%s/testdata/receipt_public.jpeg", testpath),
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
-			FileName: "test_invoice",
+			FileName: "receipt_public.jpeg",
 			Tags:     []string{"integration", "test", "upload"},
 		},
 	})
+	defer cleanUp(t, resp.ID)
+	assert.NoError(t, err)
 	assert.NotNil(t, resp)
-	assert.NoError(t, err)
-}
-
-func TestIntegrationSuccessProcessDocumentUploadBase64(t *testing.T) {
-	timeout, _ := time.ParseDuration("10s")
-	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: os.Getenv("USERNAME"),
-		APIKey:   os.Getenv("API_KEY"),
-		HTTP: HTTPOptions{
-			Timeout: timeout,
-		},
-	})
-	assert.NotNil(t, client)
-	assert.NoError(t, err)
-
-	testpath, _ := os.Getwd()
-	encodedFile, _ := Base64EncodeFile(fmt.Sprintf("%s/testdata/invoice1.png", testpath))
-	resp, err := client.ProcessDocumentUploadBase64(scheme.DocumentUploadBase64Options{
-		FileData: encodedFile,
-		DocumentSharedOptions: scheme.DocumentSharedOptions{
-			FileName: "invoice1.png",
-			Tags:     []string{"integration", "test", "upload", "base64"},
-		},
-	})
-
-	assert.NotNil(t, resp)
-	assert.NoError(t, err)
 }

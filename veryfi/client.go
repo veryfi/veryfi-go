@@ -1,7 +1,9 @@
 package veryfi
 
 import (
+	"crypto/tls"
 	"fmt"
+
 	"github.com/pkg/errors"
 
 	"github.com/go-resty/resty/v2"
@@ -58,20 +60,24 @@ func (c *Client) Config() *Options {
 	return c.options
 }
 
-// ProcessDocumentUpload returns the processed document using file upload.
+// SetTLSConfig sets the TLS configurations for underling transportation layer.
+func (c *Client) SetTLSConfig(config *tls.Config) {
+	c.client.SetTLSClientConfig(config)
+}
+
+// ProcessDocumentUpload returns the processed document.
 func (c *Client) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
-	if err := c.post(documentURI, opts.FilePath, opts.DocumentSharedOptions, out); err != nil {
+	encodedFile, err := Base64EncodeFile(opts.FilePath)
+	if err != nil {
 		return nil, err
 	}
 
-	return *out, nil
-}
-
-// ProcessDocumentUploadBase64 returns the processed base64 encoded document.
-func (c *Client) ProcessDocumentUploadBase64(opts scheme.DocumentUploadBase64Options) (*scheme.Document, error) {
-	out := new(*scheme.Document)
-	if err := c.post(documentURI, "", opts, out); err != nil {
+	payload := scheme.DocumentUploadBase64Options{
+		FileData:              encodedFile,
+		DocumentSharedOptions: opts.DocumentSharedOptions,
+	}
+	if err := c.post(documentURI, payload, out); err != nil {
 		return nil, err
 	}
 
@@ -81,7 +87,7 @@ func (c *Client) ProcessDocumentUploadBase64(opts scheme.DocumentUploadBase64Opt
 // ProcessDocumentURL returns the processed document using URL.
 func (c *Client) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
-	if err := c.post(documentURI, "", opts, out); err != nil {
+	if err := c.post(documentURI, opts, out); err != nil {
 		return nil, err
 	}
 
@@ -141,7 +147,7 @@ func (c *Client) GetLineItems(documentID string) (*scheme.LineItems, error) {
 // AddLineItem returns a added line item for a processed document.
 func (c *Client) AddLineItem(documentID string, opts scheme.LineItemOptions) (*scheme.LineItem, error) {
 	out := new(*scheme.LineItem)
-	if err := c.post(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), "", opts, out); err != nil {
+	if err := c.post(fmt.Sprintf("%s%s%s", documentURI, documentID, lineItemURI), opts, out); err != nil {
 		return nil, err
 	}
 
@@ -247,13 +253,9 @@ func (c *Client) setBaseURL() *resty.Client {
 }
 
 // post performs a POST request against Veryfi API.
-func (c *Client) post(uri string, filePath string, body interface{}, okScheme interface{}) error {
+func (c *Client) post(uri string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
 	request := c.request(okScheme, errScheme).SetBody(body)
-
-	if len(filePath) != 0 {
-		request.SetFile("file", filePath)
-	}
 
 	_, err := request.Post(uri)
 
