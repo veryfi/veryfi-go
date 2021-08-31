@@ -12,20 +12,13 @@ import (
 	"github.com/veryfi/veryfi-go/veryfi/test"
 )
 
-func TestUnitNewClientV7_NilConfig(t *testing.T) {
-	client, err := NewClientV7(nil)
-	assert.Nil(t, client)
-	assert.Error(t, err)
-}
-
-func TestUnitClientV7_DocumentProcessing(t *testing.T) {
+func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 	server := test.NewHTTPServer()
-	defer server.Close()
 
 	pwd, err := os.Getwd()
 	assert.NoError(t, err)
 
-	mockReceipt := fmt.Sprintf("%v/testdata/%v", pwd, "receipt_public.jpeg")
+	mockReceiptPath := fmt.Sprintf("%v/testdata/%v", pwd, "receipt_public.jpeg")
 	mockReceiptData := fmt.Sprintf("%v/testdata/%v", pwd, "receipt_public.json")
 	mockResp, err := ioutil.ReadFile(mockReceiptData)
 	assert.NoError(t, err)
@@ -82,13 +75,31 @@ func TestUnitClientV7_DocumentProcessing(t *testing.T) {
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
 
+	return server, client, mockReceiptPath, expected
+}
+
+func TestUnitNewClientV7_NilConfig(t *testing.T) {
+	client, err := NewClientV7(nil)
+	assert.Nil(t, client)
+	assert.Error(t, err)
+}
+
+func TestUnitClientV7_GetDocument(t *testing.T) {
+	server, client, _, expected := setUp(t)
+	defer server.Close()
+
 	resp, err := client.GetDocument("36966934", scheme.DocumentGetOptions{})
 	assert.NotNil(t, resp)
 	assert.NoError(t, err)
 	assert.Equal(t, expected, resp)
+}
 
-	resp, err = client.ProcessDocumentUpload(scheme.DocumentUploadOptions{
-		FilePath: mockReceipt,
+func TestUnitClientV7_ProcessDocumentUpload(t *testing.T) {
+	server, client, mockReceiptPath, expected := setUp(t)
+	defer server.Close()
+
+	resp, err := client.ProcessDocumentUpload(scheme.DocumentUploadOptions{
+		FilePath: mockReceiptPath,
 	})
 	assert.NotNil(t, resp)
 	assert.NoError(t, err)
