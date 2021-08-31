@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/veryfi/veryfi-go/veryfi/scheme"
@@ -84,6 +85,44 @@ func TestUnitNewClientV7_NilConfig(t *testing.T) {
 	assert.Error(t, err)
 }
 
+func TestUnitNewClientV7_Config(t *testing.T) {
+	client, err := NewClientV7(&Options{
+		ClientID: "testClientID",
+		Username: "testUsername",
+		APIKey:   "testAPIKey",
+	})
+	assert.NotNil(t, client)
+	assert.NoError(t, err)
+
+	timeout, err := time.ParseDuration("120s")
+	assert.NoError(t, err)
+
+	waitTime, err := time.ParseDuration("100ms")
+	assert.NoError(t, err)
+
+	maxWaitTime, err := time.ParseDuration("360s")
+	assert.NoError(t, err)
+
+	expected := &Options{
+		EnvironmentURL: "api.veryfi.com",
+		ClientID:       "testClientID",
+		Username:       "testUsername",
+		APIKey:         "testAPIKey",
+		HTTP: HTTPOptions{
+			Timeout: timeout,
+			Retry: RetryOptions{
+				Count:       3,
+				WaitTime:    waitTime,
+				MaxWaitTime: maxWaitTime,
+			},
+		},
+	}
+
+	resp := client.Config()
+	assert.NotNil(t, resp)
+	assert.Equal(t, expected, resp)
+}
+
 func TestUnitClientV7_GetDocument(t *testing.T) {
 	server, client, _, expected := setUp(t)
 	defer server.Close()
@@ -100,6 +139,18 @@ func TestUnitClientV7_ProcessDocumentUpload(t *testing.T) {
 
 	resp, err := client.ProcessDocumentUpload(scheme.DocumentUploadOptions{
 		FilePath: mockReceiptPath,
+	})
+	assert.NotNil(t, resp)
+	assert.NoError(t, err)
+	assert.Equal(t, expected, resp)
+}
+
+func TestUnitClientV7_ProcessDocumentURL(t *testing.T) {
+	server, client, _, expected := setUp(t)
+	defer server.Close()
+
+	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
+		FileURL: "https://www.veryfi.com/api",
 	})
 	assert.NotNil(t, resp)
 	assert.NoError(t, err)
