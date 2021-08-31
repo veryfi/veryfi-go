@@ -15,6 +15,7 @@ import (
 
 func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 	server := test.NewHTTPServer()
+	assert.NotNil(t, server)
 
 	pwd, err := os.Getwd()
 	assert.NoError(t, err)
