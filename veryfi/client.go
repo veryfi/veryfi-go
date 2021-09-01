@@ -27,6 +27,9 @@ type Client struct {
 	// apiVersion is the current API version of Veryfi that we are
 	// communicating with.
 	apiVersion string
+
+	// pkgVersion is the current SDK version.
+	pkgVersion string
 }
 
 // NewClientV7 returns a new instance of a client for v7 API.
@@ -40,6 +43,7 @@ func NewClientV7(opts *Options) (*Client, error) {
 		options:    opts,
 		client:     c,
 		apiVersion: "v7",
+		pkgVersion: "0.1.13",
 	}, nil
 }
 
@@ -245,6 +249,7 @@ func (c *Client) request(payload interface{}, okScheme interface{}, errScheme in
 	timestamp := int(time.Now().Unix())
 	return c.setBaseURL().R().
 		SetHeaders(map[string]string{
+			"User-Agent":                 fmt.Sprintf("Go Veryfi-Go/%s", c.pkgVersion),
 			"Content-Type":               "application/json",
 			"Accept":                     "application/json",
 			"CLIENT-ID":                  c.options.ClientID,
@@ -296,7 +301,7 @@ func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) 
 // rdelete performs a DELETE request against Veryfi API.
 func (c *Client) rdelete(uri string) error {
 	errScheme := new(scheme.Error)
-	request := c.request(map[string]string{}, map[string]string{}, errScheme)
+	request := c.request(struct{}{}, map[string]string{}, errScheme)
 	_, err := request.Delete(uri)
 
 	return check(err, errScheme)
