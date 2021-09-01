@@ -153,11 +153,11 @@ To run unit tests:
 make test-unit
 ```
 
-To run integration tests, supply your `CLIENT_ID`, `USERNAME`, and `API_KEY` environment variables in [Makefile](Makefile) and run `make test-integration`:
+To run integration tests, supply your `CLIENT_ID`, `CLIENT_SECRET`, `USERNAME`, and `API_KEY` environment variables in [Makefile](Makefile) and run `make test-integration`:
 ```
 .PHONY: test-integration
 test-integration:  ## Run integration tests
-	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
+	CLIENT_ID=FIXME CLIENT_SECRET=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
 ```
 
 
@@ -181,5 +181,3 @@ Below is a introduction to the Go SDK. We're gonna walkthrough a problem and sol
 [Link to blog post →](https://www.veryfi.com/go/)
 
 If you prefer a video format, here is the link to our Youtube channel →
-
-[![Watch 'Code with Matt' Video](https://img.youtube.com/vi/HK-7lvY5J9E/0.jpg)](https://www.youtube.com/watch?v=HK-7lvY5J9E)

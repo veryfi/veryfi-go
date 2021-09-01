@@ -37,7 +37,7 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 		ImgFileName:   "7a0371f1-f695-4f9b-9e2b-da54cdf189fc.jpg",
 		InvoiceNumber: "98",
 		LineItems: []scheme.LineItem{
-			scheme.LineItem{
+			{
 				Description: "98 Meat Pty Xchz",
 				ID:          67185481,
 				Price:       0.0,
@@ -52,7 +52,7 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 		ReferenceNumber:    "VBIJG-6934",
 		Tax:                97.66,
 		TaxLines: []scheme.TaxLine{
-			scheme.TaxLine{
+			{
 				Rate:  7.5,
 				Total: 97.66,
 			},
