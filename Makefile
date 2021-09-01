@@ -32,7 +32,8 @@ test-unit:  ## Run unit tests
 
 .PHONY: test-integration
 test-integration:  ## Run integration tests
-	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
+	# CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
+	CLIENT_ID=vrf1pF9CSF19wGpasWeTsfVueKUPesnMJTMVp58 CLIENT_SECRET=JgG6jB2oJMLbHwBN5jEd6h3f3Lj1o9gK5kcz2xAf8Kyi2X1PNaJ6F6B0Sv4YcOsSllGkMofgUiZV5ZTNsjkk6bXyctGGAdfcratu4Dl2CA2XtU6En5icHxjVRUNoSFGP USERNAME=hoanhan.api API_KEY=2e53375fb12d450e60f486ec7a61b3w20 go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
 
 .PHONY: version
 version: ## Print the version

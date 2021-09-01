@@ -12,9 +12,10 @@ import (
 
 func cleanUp(t *testing.T, documentID int) {
 	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: os.Getenv("USERNAME"),
-		APIKey:   os.Getenv("API_KEY"),
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		Username:     os.Getenv("USERNAME"),
+		APIKey:       os.Getenv("API_KEY"),
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
@@ -37,9 +38,10 @@ func TestIntegrationFailNoAuth(t *testing.T) {
 
 func TestIntegrationFailInvalidClientID(t *testing.T) {
 	client, err := NewClientV7(&Options{
-		ClientID: "foo",
-		Username: os.Getenv("USERNAME"),
-		APIKey:   os.Getenv("API_KEY"),
+		ClientID:     "foo",
+		ClientSecret: "bar",
+		Username:     os.Getenv("USERNAME"),
+		APIKey:       os.Getenv("API_KEY"),
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
@@ -53,9 +55,10 @@ func TestIntegrationFailInvalidClientID(t *testing.T) {
 
 func TestIntegrationFailInvalidUsername(t *testing.T) {
 	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: "foo",
-		APIKey:   os.Getenv("API_KEY"),
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		Username:     "foo",
+		APIKey:       os.Getenv("API_KEY"),
 	})
 	assert.NoError(t, err)
 	assert.NotNil(t, client)
@@ -69,9 +72,10 @@ func TestIntegrationFailInvalidUsername(t *testing.T) {
 
 func TestIntegrationFailInvalidAPIKey(t *testing.T) {
 	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: os.Getenv("USERNAME"),
-		APIKey:   "foo",
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		Username:     os.Getenv("USERNAME"),
+		APIKey:       "foo",
 	})
 	assert.NoError(t, err)
 	assert.NotNil(t, client)
@@ -85,9 +89,10 @@ func TestIntegrationFailInvalidAPIKey(t *testing.T) {
 
 func TestIntegrationFailInvalidDocument(t *testing.T) {
 	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: os.Getenv("USERNAME"),
-		APIKey:   os.Getenv("API_KEY"),
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		Username:     os.Getenv("USERNAME"),
+		APIKey:       os.Getenv("API_KEY"),
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
@@ -101,9 +106,10 @@ func TestIntegrationFailInvalidDocument(t *testing.T) {
 
 func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
 	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: os.Getenv("USERNAME"),
-		APIKey:   os.Getenv("API_KEY"),
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		Username:     os.Getenv("USERNAME"),
+		APIKey:       os.Getenv("API_KEY"),
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
@@ -121,9 +127,10 @@ func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
 
 func TestIntegrationSuccessProcessDocumentUpload(t *testing.T) {
 	client, err := NewClientV7(&Options{
-		ClientID: os.Getenv("CLIENT_ID"),
-		Username: os.Getenv("USERNAME"),
-		APIKey:   os.Getenv("API_KEY"),
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		Username:     os.Getenv("USERNAME"),
+		APIKey:       os.Getenv("API_KEY"),
 	})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
