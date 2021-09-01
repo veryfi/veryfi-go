@@ -1,8 +1,14 @@
 package veryfi
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
 	"crypto/tls"
+	"encoding/base64"
 	"fmt"
+	"strconv"
+	"strings"
+	"time"
 
 	"github.com/pkg/errors"
 
@@ -21,6 +27,9 @@ type Client struct {
 	// apiVersion is the current API version of Veryfi that we are
 	// communicating with.
 	apiVersion string
+
+	// pkgVersion is the current SDK version.
+	pkgVersion string
 }
 
 // NewClientV7 returns a new instance of a client for v7 API.
@@ -34,6 +43,7 @@ func NewClientV7(opts *Options) (*Client, error) {
 		options:    opts,
 		client:     c,
 		apiVersion: "v7",
+		pkgVersion: "1.0.0",
 	}, nil
 }
 
@@ -235,13 +245,17 @@ func (c *Client) DeleteGlobalTag(tagID string) error {
 }
 
 // request returns an authorized request to Veryfi API.
-func (c *Client) request(okScheme interface{}, errScheme interface{}) *resty.Request {
+func (c *Client) request(payload interface{}, okScheme interface{}, errScheme interface{}) *resty.Request {
+	timestamp := int(time.Now().Unix())
 	return c.setBaseURL().R().
 		SetHeaders(map[string]string{
-			"Content-Type":  "application/json",
-			"Accept":        "application/json",
-			"CLIENT-ID":     c.options.ClientID,
-			"AUTHORIZATION": fmt.Sprintf("apikey %s:%s", c.options.Username, c.options.APIKey),
+			"User-Agent":                 fmt.Sprintf("Go Veryfi-Go/%s", c.pkgVersion),
+			"Content-Type":               "application/json",
+			"Accept":                     "application/json",
+			"Client-Id":                  c.options.ClientID,
+			"Authorization":              fmt.Sprintf("apikey %s:%s", c.options.Username, c.options.APIKey),
+			"X-Veryfi-Request-Timestamp": strconv.Itoa(timestamp),
+			"X-Veryfi-Request-Signature": c.generateSignature(payload, timestamp),
 		}).
 		SetResult(okScheme).
 		SetError(errScheme)
@@ -255,7 +269,7 @@ func (c *Client) setBaseURL() *resty.Client {
 // post performs a POST request against Veryfi API.
 func (c *Client) post(uri string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
-	request := c.request(okScheme, errScheme).SetBody(body)
+	request := c.request(body, okScheme, errScheme).SetBody(body)
 
 	_, err := request.Post(uri)
 
@@ -265,7 +279,7 @@ func (c *Client) post(uri string, body interface{}, okScheme interface{}) error 
 // put performs a PUT request against Veryfi API.
 func (c *Client) put(uri string, body interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
-	request := c.request(okScheme, errScheme).SetBody(body)
+	request := c.request(body, okScheme, errScheme).SetBody(body)
 	_, err := request.Put(uri)
 
 	return check(err, errScheme)
@@ -274,7 +288,7 @@ func (c *Client) put(uri string, body interface{}, okScheme interface{}) error {
 // get performs a GET request against Veryfi API.
 func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) error {
 	errScheme := new(scheme.Error)
-	request := c.request(okScheme, errScheme)
+	request := c.request(queryParams, okScheme, errScheme)
 	if queryParams != nil {
 		request.SetQueryParams(structToMap(queryParams))
 	}
@@ -287,10 +301,22 @@ func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) 
 // rdelete performs a DELETE request against Veryfi API.
 func (c *Client) rdelete(uri string) error {
 	errScheme := new(scheme.Error)
-	request := c.request(map[string]string{}, errScheme)
+	request := c.request(struct{}{}, map[string]string{}, errScheme)
 	_, err := request.Delete(uri)
 
 	return check(err, errScheme)
+}
+
+// generateSignature for a given request.
+func (c *Client) generateSignature(s interface{}, timestamp int) string {
+	p := []string{fmt.Sprintf("timestamp:%v", timestamp)}
+	for k, v := range structToMap(s) {
+		p = append(p, fmt.Sprintf("%v:%v", k, v))
+	}
+
+	h := hmac.New(sha256.New, []byte(c.options.ClientSecret))
+	h.Write([]byte(strings.Join(p, ",")))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
 // check validates returned response from Veryfi.

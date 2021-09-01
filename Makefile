@@ -1,4 +1,4 @@
-PKG_VERSION := v0.1.13
+PKG_VERSION := v1.0.0
 GIT_COMMIT  ?= $(shell git rev-parse --short HEAD 2> /dev/null || true)
 BUILD_DATE  := $(shell date -u +%Y-%m-%dT%T 2> /dev/null)
 
@@ -13,6 +13,10 @@ clean:  ## Remove temporary files and build artifacts
 cover: test-unit  ## Run unit tests and open the coverage report
 	go tool cover -html=coverage.out
 
+.PHONY: changelog
+changelog:  ## Generate changelog from commits via Docker
+	docker run -it --rm -v "$(pwd)":/usr/local/src/your-app githubchangeloggenerator/github-changelog-generator -u veryfi -p veryfi-go -t FIXME_GITHUB_ACCESS_TOKEN
+
 .PHONY: fmt
 fmt:  ## Run gofmt on all files
 	gofmt -s -w .
@@ -23,7 +27,7 @@ github-tag:  ## Create and push a tag with the current client version
 	git push -u origin ${PKG_VERSION}
 
 .PHONY: lint
-lint:  ## Lint project source files
+lint:  ## Lint project source files via Docker
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:v1.39.0 golangci-lint run
 
 .PHONY: test-unit
@@ -32,7 +36,7 @@ test-unit:  ## Run unit tests
 
 .PHONY: test-integration
 test-integration:  ## Run integration tests
-	CLIENT_ID=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
+	CLIENT_ID=FIXME CLIENT_SECRET=FIXME USERNAME=FIXME API_KEY=FIXME go test -race -cover -run Integration -coverprofile=coverage.out -covermode=atomic ./...
 
 .PHONY: version
 version: ## Print the version

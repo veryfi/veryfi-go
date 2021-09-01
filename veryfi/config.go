@@ -15,6 +15,9 @@ type Options struct {
 	// ClientID provided by Veryfi.
 	ClientID string `default:"-"`
 
+	// ClientSecret provided by Veryfi.
+	ClientSecret string `default:"-"`
+
 	// Username provided by Veryfi.
 	Username string `default:"-"`
 
