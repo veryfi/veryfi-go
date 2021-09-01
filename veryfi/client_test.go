@@ -151,7 +151,7 @@ func TestUnitClientV7_ProcessDocumentURL(t *testing.T) {
 	defer server.Close()
 
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
-		FileURL: "https://www.veryfi.com/api",
+		FileURL: "http://cdn-dev.veryfi.com/testing/veryfi-python/receipt_public.jpg",
 	})
 	assert.NotNil(t, resp)
 	assert.NoError(t, err)

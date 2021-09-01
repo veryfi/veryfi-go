@@ -115,7 +115,7 @@ func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
 	assert.NoError(t, err)
 
 	resp, err := client.ProcessDocumentURL(scheme.DocumentURLOptions{
-		FileURL: "https://templates.invoicehome.com/invoice-template-us-neat-750px.png",
+		FileURL: "http://cdn-dev.veryfi.com/testing/veryfi-python/receipt_public.jpg",
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
 			Tags: []string{"integration", "test", "url"},
 		},
