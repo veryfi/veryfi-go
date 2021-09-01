@@ -252,8 +252,8 @@ func (c *Client) request(payload interface{}, okScheme interface{}, errScheme in
 			"User-Agent":                 fmt.Sprintf("Go Veryfi-Go/%s", c.pkgVersion),
 			"Content-Type":               "application/json",
 			"Accept":                     "application/json",
-			"CLIENT-ID":                  c.options.ClientID,
-			"AUTHORIZATION":              fmt.Sprintf("apikey %s:%s", c.options.Username, c.options.APIKey),
+			"Client-Id":                  c.options.ClientID,
+			"Authorization":              fmt.Sprintf("apikey %s:%s", c.options.Username, c.options.APIKey),
 			"X-Veryfi-Request-Timestamp": strconv.Itoa(timestamp),
 			"X-Veryfi-Request-Signature": c.generateSignature(payload, timestamp),
 		}).
