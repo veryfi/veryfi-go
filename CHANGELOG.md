@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/veryfi/veryfi-go/tree/HEAD)
+
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/v1.0.0...HEAD)
+
+**Implemented enhancements:**
+
+- Use client\_secret and create signature [\#1](https://github.com/veryfi/veryfi-go/issues/1)
+
+## [v1.0.0](https://github.com/veryfi/veryfi-go/tree/v1.0.0) (2021-09-01)
+
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/v0.1.13...v1.0.0)
+
+**Merged pull requests:**
+
+- Use signature in request [\#6](https://github.com/veryfi/veryfi-go/pull/6) ([hoanhan101](https://github.com/hoanhan101))
+
 ## [v0.1.13](https://github.com/veryfi/veryfi-go/tree/v0.1.13) (2021-09-01)
 
 [Full Changelog](https://github.com/veryfi/veryfi-go/compare/v0.1.12...v0.1.13)
@@ -54,23 +70,23 @@
 
 ## [v0.1.6](https://github.com/veryfi/veryfi-go/tree/v0.1.6) (2021-05-10)
 
-[Full Changelog](https://github.com/veryfi/veryfi-go/compare/v0.1.5...v0.1.6)
-
-## [v0.1.5](https://github.com/veryfi/veryfi-go/tree/v0.1.5) (2021-05-10)
-
-[Full Changelog](https://github.com/veryfi/veryfi-go/compare/0.1.5...v0.1.5)
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/0.1.5...v0.1.6)
 
 ## [0.1.5](https://github.com/veryfi/veryfi-go/tree/0.1.5) (2021-05-10)
 
-[Full Changelog](https://github.com/veryfi/veryfi-go/compare/0.1.4...0.1.5)
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/v0.1.5...0.1.5)
 
-## [0.1.4](https://github.com/veryfi/veryfi-go/tree/0.1.4) (2021-05-04)
+## [v0.1.5](https://github.com/veryfi/veryfi-go/tree/v0.1.5) (2021-05-10)
 
-[Full Changelog](https://github.com/veryfi/veryfi-go/compare/v0.1.4...0.1.4)
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/v0.1.4...v0.1.5)
 
 ## [v0.1.4](https://github.com/veryfi/veryfi-go/tree/v0.1.4) (2021-05-04)
 
-[Full Changelog](https://github.com/veryfi/veryfi-go/compare/0.1.3...v0.1.4)
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/0.1.4...v0.1.4)
+
+## [0.1.4](https://github.com/veryfi/veryfi-go/tree/0.1.4) (2021-05-04)
+
+[Full Changelog](https://github.com/veryfi/veryfi-go/compare/0.1.3...0.1.4)
 
 ## [0.1.3](https://github.com/veryfi/veryfi-go/tree/0.1.3) (2021-05-03)
 
