@@ -43,7 +43,7 @@ func NewClientV7(opts *Options) (*Client, error) {
 		options:    opts,
 		client:     c,
 		apiVersion: "v7",
-		pkgVersion: "1.0.0",
+		pkgVersion: "1.1.0",
 	}, nil
 }
 
