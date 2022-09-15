@@ -105,7 +105,7 @@ type Document struct {
 	ImgFileName         string     `json:"img_file_name"`
 	ImgThumbnailURL     string     `json:"img_thumbnail_url"`
 	ImgURL              string     `json:"img_url"`
-	Insurance           string     `json:"insurance"`
+	Insurance           float64    `json:"insurance"`
 	InvoiceNumber       string     `json:"invoice_number"`
 	IsDuplicate         int        `json:"is_duplicate"`
 	LineItems           []LineItem `json:"line_items"`
