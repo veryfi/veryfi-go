@@ -28,9 +28,12 @@ type DocumentSharedOptions struct {
 	Categories        []string `json:"categories,omitempty"`
 	Tags              []string `json:"tags,omitempty"`
 	MaxPagesToProcess int      `json:"max_pages_to_process,omitempty"`
-	BoostMode         int      `json:"boost_mode,omitempty"`
+	BoostMode         bool     `json:"boost_mode,omitempty"`
+	AutoDelete        bool     `json:"auto_delete,omitempty"`
+	DetectBlur        bool     `json:"detect_blur,omitempty"`
+	ParseAddress      bool     `json:"parse_address,omitempty"`
 	ExternalID        string   `json:"external_id,omitempty"`
-	Async             int      `json:"async,omitempty"`
+	Async             bool     `json:"async,omitempty"`
 }
 
 // DocumentUpdateOptions describes the query parameters to update a document.
@@ -88,9 +91,7 @@ type LineItemOptions struct {
 type Document struct {
 	ABNNumber           string     `json:"abn_number"`
 	AccountNumber       string     `json:"account_number"`
-	BillToAddress       string     `json:"bill_to_address"`
-	BillToName          string     `json:"bill_to_name"`
-	BillToVATNumber     string     `json:"bill_to_vat_number"`
+	BillTo              ToField    `json:"bill_to"`
 	CardNumber          string     `json:"card_number"`
 	Category            string     `json:"category"`
 	Created             string     `json:"created"`
@@ -107,7 +108,7 @@ type Document struct {
 	ImgURL              string     `json:"img_url"`
 	Insurance           float64    `json:"insurance"`
 	InvoiceNumber       string     `json:"invoice_number"`
-	IsDuplicate         int        `json:"is_duplicate"`
+	IsDuplicate         bool       `json:"is_duplicate"`
 	LineItems           []LineItem `json:"line_items"`
 	OCRText             string     `json:"ocr_text"`
 	OrderDate           string     `json:"order_date"`
@@ -120,9 +121,7 @@ type Document struct {
 	ServiceEndDate      string     `json:"service_end_date"`
 	ServiceStartDate    string     `json:"service_start_date"`
 	ShipDate            string     `json:"ship_date"`
-	ShipToAddress       string     `json:"ship_to_address"`
-	ShipToName          string     `json:"ship_to_name"`
-	Shipping            float64    `json:"shipping"`
+	ShipTo              ToField    `json:"ship_to"`
 	StoreNumber         string     `json:"store_number"`
 	Subtotal            float64    `json:"subtotal"`
 	Tax                 float64    `json:"tax"`
@@ -134,11 +133,48 @@ type Document struct {
 	Updated             string     `json:"updated"`
 	VATNumber           string     `json:"vat_number"`
 	Vendor              Vendor     `json:"vendor"`
-	VendorAccountNumber string     `json:"vendor_account_number"`
-	VendorBankName      string     `json:"vendor_bank_name"`
-	VendorBankNumber    string     `json:"vendor_bank_number"`
-	VendorBankSwift     string     `json:"vendor_bank_swift"`
 	VendorIban          string     `json:"vendor_iban"`
+}
+
+// ToField describes the to field response.
+type ToField struct {
+	Name          string        `json:"name"`
+	Address       string        `json:"address"`
+	ParsedAddress ParsedAddress `json:"parsed_address"`
+	Email         string        `json:"email"`
+	VATNumber     string        `json:"vat_number"`
+	PhoneNumber   string        `json:"phone_number"`
+	RegNumber     string        `json:"reg_number"`
+}
+
+// ParsedAddress describes the parsed address response.
+type ParsedAddress struct {
+	City          string `json:"city"`
+	Country       string `json:"country"`
+	Postcode      string `json:"postcode"`
+	State         string `json:"state"`
+	StreetAddress string `json:"street_address"`
+	House         string `json:"house"`
+	HouseNumber   string `json:"house_number"`
+	Road          string `json:"road"`
+	Unit          string `json:"unit"`
+	Level         string `json:"level"`
+	Staircase     string `json:"staircase"`
+	POBox         string `json:"po_box"`
+	Suburb        string `json:"suburb"`
+	CityDistrict  string `json:"city_district"`
+	Island        string `json:"island"`
+	StateDistrict string `json:"state_district"`
+	CountryRegion string `json:"country_region"`
+	WorldRegion   string `json:"world_region"`
+}
+
+// PaymentsInfo describes the payment response.
+type PaymentsInfo struct {
+	CardNumber  string `json:"card_number"`
+	DisplayName string `json:"display_name"`
+	Terms       string `json:"terms"`
+	Type        string `json:"type"`
 }
 
 // LineItems describes the line items in a document response.
@@ -158,6 +194,7 @@ type LineItem struct {
 	Reference     string  `json:"reference"`
 	Section       string  `json:"section"`
 	SKU           string  `json:"sku"`
+	UPC           string  `json:"upc"`
 	Tax           float64 `json:"tax"`
 	TaxRate       float64 `json:"tax_rate"`
 	Total         float64 `json:"total"`
@@ -175,17 +212,28 @@ type TaxLine struct {
 
 // Vendor describes the vendor response.
 type Vendor struct {
-	Address         string `json:"address"`
-	Category        string `json:"category"`
-	Email           string `json:"email"`
-	FaxNumber       string `json:"fax_number"`
-	Name            string `json:"name"`
-	PhoneNumber     string `json:"phone_number"`
-	RawName         string `json:"raw_name"`
-	VendorLogo      string `json:"vendor_logo"`
-	VendorRegNumber string `json:"vendor_reg_number"`
-	VendorType      string `json:"vendor_type"`
-	Web             string `json:"web"`
+	ABNNumber       string        `json:"abn_number"`
+	AccountCurrency string        `json:"account_currency"`
+	AccountNumber   string        `json:"account_number"`
+	BankName        string        `json:"bank_name"`
+	BankNumber      string        `json:"bank_number"`
+	BankSwift       string        `json:"bank_swift"`
+	ExternalID      string        `json:"external_id"`
+	FaxNumber       string        `json:"fax_number"`
+	FullAddress     string        `json:"full_address"`
+	IBAN            string        `json:"iban"`
+	RawName         string        `json:"raw_name"`
+	Types           string        `json:"types"`
+	Web             string        `json:"web"`
+	Name            string        `json:"name"`
+	Address         string        `json:"address"`
+	ParsedAddress   ParsedAddress `json:"parsed_address"`
+	Email           string        `json:"email"`
+	VATNumber       string        `json:"vat_number"`
+	PhoneNumber     string        `json:"phone_number"`
+	RegNumber       string        `json:"reg_number"`
+	Logo            string        `json:"logo"`
+	Type            string        `json:"type"`
 }
 
 // Tags describes the tags response.

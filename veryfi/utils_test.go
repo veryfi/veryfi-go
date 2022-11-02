@@ -29,16 +29,16 @@ func TestUnitBuildURL(t *testing.T) {
 		{
 			in: map[string]interface{}{
 				"host": "api.veryfi.com",
-				"path": []string{"api", "v7"},
+				"path": []string{"api", "v8"},
 			},
-			expected: "https://api.veryfi.com/api/v7",
+			expected: "https://api.veryfi.com/api/v8",
 		},
 		{
 			in: map[string]interface{}{
 				"host": "api.veryfi.com",
-				"path": []string{"api", "v7", "foo"},
+				"path": []string{"api", "v8", "foo"},
 			},
-			expected: "https://api.veryfi.com/api/v7/foo",
+			expected: "https://api.veryfi.com/api/v8/foo",
 		},
 	}
 

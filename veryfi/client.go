@@ -32,8 +32,8 @@ type Client struct {
 	pkgVersion string
 }
 
-// NewClientV7 returns a new instance of a client for v7 API.
-func NewClientV7(opts *Options) (*Client, error) {
+// NewClientV8 returns a new instance of a client for v8 API.
+func NewClientV8(opts *Options) (*Client, error) {
 	c, err := createClient(opts)
 	if err != nil {
 		return nil, errors.Wrap(err, "fail to create a client")
@@ -42,8 +42,8 @@ func NewClientV7(opts *Options) (*Client, error) {
 	return &Client{
 		options:    opts,
 		client:     c,
-		apiVersion: "v7",
-		pkgVersion: "1.1.0",
+		apiVersion: "v8",
+		pkgVersion: "1.2.0",
 	}, nil
 }
 

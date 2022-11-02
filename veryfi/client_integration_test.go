@@ -11,7 +11,7 @@ import (
 )
 
 func cleanUp(t *testing.T, documentID int) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Username:     os.Getenv("USERNAME"),
@@ -25,7 +25,7 @@ func cleanUp(t *testing.T, documentID int) {
 }
 
 func TestIntegrationFailNoAuth(t *testing.T) {
-	client, err := NewClientV7(&Options{})
+	client, err := NewClientV8(&Options{})
 	assert.NotNil(t, client)
 	assert.NoError(t, err)
 
@@ -37,7 +37,7 @@ func TestIntegrationFailNoAuth(t *testing.T) {
 }
 
 func TestIntegrationFailInvalidClientID(t *testing.T) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     "foo",
 		ClientSecret: "bar",
 		Username:     os.Getenv("USERNAME"),
@@ -54,7 +54,7 @@ func TestIntegrationFailInvalidClientID(t *testing.T) {
 }
 
 func TestIntegrationFailInvalidUsername(t *testing.T) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Username:     "foo",
@@ -71,7 +71,7 @@ func TestIntegrationFailInvalidUsername(t *testing.T) {
 }
 
 func TestIntegrationFailInvalidAPIKey(t *testing.T) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Username:     os.Getenv("USERNAME"),
@@ -88,7 +88,7 @@ func TestIntegrationFailInvalidAPIKey(t *testing.T) {
 }
 
 func TestIntegrationFailInvalidDocument(t *testing.T) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Username:     os.Getenv("USERNAME"),
@@ -105,7 +105,7 @@ func TestIntegrationFailInvalidDocument(t *testing.T) {
 }
 
 func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Username:     os.Getenv("USERNAME"),
@@ -126,7 +126,7 @@ func TestIntegrationSuccessProcessDocumentURL(t *testing.T) {
 }
 
 func TestIntegrationSuccessProcessDocumentUpload(t *testing.T) {
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		Username:     os.Getenv("USERNAME"),
