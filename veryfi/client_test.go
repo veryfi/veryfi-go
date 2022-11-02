@@ -26,8 +26,8 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 	assert.NoError(t, err)
 
 	mockRespStr := string(mockResp)
-	server.Serve(t, "/api/v7/partner/documents/36966934/", 200, mockRespStr)
-	server.Serve(t, "/api/v7/partner/documents/", 200, mockRespStr)
+	server.Serve(t, "/api/v8/partner/documents/36966934/", 200, mockRespStr)
+	server.Serve(t, "/api/v8/partner/documents/", 200, mockRespStr)
 
 	expected := &scheme.Document{
 		Created:       "2021-06-22 20:11:10",
@@ -60,14 +60,14 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 		Total:   97.66,
 		Updated: "2021-06-22 20:11:11",
 		Vendor: scheme.Vendor{
-			Name:       "In-N-Out Burger",
-			RawName:    "In-N-Out Burger",
-			VendorLogo: "https://cdn.veryfi.com/logos/us/949103001.png",
-			VendorType: "Restaurant",
+			Name:    "In-N-Out Burger",
+			RawName: "In-N-Out Burger",
+			Logo:    "",
+			Type:    "",
 		},
 	}
 
-	client, err := NewClientV7(&Options{
+	client, err := NewClientV8(&Options{
 		EnvironmentURL: server.URL,
 		ClientID:       "testClientID",
 		Username:       "testUsername",
@@ -80,14 +80,14 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 	return server, client, mockReceiptPath, expected
 }
 
-func TestUnitNewClientV7_NilConfig(t *testing.T) {
-	client, err := NewClientV7(nil)
+func TestUnitNewClientV8_NilConfig(t *testing.T) {
+	client, err := NewClientV8(nil)
 	assert.Nil(t, client)
 	assert.Error(t, err)
 }
 
-func TestUnitNewClientV7_Config(t *testing.T) {
-	client, err := NewClientV7(&Options{
+func TestUnitNewClientV8_Config(t *testing.T) {
+	client, err := NewClientV8(&Options{
 		ClientID: "testClientID",
 		Username: "testUsername",
 		APIKey:   "testAPIKey",
@@ -124,7 +124,7 @@ func TestUnitNewClientV7_Config(t *testing.T) {
 	assert.Equal(t, expected, resp)
 }
 
-func TestUnitClientV7_GetDocument(t *testing.T) {
+func TestUnitClientV8_GetDocument(t *testing.T) {
 	server, client, _, expected := setUp(t)
 	defer server.Close()
 
@@ -134,7 +134,7 @@ func TestUnitClientV7_GetDocument(t *testing.T) {
 	assert.Equal(t, expected, resp)
 }
 
-func TestUnitClientV7_ProcessDocumentUpload(t *testing.T) {
+func TestUnitClientV8_ProcessDocumentUpload(t *testing.T) {
 	server, client, mockReceiptPath, expected := setUp(t)
 	defer server.Close()
 
@@ -146,7 +146,7 @@ func TestUnitClientV7_ProcessDocumentUpload(t *testing.T) {
 	assert.Equal(t, expected, resp)
 }
 
-func TestUnitClientV7_ProcessDocumentURL(t *testing.T) {
+func TestUnitClientV8_ProcessDocumentURL(t *testing.T) {
 	server, client, _, expected := setUp(t)
 	defer server.Close()
 

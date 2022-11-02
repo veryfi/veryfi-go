@@ -15,8 +15,8 @@ func ExampleClient_processDocument() {
 		log.Fatal(err)
 	}
 
-	// Initialize a Veryfi Client for v7 API.
-	client, err := veryfi.NewClientV7(&veryfi.Options{
+	// Initialize a Veryfi Client for v8 API.
+	client, err := veryfi.NewClientV8(&veryfi.Options{
 		ClientID: "YOUR_CLIENT_ID",
 		Username: "YOUR_USERNAME",
 		APIKey:   "YOUR_API_KEY",
@@ -66,8 +66,8 @@ func ExampleClient_manageDocument() {
 		log.Fatal(err)
 	}
 
-	// Initialize a Veryfi Client for v7 API.
-	client, err := veryfi.NewClientV7(&veryfi.Options{
+	// Initialize a Veryfi Client for v8 API.
+	client, err := veryfi.NewClientV8(&veryfi.Options{
 		ClientID: "YOUR_CLIENT_ID",
 		Username: "YOUR_USERNAME",
 		APIKey:   "YOUR_API_KEY",
@@ -87,9 +87,7 @@ func ExampleClient_manageDocument() {
 	deleteDocumentID := "YOUR_DOCUMENT_ID"
 
 	// Update a document.
-	resp, err := client.UpdateDocument(documentID, scheme.DocumentUpdateOptions{
-		BillToName:    "Hoanh An",
-		BillToAddress: "NY",
+	_, err = client.UpdateDocument(documentID, scheme.DocumentUpdateOptions{
 		Vendor: scheme.VendorUpdateOptions{
 			Name:    "Hoanh An",
 			Address: "NY",
@@ -98,7 +96,6 @@ func ExampleClient_manageDocument() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("ID: %v\tBill To Name: %v\n", resp.ID, resp.BillToName)
 
 	// Search documents.
 	docs, err := client.SearchDocuments(scheme.DocumentSearchOptions{
@@ -108,17 +105,16 @@ func ExampleClient_manageDocument() {
 		log.Fatal(err)
 	}
 	for _, doc := range *docs {
-		fmt.Printf("ID: %v\tBill To Name: %v\n", doc.ID, doc.BillToName)
+		fmt.Println(doc)
 	}
 
 	// Get a document.
-	resp, err = client.GetDocument(documentID, scheme.DocumentGetOptions{
+	_, err = client.GetDocument(documentID, scheme.DocumentGetOptions{
 		ReturnAuditTrail: "1",
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("ID: %v\tBill To Name: %v\n", resp.ID, resp.BillToName)
 
 	// Delete a document.
 	err = client.DeleteDocument(deleteDocumentID)
@@ -133,8 +129,8 @@ func ExampleClient_manageLineItem() {
 		log.Fatal(err)
 	}
 
-	// Initialize a Veryfi Client for v7 API.
-	client, err := veryfi.NewClientV7(&veryfi.Options{
+	// Initialize a Veryfi Client for v8 API.
+	client, err := veryfi.NewClientV8(&veryfi.Options{
 		ClientID: "YOUR_CLIENT_ID",
 		Username: "YOUR_USERNAME",
 		APIKey:   "YOUR_API_KEY",
@@ -206,8 +202,8 @@ func ExampleClient_manageTag() {
 		log.Fatal(err)
 	}
 
-	// Initialize a Veryfi Client for v7 API.
-	client, err := veryfi.NewClientV7(&veryfi.Options{
+	// Initialize a Veryfi Client for v8 API.
+	client, err := veryfi.NewClientV8(&veryfi.Options{
 		ClientID: "YOUR_CLIENT_ID",
 		Username: "YOUR_USERNAME",
 		APIKey:   "YOUR_API_KEY",

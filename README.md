@@ -82,7 +82,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client, err := veryfi.NewClientV7(&veryfi.Options{
+	client, err := veryfi.NewClientV8(&veryfi.Options{
 		ClientID: "YOUR_CLIENT_ID",
 		Username: "YOUR_USERNAME",
 		APIKey:   "YOUR_API_KEY",
