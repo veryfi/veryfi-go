@@ -112,7 +112,7 @@ type Document struct {
 	LineItems           []LineItem   `json:"line_items"`
 	OCRText             string       `json:"ocr_text"`
 	OrderDate           string       `json:"order_date"`
-	Payments            PaymentsInfo `json:"payments"`
+	Payment             PaymentsInfo `json:"payment"`
 	PhoneNumber         string       `json:"phone_number"`
 	PurchaseOrderNumber string       `json:"purchase_order_number"`
 	Rounding            float64      `json:"rounding"`

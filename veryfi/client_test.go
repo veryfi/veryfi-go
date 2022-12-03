@@ -47,7 +47,7 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 			},
 		},
 		OCRText: "\n\\x0c2004-10-31\n\t8:21 PM\nYOUR GUEST NUMBER IS\n98\nIN-N-OUT BURGER LAS VEGAS EASTERN\n2004-10-31\t\t8:21 PM\n165 1 5 98\nCashier: SAM\nGUEST #: 98\nCounter-Eat in\n\t2.65\nDbDb\t\t88.20\n98 Meat Pty Xchz\n\t90.85\nCounter-Eat In\t\t6.81\nTAX 7.50%\t\t97.66\nAmount Due\n\t$97.66\nCASH TENDER\t\t$.00\nChange\n2004-10-31\t\t8:21 PM\nTHANK YOU!\n",
-		Payments: scheme.PaymentsInfo{
+		Payment: scheme.PaymentsInfo{
 			CardNumber:  "1234",
 			DisplayName: "Cash",
 			Terms:       "",
