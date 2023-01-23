@@ -1,8 +1,11 @@
+<img src="https://user-images.githubusercontent.com/30125790/212157461-58bdc714-2f89-44c2-8e4d-d42bee74854e.png#gh-dark-mode-only" width="200">
+<img src="https://user-images.githubusercontent.com/30125790/212157486-bfd08c5d-9337-4b78-be6f-230dc63838ba.png#gh-light-mode-only" width="200">
+
 [![Go Reference](https://pkg.go.dev/badge/github.com/veryfi/veryfi-go/veryfi.svg)](https://pkg.go.dev/github.com/veryfi/veryfi-go/veryfi)
 [![Go Report Card](https://goreportcard.com/badge/github.com/veryfi/veryfi-go)](https://goreportcard.com/report/github.com/veryfi/veryfi-go)
 [![Test](https://github.com/veryfi/veryfi-go/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/veryfi/veryfi-go/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-![Veryfi Logo](https://cdn.veryfi.com/logos/veryfi-logo-wide-github.png)
 
 **veryfi-go** is a Go module for communicating with the [Veryfi OCR API](https://veryfi.com/api/).
 
