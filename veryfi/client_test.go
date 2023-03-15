@@ -20,7 +20,7 @@ func setUp(t *testing.T) (test.HTTPServer, *Client, string, *scheme.Document) {
 	pwd, err := os.Getwd()
 	assert.NoError(t, err)
 
-	mockReceiptPath := fmt.Sprintf("%v/testdata/%v", pwd, "receipt_public.jpeg")
+	mockReceiptPath := fmt.Sprintf("%v/testdata/%v", pwd, "receipt_public.jpg")
 	mockReceiptData := fmt.Sprintf("%v/testdata/%v", pwd, "receipt_public.json")
 	mockResp, err := ioutil.ReadFile(mockReceiptData)
 	assert.NoError(t, err)
