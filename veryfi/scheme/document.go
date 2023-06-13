@@ -231,6 +231,8 @@ type Vendor struct {
 	PhoneNumber     string        `json:"phone_number"`
 	RegNumber       string        `json:"reg_number"`
 	Logo            string        `json:"logo"`
+	Lat             float64       `json:"lat"`
+	Lng             float64       `json:"lng"`
 	Type            string        `json:"type"`
 }
 
