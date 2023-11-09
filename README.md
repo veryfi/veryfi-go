@@ -166,6 +166,7 @@ test-integration:  ## Run integration tests
 
 ## Need Help?
 
+Visit https://docs.veryfi.com/ to access integration guides and usage notes in the Veryfi API Documentation Portal
 
 If you run into any issue or need help installing or using the library, please contact <support@veryfi.com>.
 
