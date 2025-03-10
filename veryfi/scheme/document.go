@@ -34,6 +34,9 @@ type DocumentSharedOptions struct {
 	ParseAddress      bool     `json:"parse_address,omitempty"`
 	ExternalID        string   `json:"external_id,omitempty"`
 	Async             bool     `json:"async,omitempty"`
+	ConfidenceDetails bool     `json:"confidence_details,omitempty"`
+	BoundingBoxes     bool     `json:"bounding_boxes,omitempty"`
+
 }
 
 // DocumentUpdateOptions describes the query parameters to update a document.
