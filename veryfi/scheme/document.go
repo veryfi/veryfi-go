@@ -36,7 +36,6 @@ type DocumentSharedOptions struct {
 	Async             bool     `json:"async,omitempty"`
 	ConfidenceDetails bool     `json:"confidence_details,omitempty"`
 	BoundingBoxes     bool     `json:"bounding_boxes,omitempty"`
-
 }
 
 // DocumentUpdateOptions describes the query parameters to update a document.
@@ -101,50 +100,79 @@ const (
 
 // Document describes the response.
 type Document struct {
-	ABNNumber           string         `json:"abn_number"`
-	AccountNumber       string         `json:"account_number"`
-	BillTo              ToField        `json:"bill_to"`
-	CardNumber          string         `json:"card_number"`
-	Category            string         `json:"category"`
-	Created             string         `json:"created"`
-	CurrencyCode        string         `json:"currency_code"`
-	Date                string         `json:"date"`
-	DeliveryDate        string         `json:"delivery_date"`
-	Discount            float64        `json:"discount"`
-	ReferenceNumber     string         `json:"reference_number"`
-	DueDate             string         `json:"due_date"`
-	ExternalID          string         `json:"external_id"`
-	ID                  int            `json:"id"`
-	ImgFileName         string         `json:"img_file_name"`
-	ImgThumbnailURL     string         `json:"img_thumbnail_url"`
-	ImgURL              string         `json:"img_url"`
-	Insurance           float64        `json:"insurance"`
-	InvoiceNumber       string         `json:"invoice_number"`
-	IsDuplicate         bool           `json:"is_duplicate"`
-	LineItems           []LineItem     `json:"line_items"`
-	OCRText             string         `json:"ocr_text"`
-	OrderDate           string         `json:"order_date"`
-	Payment             PaymentsInfo   `json:"payment"`
-	PhoneNumber         string         `json:"phone_number"`
-	PurchaseOrderNumber string         `json:"purchase_order_number"`
-	Rounding            float64        `json:"rounding"`
-	ServiceEndDate      string         `json:"service_end_date"`
-	ServiceStartDate    string         `json:"service_start_date"`
-	ShipDate            string         `json:"ship_date"`
-	ShipTo              ToField        `json:"ship_to"`
-	Status              DocumentStatus `json:"status"`
-	StoreNumber         string         `json:"store_number"`
-	Subtotal            float64        `json:"subtotal"`
-	Tax                 float64        `json:"tax"`
-	TaxLines            []TaxLine      `json:"tax_lines"`
-	Tip                 float64        `json:"tip"`
-	Total               float64        `json:"total"`
-	TotalWeight         string         `json:"total_weight"`
-	TrackingNumber      string         `json:"tracking_number"`
-	Updated             string         `json:"updated"`
-	VATNumber           string         `json:"vat_number"`
-	Vendor              Vendor         `json:"vendor"`
-	VendorIban          string         `json:"vendor_iban"`
+	AccountingEntryType     string         `json:"accounting_entry_type"`
+	AccountNumber           string         `json:"account_number"`
+	Balance                 string         `json:"balance"`
+	Barcodes                []string       `json:"barcodes"`
+	BillTo                  ToField        `json:"bill_to"`
+	Cashback                string         `json:"cashback"`
+	Category                string         `json:"category"`
+	Created                 string         `json:"created_date"`
+	CountryCode             string         `json:"country_code"`
+	CurrencyCode            string         `json:"currency_code"`
+	Date                    string         `json:"date"`
+	DefaultCategory         string         `json:"default_category"`
+	DeliveryDate            string         `json:"delivery_date"`
+	DeliveryNoteNumber      string         `json:"delivery_note_number"`
+	Discount                float64        `json:"discount"`
+	DocumentReferenceNumber string         `json:"document_reference_number"`
+	DocumentTitle           string         `json:"document_title"`
+	DuplicateOf             int            `json:"duplicate_of"`
+	DueDate                 string         `json:"due_date"`
+	ExchangeRate            float64        `json:"exch_rate"`
+	ExternalID              string         `json:"external_id"`
+	FinalBalance            float64        `json:"final_balance"`
+	GuestCount              string         `json:"guest_count"`
+	ID                      int            `json:"id"`
+	ImgFileName             string         `json:"img_file_name"`
+	ImgThumbnailURL         string         `json:"img_thumbnail_url"`
+	ImgURL                  string         `json:"img_url"`
+	Incoterms               string         `json:"incoterms"`
+	Insurance               float64        `json:"insurance"`
+	InvoiceNumber           string         `json:"invoice_number"`
+	IsApproved              bool           `json:"is_approved"`
+	IsDocument              bool           `json:"is_document"`
+	IsDuplicate             bool           `json:"is_duplicate"`
+	IsMoneyIn               bool           `json:"is_money_in"`
+	IsTransaction           bool           `json:"is_transaction"`
+	LicensePlateNumber      string         `json:"license_plate_number"`
+	LineItems               []LineItem     `json:"line_items_with_scores"`
+	Model                   string         `json:"model"`
+	Notes                   string         `json:"notes"`
+	OCRText                 string         `json:"ocr_text"`
+	OrderDate               string         `json:"order_date"`
+	Payment                 PaymentsInfo   `json:"payment"`
+	PaymentLinks            []string       `json:"payment_links"`
+	PDFURL                  string         `json:"pdf_url"`
+	PreviousBalance         float64        `json:"previous_balance"`
+	PurchaseOrderNumber     string         `json:"purchase_order_number"`
+	Rounding                float64        `json:"rounding"`
+	ServerName              string         `json:"server_name"`
+	ServiceEndDate          string         `json:"service_end_date"`
+	ServiceStartDate        string         `json:"service_start_date"`
+	ShipDate                string         `json:"ship_date"`
+	Shipping                float64        `json:"shipping"`
+	ShipTo                  ToField        `json:"ship_to"`
+	Status                  DocumentStatus `json:"status"`
+	StoreNumber             string         `json:"store_number"`
+	Subtotal                float64        `json:"subtotal"`
+	Tags                    []string       `json:"tags"`
+	Tax                     float64        `json:"tax"`
+	TaxLines                []TaxLine      `json:"tax_lines_with_scores"`
+	Tip                     float64        `json:"tip"`
+	Total                   float64        `json:"total"`
+	TotalQuantity           float64        `json:"total_quantity"`
+	TotalWeight             string         `json:"total_weight"`
+	TrackingNumber          string         `json:"tracking_number"`
+	TrackingNumbers         []string       `json:"tracking_numbers"`
+	Updated                 string         `json:"updated_date"`
+	VendingPerson           string         `json:"vending_person"`
+	VendingPersonNumber     string         `json:"vending_person_number"`
+	Vendor                  Vendor         `json:"vendor"`
+	Vendors                 []string       `json:"vendors"`
+	VINNumber               string         `json:"vin_number"`
+	Warnings                []string       `json:"warnings"`
+	Weights                 []string       `json:"weights"`
 }
 
 // ToField describes the to field response.
@@ -195,30 +223,59 @@ type LineItems struct {
 
 // LineItem describes the line item in a document response.
 type LineItem struct {
-	Date          string  `json:"date"`
-	Description   string  `json:"description"`
-	Discount      float64 `json:"discount"`
-	ID            int     `json:"id"`
-	Order         int     `json:"order"`
-	Price         float64 `json:"price"`
-	Quantity      float64 `json:"quantity"`
-	Reference     string  `json:"reference"`
-	Section       string  `json:"section"`
-	SKU           string  `json:"sku"`
-	UPC           string  `json:"upc"`
-	Tax           float64 `json:"tax"`
-	TaxRate       float64 `json:"tax_rate"`
-	Total         float64 `json:"total"`
-	Type          string  `json:"type"`
-	UnitOfMeasure string  `json:"unit_of_measure"`
+	Category              string      `json:"category"`
+	CountryOfOrigin       string      `json:"country_of_origin"`
+	Date                  string      `json:"date"`
+	Description           string      `json:"description"`
+	Discount              float64     `json:"discount"`
+	DiscountPrice         float64     `json:"discount_price"`
+	DiscountRate          float64     `json:"discount_rate"`
+	EndDate               string      `json:"end_date"`
+	FullDescription       string      `json:"full_description"`
+	GrossTotal            float64     `json:"gross_total"`
+	HSN                   string      `json:"hsn"`
+	ID                    int         `json:"id"`
+	Lot                   string      `json:"lot"`
+	Manufacturer          string      `json:"manufacturer"`
+	NetTotal              float64     `json:"net_total"`
+	NormalizedDescription string      `json:"normalized_description"`
+	Order                 int         `json:"order"`
+	Price                 float64     `json:"price"`
+	ProductInfo           ProductInfo `json:"product_info"`
+	Quantity              float64     `json:"quantity"`
+	Reference             string      `json:"reference"`
+	Section               string      `json:"section"`
+	SKU                   string      `json:"sku"`
+	StartDate             string      `json:"start_date"`
+	Subtotal              float64     `json:"subtotal"`
+	Tags                  []string    `json:"tags"`
+	Tax                   float64     `json:"tax"`
+	TaxCode               string      `json:"tax_code"`
+	TaxRate               float64     `json:"tax_rate"`
+	Text                  string      `json:"text"`
+	Total                 float64     `json:"total"`
+	Type                  string      `json:"type"`
+	UnitOfMeasure         string      `json:"unit_of_measure"`
+	UPC                   string      `json:"upc"`
+	Weight                string      `json:"weight"`
+}
+
+// ProductInfo describes the product info in a document response.
+type ProductInfo struct {
+	Brand               string   `json:"brand"`
+	Category            []string `json:"category"`
+	ExpandedDescription string   `json:"expanded_description"`
 }
 
 // TaxLine describes the tax line response.
 type TaxLine struct {
-	Name  string  `json:"name"`
-	Order int     `json:"order"`
-	Rate  float64 `json:"rate"`
-	Total float64 `json:"total"`
+	Base           float64 `json:"base"`
+	Code           string  `json:"code"`
+	Name           string  `json:"name"`
+	Order          int     `json:"order"`
+	Rate           float64 `json:"rate"`
+	Total          float64 `json:"total"`
+	TotalInclusive float64 `json:"total_inclusive"`
 }
 
 // Vendor describes the vendor response.
