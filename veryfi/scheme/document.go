@@ -73,9 +73,21 @@ type DocumentSearchOptions struct {
 	CreatedLTE string `json:"created__lte"`
 }
 
+type DetailedDocumentSearchOptions struct {
+	DocumentSearchOptions
+	BoundingBoxes     string `json:"bounding_boxes"`
+	ConfidenceDetails string `json:"confidence_details"`
+}
+
 // DocumentGetOptions describes the query parameters to get a document.
 type DocumentGetOptions struct {
 	ReturnAuditTrail string `json:"return_audit_trail"`
+}
+
+type DocumentGetDetailedOptions struct {
+	DocumentGetOptions
+	BoundingBoxes     string `json:"bounding_boxes"`
+	ConfidenceDetails string `json:"confidence_details"`
 }
 
 // LineItemOptions describes the query parameters to add a line to a document.
@@ -263,4 +275,169 @@ type Tag struct {
 // TagOptions describes query parameters to update a tag in a document.
 type TagOptions struct {
 	Name string `json:"name"`
+}
+
+// DetailedField represents a field with confidence scores and metadata
+type DetailedField struct {
+	Value          string    `json:"value,omitempty"`
+	Score          float64   `json:"score,omitempty"`
+	OCRScore       float64   `json:"ocr_score,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
+	Rotation       int       `json:"rotation,omitempty"`
+}
+
+// DetailedFloatField represents a numeric field with confidence scores
+type DetailedFloatField struct {
+	Value          float64   `json:"value,omitempty"`
+	Score          float64   `json:"score,omitempty"`
+	OCRScore       float64   `json:"ocr_score,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
+	Rotation       int       `json:"rotation,omitempty"`
+}
+
+// DetailedDateField represents a date field with confidence scores
+type DetailedDateField struct {
+	Value          string    `json:"value,omitempty"` // ISO 8601 date format
+	Score          float64   `json:"score,omitempty"`
+	OCRScore       float64   `json:"ocr_score,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
+	Rotation       int       `json:"rotation,omitempty"`
+}
+
+// DetailedBoolField represents a boolean field with confidence scores
+type DetailedBoolField struct {
+	Value          bool      `json:"value,omitempty"`
+	Score          float64   `json:"score,omitempty"`
+	OCRScore       float64   `json:"ocr_score,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
+	Rotation       int       `json:"rotation,omitempty"`
+}
+
+// DetailedVendor extends Vendor with detailed fields
+type DetailedVendor struct {
+	ABNNumber       *DetailedField     `json:"abn_number,omitempty"`
+	AccountCurrency *DetailedField     `json:"account_currency,omitempty"`
+	AccountNumber   *DetailedField     `json:"account_number,omitempty"`
+	BankName        *DetailedField     `json:"bank_name,omitempty"`
+	BankNumber      *DetailedField     `json:"bank_number,omitempty"`
+	BankSwift       *DetailedField     `json:"bank_swift,omitempty"`
+	ExternalID      string     `json:"external_id,omitempty"`
+	FaxNumber       *DetailedField     `json:"fax_number,omitempty"`
+	FullAddress     *DetailedField     `json:"full_address,omitempty"`
+	IBAN            *DetailedField     `json:"iban,omitempty"`
+	RawName         *DetailedField     `json:"raw_name,omitempty"`
+	Types           *DetailedField     `json:"types,omitempty"`
+	Web             *DetailedField     `json:"web,omitempty"`
+	Name            *DetailedField     `json:"name,omitempty"`
+	Address         *DetailedField     `json:"address,omitempty"`
+	ParsedAddress   *ParsedAddress `json:"parsed_address,omitempty"`
+	Email           *DetailedField     `json:"email,omitempty"`
+	VATNumber       *DetailedField     `json:"vat_number,omitempty"`
+	PhoneNumber     *DetailedField     `json:"phone_number,omitempty"`
+	RegNumber       *DetailedField     `json:"reg_number,omitempty"`
+	Logo            string     `json:"logo,omitempty"`
+	Lat             float64       `json:"lat,omitempty"`
+	Lng             float64       `json:"lng,omitempty"`
+	Type            *DetailedField        `json:"type"`
+}
+
+// DetailedBillTo represents bill_to information with confidence scores
+type DetailedToField struct {
+	Name          *DetailedField        `json:"name"`
+	Address       *DetailedField        `json:"address"`
+	ParsedAddress *ParsedAddress `json:"parsed_address"`
+	Email         *DetailedField        `json:"email"`
+	VATNumber     *DetailedField        `json:"vat_number"`
+	PhoneNumber   *DetailedField        `json:"phone_number"`
+	RegNumber     *DetailedField        `json:"reg_number"`
+}
+
+// DetailedPayment represents payment information with confidence scores
+type DetailedPayment struct {
+	CardNumber  *DetailedField `json:"card_number"`
+	DisplayName string `json:"display_name"`
+	Terms       *DetailedField `json:"terms"`
+	Type        *DetailedField `json:"type"`
+}
+
+// DetailedLineItem extends LineItem with confidence scores
+type DetailedLineItem struct {
+	Date          *DetailedDateField  `json:"date"`
+	Description   *DetailedField  `json:"description"`
+	Discount      *DetailedFloatField `json:"discount"`
+	ID            int     `json:"id"`
+	Order         int     `json:"order"`
+	Price         *DetailedFloatField `json:"price"`
+	Quantity      *DetailedFloatField `json:"quantity"`
+	Reference     *DetailedField  `json:"reference"`
+	Section       *DetailedField  `json:"section"`
+	SKU           *DetailedField  `json:"sku"`
+	UPC           *DetailedField  `json:"upc"`
+	Tax           *DetailedFloatField `json:"tax"`
+	TaxRate       *DetailedFloatField `json:"tax_rate"`
+	Total         *DetailedFloatField `json:"total"`
+	Type          string  `json:"type"`
+	UnitOfMeasure *DetailedField  `json:"unit_of_measure"`
+}
+
+// DetailedTaxLine extends TaxLine with confidence scores
+type DetailedTaxLine struct {
+	Order int     `json:"order"`
+	Name  *DetailedField  `json:"name"`
+	Rate  *DetailedFloatField `json:"rate"`
+	Total *DetailedFloatField `json:"total"`
+}
+
+// DetailedDocument extends Document with detailed field information
+type DetailedDocument struct {
+	ABNNumber           *DetailedField         `json:"abn_number,omitempty"`
+	AccountNumber       *DetailedField         `json:"account_number,omitempty"`
+	BillTo              DetailedToField        `json:"bill_to"`
+	CardNumber          *DetailedField         `json:"card_number,omitempty"`
+	Category            *DetailedField         `json:"category,omitempty"`
+	Created             *DetailedField         `json:"created,omitempty"`
+	CurrencyCode        *DetailedField         `json:"currency_code,omitempty"`
+	Date                *DetailedDateField         `json:"date"`
+	DeliveryDate        *DetailedDateField         `json:"delivery_date"`
+	Discount            *DetailedFloatField        `json:"discount"`
+	ReferenceNumber     string         `json:"reference_number"`
+	DueDate             *DetailedDateField         `json:"due_date"`
+	ExternalID          string         `json:"external_id"`
+	ID                  int            `json:"id"`
+	ImgFileName         string         `json:"img_file_name"`
+	ImgThumbnailURL     string         `json:"img_thumbnail_url"`
+	ImgURL              string         `json:"img_url"`
+	Insurance           *DetailedFloatField        `json:"insurance"`
+	InvoiceNumber       *DetailedField         `json:"invoice_number"`
+	IsDuplicate         bool           `json:"is_duplicate"`
+	LineItems           []LineItem     `json:"line_items"`
+	LineItemsWithScores           []DetailedLineItem     `json:"line_items_with_scores"`
+	OCRText             string         `json:"ocr_text"`
+	OrderDate           *DetailedDateField         `json:"order_date"`
+	Payment             *DetailedPayment   `json:"payment"`
+	PhoneNumber         *DetailedField         `json:"phone_number"`
+	PurchaseOrderNumber *DetailedField         `json:"purchase_order_number"`
+	Rounding            *DetailedFloatField        `json:"rounding"`
+	ServiceEndDate      *DetailedDateField         `json:"service_end_date"`
+	ServiceStartDate    *DetailedDateField         `json:"service_start_date"`
+	ShipDate            *DetailedDateField         `json:"ship_date"`
+	ShipTo              DetailedToField        `json:"ship_to"`
+	Status              DocumentStatus `json:"status"`
+	StoreNumber         *DetailedField         `json:"store_number"`
+	Subtotal            *DetailedFloatField        `json:"subtotal"`
+	Tax                 *DetailedFloatField        `json:"tax"`
+	TaxLines            []TaxLine      `json:"tax_lines"`
+	TaxLinesWithScores            []DetailedTaxLine      `json:"tax_lines_with_scores"`
+	Tip                 *DetailedFloatField        `json:"tip"`
+	Total               *DetailedFloatField        `json:"total"`
+	TotalWeight         *DetailedField         `json:"total_weight"`
+	TrackingNumber      *DetailedField         `json:"tracking_number"`
+	Updated             string         `json:"updated"`
+	VATNumber           *DetailedField         `json:"vat_number"`
+	Vendor              *DetailedVendor         `json:"vendor"`
+	VendorIban          *DetailedField         `json:"vendor_iban"`
 }
