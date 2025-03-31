@@ -124,6 +124,22 @@ func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.D
 	return *out, nil
 }
 
+// SearchDetailedDocuments returns a list of processed documents with matching queries.
+func (c *Client) SearchDetailedDocuments(opts scheme.DetailedDocumentSearchOptions) (*[]scheme.DetailedDocument, error) {
+	out := new(*[]scheme.DetailedDocument)
+	detailedOpts := scheme.DetailedDocumentSearchOptions{
+		DocumentSearchOptions: opts.DocumentSearchOptions,
+		BoundingBoxes:         "true",
+		ConfidenceDetails:     "true",
+	}
+	if err := c.get(documentURI, detailedOpts, out); err != nil {
+		return nil, err
+	}
+	
+	return *out, nil
+}
+
+
 // GetDocument returns a processed document with matching queries.
 func (c *Client) GetDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
@@ -242,6 +258,21 @@ func (c *Client) DeleteGlobalTag(tagID string) error {
 	}
 
 	return nil
+}
+
+// GetDetailedDocument returns a processed document with detailed field information
+func (c *Client) GetDetailedDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.DetailedDocument, error) {
+	out := new(*scheme.DetailedDocument)
+	detailedOpts := scheme.DocumentGetDetailedOptions{
+		DocumentGetOptions: opts,
+		ConfidenceDetails: "true",
+		BoundingBoxes:     "true",
+	}
+	err := c.get(fmt.Sprintf("%s%s", documentURI, documentID), detailedOpts, out)
+	if err != nil {
+		return nil, err
+	}
+	return *out, nil
 }
 
 // request returns an authorized request to Veryfi API.
