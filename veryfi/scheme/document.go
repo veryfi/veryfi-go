@@ -63,26 +63,27 @@ type VendorUpdateOptions struct {
 
 // DocumentSearchOptions describes the query parameters to search document.
 type DocumentSearchOptions struct {
-	Q          string         `json:"q"`
-	ExternalID string         `json:"external_id"`
-	Tag        string         `json:"tag"`
-	CreatedGT  string         `json:"created__gt"`
-	CreatedGTE string         `json:"created__gte"`
-	CreatedLT  string         `json:"created__lt"`
-	CreatedLTE string         `json:"created__lte"`
-	Status     DocumentStatus `json:"status"`
-	DeviceID   string         `json:"device_id"`
-	Owner      string         `json:"owner"`
-	UpdatedGT  string         `json:"updated__gt"`
-	UpdatedGTE string         `json:"updated__gte"`
-	UpdatedLT  string         `json:"updated__lt"`
-	UpdatedLTE string         `json:"updated__lte"`
-	DateGT     string         `json:"date__gt"`
-	DateGTE    string         `json:"date__gte"`
-	DateLT     string         `json:"date__lt"`
-	DateLTE    string         `json:"date__lte"`
-	Page       string         `json:"page"`
-	PageSize   string         `json:"page_size"`
+	Q                 string         `json:"q"`
+	ExternalID        string         `json:"external_id"`
+	Tag               string         `json:"tag"`
+	CreatedGT         string         `json:"created__gt"`
+	CreatedGTE        string         `json:"created__gte"`
+	CreatedLT         string         `json:"created__lt"`
+	CreatedLTE        string         `json:"created__lte"`
+	Status            DocumentStatus `json:"status"`
+	DeviceID          string         `json:"device_id"`
+	Owner             string         `json:"owner"`
+	UpdatedGT         string         `json:"updated__gt"`
+	UpdatedGTE        string         `json:"updated__gte"`
+	UpdatedLT         string         `json:"updated__lt"`
+	UpdatedLTE        string         `json:"updated__lte"`
+	DateGT            string         `json:"date__gt"`
+	DateGTE           string         `json:"date__gte"`
+	DateLT            string         `json:"date__lt"`
+	DateLTE           string         `json:"date__lte"`
+	Page              string         `json:"page"`
+	PageSize          string         `json:"page_size"`
+	TrackTotalResults bool           `json:"track_total_results"`
 }
 
 type DetailedDocumentSearchOptions struct {
@@ -106,6 +107,7 @@ type DetailedDocumentSearchOptions struct {
 	DateLTE           string         `json:"date__lte"`
 	Page              string         `json:"page"`
 	PageSize          string         `json:"page_size"`
+	TrackTotalResults bool           `json:"track_total_results"`
 	BoundingBoxes     bool           `json:"bounding_boxes"`
 	ConfidenceDetails bool           `json:"confidence_details"`
 }
@@ -143,7 +145,15 @@ const (
 )
 
 type Documents struct {
-	Documents []Document `json:"documents"`
+	Documents []Document    `json:"documents"`
+	Meta      DocumentsMeta `json:"meta"`
+}
+
+type DocumentsMeta struct {
+	DocumentsPerPage int `json:"documents_per_page"`
+	PageNumber       int `json:"page_number"`
+	TotalPages       int `json:"total_pages"`
+	TotalResults     int `json:"total_results"`
 }
 
 // Document describes the response.
@@ -429,6 +439,7 @@ type DetailedTaxLine struct {
 
 type DetailedDocuments struct {
 	Documents []DetailedDocument `json:"documents"`
+	Meta      DocumentsMeta      `json:"meta"`
 }
 
 // DetailedDocument extends Document with detailed field information

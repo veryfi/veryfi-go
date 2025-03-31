@@ -148,6 +148,7 @@ func (c *Client) SearchDetailedDocuments(opts scheme.DocumentSearchOptions) (*sc
 		DateLTE:           opts.DateLTE,
 		Page:              opts.Page,
 		PageSize:          opts.PageSize,
+		TrackTotalResults: opts.TrackTotalResults,
 		BoundingBoxes:     true,
 		ConfidenceDetails: true,
 	}
