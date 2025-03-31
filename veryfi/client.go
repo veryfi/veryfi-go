@@ -135,6 +135,19 @@ func (c *Client) SearchDetailedDocuments(opts scheme.DocumentSearchOptions) (*sc
 		CreatedGTE:        opts.CreatedGTE,
 		CreatedLT:         opts.CreatedLT,
 		CreatedLTE:        opts.CreatedLTE,
+		Status:            opts.Status,
+		DeviceID:          opts.DeviceID,
+		Owner:             opts.Owner,
+		UpdatedGT:         opts.UpdatedGT,
+		UpdatedGTE:        opts.UpdatedGTE,
+		UpdatedLT:         opts.UpdatedLT,
+		UpdatedLTE:        opts.UpdatedLTE,
+		DateGT:            opts.DateGT,
+		DateGTE:           opts.DateGTE,
+		DateLT:            opts.DateLT,
+		DateLTE:           opts.DateLTE,
+		Page:              opts.Page,
+		PageSize:          opts.PageSize,
 		BoundingBoxes:     true,
 		ConfidenceDetails: true,
 	}
@@ -327,6 +340,14 @@ func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) 
 	request := c.request(queryParams, okScheme, errScheme)
 	if queryParams != nil {
 		request.SetQueryParams(structToMap(queryParams))
+	}
+	// Print query parameters for debugging
+	if queryParams != nil {
+		params := structToMap(queryParams)
+		fmt.Println("Query Parameters:")
+		for key, value := range params {
+			fmt.Printf("  %s: %v\n", key, value)
+		}
 	}
 
 	_, err := request.Get(uri)

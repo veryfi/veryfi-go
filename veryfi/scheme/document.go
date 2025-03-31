@@ -63,25 +63,51 @@ type VendorUpdateOptions struct {
 
 // DocumentSearchOptions describes the query parameters to search document.
 type DocumentSearchOptions struct {
-	Q          string `json:"q"`
-	ExternalID string `json:"external_id"`
-	Tag        string `json:"tag"`
-	CreatedGT  string `json:"created__gt"`
-	CreatedGTE string `json:"created__gte"`
-	CreatedLT  string `json:"created__lt"`
-	CreatedLTE string `json:"created__lte"`
+	Q          string         `json:"q"`
+	ExternalID string         `json:"external_id"`
+	Tag        string         `json:"tag"`
+	CreatedGT  string         `json:"created__gt"`
+	CreatedGTE string         `json:"created__gte"`
+	CreatedLT  string         `json:"created__lt"`
+	CreatedLTE string         `json:"created__lte"`
+	Status     DocumentStatus `json:"status"`
+	DeviceID   string         `json:"device_id"`
+	Owner      string         `json:"owner"`
+	UpdatedGT  string         `json:"updated__gt"`
+	UpdatedGTE string         `json:"updated__gte"`
+	UpdatedLT  string         `json:"updated__lt"`
+	UpdatedLTE string         `json:"updated__lte"`
+	DateGT     string         `json:"date__gt"`
+	DateGTE    string         `json:"date__gte"`
+	DateLT     string         `json:"date__lt"`
+	DateLTE    string         `json:"date__lte"`
+	Page       string         `json:"page"`
+	PageSize   string         `json:"page_size"`
 }
 
 type DetailedDocumentSearchOptions struct {
-	Q                 string `json:"q,omitempty"`
-	ExternalID        string `json:"external_id,omitempty"`
-	Tag               string `json:"tag,omitempty"`
-	CreatedGT         string `json:"created__gt,omitempty"`
-	CreatedGTE        string `json:"created__gte,omitempty"`
-	CreatedLT         string `json:"created__lt,omitempty"`
-	CreatedLTE        string `json:"created__lte,omitempty"`
-	BoundingBoxes     bool   `json:"bounding_boxes"`
-	ConfidenceDetails bool   `json:"confidence_details"`
+	Q                 string         `json:"q"`
+	ExternalID        string         `json:"external_id"`
+	Tag               string         `json:"tag"`
+	CreatedGT         string         `json:"created__gt"`
+	CreatedGTE        string         `json:"created__gte"`
+	CreatedLT         string         `json:"created__lt"`
+	CreatedLTE        string         `json:"created__lte"`
+	Status            DocumentStatus `json:"status"`
+	DeviceID          string         `json:"device_id"`
+	Owner             string         `json:"owner"`
+	UpdatedGT         string         `json:"updated__gt"`
+	UpdatedGTE        string         `json:"updated__gte"`
+	UpdatedLT         string         `json:"updated__lt"`
+	UpdatedLTE        string         `json:"updated__lte"`
+	DateGT            string         `json:"date__gt"`
+	DateGTE           string         `json:"date__gte"`
+	DateLT            string         `json:"date__lt"`
+	DateLTE           string         `json:"date__lte"`
+	Page              string         `json:"page"`
+	PageSize          string         `json:"page_size"`
+	BoundingBoxes     bool           `json:"bounding_boxes"`
+	ConfidenceDetails bool           `json:"confidence_details"`
 }
 
 // DocumentGetOptions describes the query parameters to get a document.
