@@ -73,15 +73,15 @@ type DocumentSearchOptions struct {
 }
 
 type DetailedDocumentSearchOptions struct {
-	Q          string `json:"q,omitempty"`
-	ExternalID string `json:"external_id,omitempty"`
-	Tag        string `json:"tag,omitempty"`
-	CreatedGT  string `json:"created__gt,omitempty"`
-	CreatedGTE string `json:"created__gte,omitempty"`
-	CreatedLT  string `json:"created__lt,omitempty"`
-	CreatedLTE string `json:"created__lte,omitempty"`
-	BoundingBoxes     bool `json:"bounding_boxes"`
-	ConfidenceDetails bool `json:"confidence_details"`
+	Q                 string `json:"q,omitempty"`
+	ExternalID        string `json:"external_id,omitempty"`
+	Tag               string `json:"tag,omitempty"`
+	CreatedGT         string `json:"created__gt,omitempty"`
+	CreatedGTE        string `json:"created__gte,omitempty"`
+	CreatedLT         string `json:"created__lt,omitempty"`
+	CreatedLTE        string `json:"created__lte,omitempty"`
+	BoundingBoxes     bool   `json:"bounding_boxes"`
+	ConfidenceDetails bool   `json:"confidence_details"`
 }
 
 // DocumentGetOptions describes the query parameters to get a document.
@@ -90,9 +90,9 @@ type DocumentGetOptions struct {
 }
 
 type DocumentGetDetailedOptions struct {
-	ReturnAuditTrail string `json:"return_audit_trail"`
-	BoundingBoxes     bool `json:"bounding_boxes"`
-	ConfidenceDetails bool `json:"confidence_details"`
+	ReturnAuditTrail  string `json:"return_audit_trail"`
+	BoundingBoxes     bool   `json:"bounding_boxes"`
+	ConfidenceDetails bool   `json:"confidence_details"`
 }
 
 // LineItemOptions describes the query parameters to add a line to a document.
@@ -407,13 +407,13 @@ type DetailedDocuments struct {
 
 // DetailedDocument extends Document with detailed field information
 type DetailedDocument struct {
-	ABNNumber           *DetailedField      `json:"abn_number,omitempty"`
-	AccountNumber       *DetailedField      `json:"account_number,omitempty"`
+	ABNNumber           *DetailedField      `json:"abn_number"`
+	AccountNumber       *DetailedField      `json:"account_number"`
 	BillTo              DetailedToField     `json:"bill_to"`
-	CardNumber          *DetailedField      `json:"card_number,omitempty"`
-	Category            *DetailedField      `json:"category,omitempty"`
-	Created             *DetailedField      `json:"created,omitempty"`
-	CurrencyCode        *DetailedField      `json:"currency_code,omitempty"`
+	CardNumber          *DetailedField      `json:"card_number"`
+	Category            *DetailedField      `json:"category"`
+	Created             *DetailedField      `json:"created"`
+	CurrencyCode        *DetailedField      `json:"currency_code"`
 	Date                *DetailedDateField  `json:"date"`
 	DeliveryDate        *DetailedDateField  `json:"delivery_date"`
 	Discount            *DetailedFloatField `json:"discount"`

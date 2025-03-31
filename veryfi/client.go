@@ -128,15 +128,15 @@ func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*scheme.Doc
 func (c *Client) SearchDetailedDocuments(opts scheme.DocumentSearchOptions) (*scheme.DetailedDocuments, error) {
 	out := new(*scheme.DetailedDocuments)
 	detailedOpts := scheme.DetailedDocumentSearchOptions{
-		Q:                   opts.Q,
-		ExternalID:          opts.ExternalID,
-		Tag:                 opts.Tag,
-		CreatedGT:           opts.CreatedGT,
-		CreatedGTE:          opts.CreatedGTE,
-		CreatedLT:           opts.CreatedLT,
-		CreatedLTE:          opts.CreatedLTE,
-		BoundingBoxes:       true,
-		ConfidenceDetails:   true,
+		Q:                 opts.Q,
+		ExternalID:        opts.ExternalID,
+		Tag:               opts.Tag,
+		CreatedGT:         opts.CreatedGT,
+		CreatedGTE:        opts.CreatedGTE,
+		CreatedLT:         opts.CreatedLT,
+		CreatedLTE:        opts.CreatedLTE,
+		BoundingBoxes:     true,
+		ConfidenceDetails: true,
 	}
 	if err := c.get(documentURI, detailedOpts, out); err != nil {
 		return nil, err
@@ -269,9 +269,9 @@ func (c *Client) DeleteGlobalTag(tagID string) error {
 func (c *Client) GetDetailedDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.DetailedDocument, error) {
 	out := new(*scheme.DetailedDocument)
 	detailedOpts := scheme.DocumentGetDetailedOptions{
-		ReturnAuditTrail: opts.ReturnAuditTrail,
-		ConfidenceDetails:  true,
-		BoundingBoxes:      true,
+		ReturnAuditTrail:  opts.ReturnAuditTrail,
+		ConfidenceDetails: true,
+		BoundingBoxes:     true,
 	}
 	err := c.get(fmt.Sprintf("%s%s", documentURI, documentID), detailedOpts, out)
 	if err != nil {
