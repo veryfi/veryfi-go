@@ -135,10 +135,9 @@ func (c *Client) SearchDetailedDocuments(opts scheme.DetailedDocumentSearchOptio
 	if err := c.get(documentURI, detailedOpts, out); err != nil {
 		return nil, err
 	}
-	
+
 	return *out, nil
 }
-
 
 // GetDocument returns a processed document with matching queries.
 func (c *Client) GetDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.Document, error) {
@@ -265,8 +264,8 @@ func (c *Client) GetDetailedDocument(documentID string, opts scheme.DocumentGetO
 	out := new(*scheme.DetailedDocument)
 	detailedOpts := scheme.DocumentGetDetailedOptions{
 		DocumentGetOptions: opts,
-		ConfidenceDetails: "true",
-		BoundingBoxes:     "true",
+		ConfidenceDetails:  "true",
+		BoundingBoxes:      "true",
 	}
 	err := c.get(fmt.Sprintf("%s%s", documentURI, documentID), detailedOpts, out)
 	if err != nil {
