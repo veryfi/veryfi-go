@@ -73,9 +73,15 @@ type DocumentSearchOptions struct {
 }
 
 type DetailedDocumentSearchOptions struct {
-	DocumentSearchOptions
-	BoundingBoxes     string `json:"bounding_boxes"`
-	ConfidenceDetails string `json:"confidence_details"`
+	Q          string `json:"q,omitempty"`
+	ExternalID string `json:"external_id,omitempty"`
+	Tag        string `json:"tag,omitempty"`
+	CreatedGT  string `json:"created__gt,omitempty"`
+	CreatedGTE string `json:"created__gte,omitempty"`
+	CreatedLT  string `json:"created__lt,omitempty"`
+	CreatedLTE string `json:"created__lte,omitempty"`
+	BoundingBoxes     bool `json:"bounding_boxes"`
+	ConfidenceDetails bool `json:"confidence_details"`
 }
 
 // DocumentGetOptions describes the query parameters to get a document.
@@ -84,9 +90,9 @@ type DocumentGetOptions struct {
 }
 
 type DocumentGetDetailedOptions struct {
-	DocumentGetOptions
-	BoundingBoxes     string `json:"bounding_boxes"`
-	ConfidenceDetails string `json:"confidence_details"`
+	ReturnAuditTrail string `json:"return_audit_trail"`
+	BoundingBoxes     bool `json:"bounding_boxes"`
+	ConfidenceDetails bool `json:"confidence_details"`
 }
 
 // LineItemOptions describes the query parameters to add a line to a document.
@@ -109,6 +115,10 @@ const (
 	Reviewed  DocumentStatus = "reviewed"
 	Archived  DocumentStatus = "archived"
 )
+
+type Documents struct {
+	Documents []Document `json:"documents"`
+}
 
 // Document describes the response.
 type Document struct {
@@ -389,6 +399,10 @@ type DetailedTaxLine struct {
 	Name  *DetailedField      `json:"name"`
 	Rate  *DetailedFloatField `json:"rate"`
 	Total *DetailedFloatField `json:"total"`
+}
+
+type DetailedDocuments struct {
+	Documents []DetailedDocument `json:"documents"`
 }
 
 // DetailedDocument extends Document with detailed field information

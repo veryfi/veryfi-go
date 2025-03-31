@@ -115,8 +115,8 @@ func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOpt
 }
 
 // SearchDocuments returns a list of processed documents with matching queries.
-func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.Document, error) {
-	out := new(*[]scheme.Document)
+func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*scheme.Documents, error) {
+	out := new(*scheme.Documents)
 	if err := c.get(documentURI, opts, out); err != nil {
 		return nil, err
 	}
@@ -125,12 +125,18 @@ func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.D
 }
 
 // SearchDetailedDocuments returns a list of processed documents with matching queries.
-func (c *Client) SearchDetailedDocuments(opts scheme.DetailedDocumentSearchOptions) (*[]scheme.DetailedDocument, error) {
-	out := new(*[]scheme.DetailedDocument)
+func (c *Client) SearchDetailedDocuments(opts scheme.DocumentSearchOptions) (*scheme.DetailedDocuments, error) {
+	out := new(*scheme.DetailedDocuments)
 	detailedOpts := scheme.DetailedDocumentSearchOptions{
-		DocumentSearchOptions: opts.DocumentSearchOptions,
-		BoundingBoxes:         "true",
-		ConfidenceDetails:     "true",
+		Q:                   opts.Q,
+		ExternalID:          opts.ExternalID,
+		Tag:                 opts.Tag,
+		CreatedGT:           opts.CreatedGT,
+		CreatedGTE:          opts.CreatedGTE,
+		CreatedLT:           opts.CreatedLT,
+		CreatedLTE:          opts.CreatedLTE,
+		BoundingBoxes:       true,
+		ConfidenceDetails:   true,
 	}
 	if err := c.get(documentURI, detailedOpts, out); err != nil {
 		return nil, err
@@ -263,9 +269,9 @@ func (c *Client) DeleteGlobalTag(tagID string) error {
 func (c *Client) GetDetailedDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.DetailedDocument, error) {
 	out := new(*scheme.DetailedDocument)
 	detailedOpts := scheme.DocumentGetDetailedOptions{
-		DocumentGetOptions: opts,
-		ConfidenceDetails:  "true",
-		BoundingBoxes:      "true",
+		ReturnAuditTrail: opts.ReturnAuditTrail,
+		ConfidenceDetails:  true,
+		BoundingBoxes:      true,
 	}
 	err := c.get(fmt.Sprintf("%s%s", documentURI, documentID), detailedOpts, out)
 	if err != nil {
