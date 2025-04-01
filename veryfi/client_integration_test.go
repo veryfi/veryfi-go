@@ -139,9 +139,9 @@ func TestIntegrationSuccessProcessDocumentUpload(t *testing.T) {
 	assert.NoError(t, err)
 
 	resp, err := client.ProcessDocumentUpload(scheme.DocumentUploadOptions{
-		FilePath: fmt.Sprintf("%s/testdata/receipt_public.jpeg", testpath),
+		FilePath: fmt.Sprintf("%s/testdata/receipt_public.jpg", testpath),
 		DocumentSharedOptions: scheme.DocumentSharedOptions{
-			FileName: "receipt_public.jpeg",
+			FileName: "receipt_public.jpg",
 			Tags:     []string{"integration", "test", "upload"},
 		},
 	})
