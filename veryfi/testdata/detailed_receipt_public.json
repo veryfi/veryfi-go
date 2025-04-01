@@ -1,0 +1,957 @@
+{
+  "account_number": {
+    "bounding_box": [0, 0.4543, 0.9355, 0.7466, 0.9512],
+    "bounding_region": [
+      0.4543, 0.9355, 0.7466, 0.9355, 0.7466, 0.9512, 0.4543, 0.9512
+    ],
+    "ocr_score": 0.93,
+    "rotation": 0,
+    "score": 1.0,
+    "value": "0053"
+  },
+  "accounting_entry_type": "debit",
+  "balance": {
+    "score": 0.42,
+    "value": null
+  },
+  "barcodes": [
+    {
+      "bounding_region": [
+        0.0347, 0.7637, 0.0389, 0.7937, 0.9716, 0.7848, 0.9685, 0.7551
+      ],
+      "data": "032962247822205240330000002760",
+      "type": "ITF"
+    }
+  ],
+  "bill_to": {
+    "address": {
+      "score": 1.0,
+      "value": null
+    },
+    "email": {
+      "score": 1.0,
+      "value": null
+    },
+    "name": {
+      "score": 0.95,
+      "value": null
+    },
+    "parsed_address": null,
+    "phone_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "reg_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "vat_number": {
+      "score": 1.0,
+      "value": null
+    }
+  },
+  "cashback": {
+    "score": 0.99,
+    "value": null
+  },
+  "category": {
+    "score": 0.94,
+    "value": "Job Supplies"
+  },
+  "confidence_details": true,
+  "country_code": {
+    "score": 0.97,
+    "value": "US"
+  },
+  "created_date": "2025-03-25 20:57:21",
+  "currency_code": {
+    "score": 0.96,
+    "value": "USD"
+  },
+  "custom_fields": {},
+  "date": {
+    "bounding_box": [0, 0.5332, 0.1168, 0.7573, 0.131],
+    "bounding_region": [
+      0.5332, 0.1168, 0.7573, 0.1168, 0.7573, 0.131, 0.5332, 0.131
+    ],
+    "rotation": 0,
+    "score": 1.0,
+    "value": "2022-05-24 13:10:00"
+  },
+  "default_category": {
+    "score": 0.59,
+    "value": "Job Supplies"
+  },
+  "delivery_date": {
+    "score": 1.0,
+    "value": null
+  },
+  "delivery_note_number": {
+    "score": 1.0,
+    "value": null
+  },
+  "discount": {
+    "bounding_box": [0, 0.7646, 0.8789, 0.8823, 0.8906],
+    "bounding_region": [
+      0.7646, 0.8789, 0.8823, 0.8789, 0.8823, 0.8906, 0.7646, 0.8906
+    ],
+    "ocr_score": 0.98,
+    "rotation": 0,
+    "score": 0.99,
+    "value": 1.2
+  },
+  "document_reference_number": {
+    "bounding_box": [0, 0.2944, 0.7461, 0.8286, 0.7627],
+    "bounding_region": [
+      0.2944, 0.7461, 0.8286, 0.7461, 0.8286, 0.7627, 0.2944, 0.7627
+    ],
+    "ocr_score": 0.99,
+    "rotation": 0,
+    "score": 1.0,
+    "value": "0329-6224-7823-2205-2403"
+  },
+  "document_title": {
+    "score": 1.0,
+    "value": null
+  },
+  "document_type": {
+    "score": 0.99,
+    "value": "receipt"
+  },
+  "due_date": {
+    "score": 1.0,
+    "value": null
+  },
+  "duplicate_of": 297133590,
+  "exch_rate": 1.0,
+  "external_id": null,
+  "final_balance": {
+    "score": 0.71,
+    "value": null
+  },
+  "guest_count": {
+    "score": 1.0,
+    "value": null
+  },
+  "id": 36966934,
+  "img_blur": false,
+  "img_file_name": "36966934.jpg",
+  "img_thumbnail_url": "https://scdn.veryfi.com/receipts/thumbnail.jpg",
+  "img_url": "https://scdn.veryfi.com/receipts/img.jpg",
+  "incoterms": {
+    "score": 1.0,
+    "value": null
+  },
+  "insurance": {
+    "score": 1.0,
+    "value": null
+  },
+  "invoice_number": {
+    "bounding_box": [0, 0.2482, 0.1201, 0.3438, 0.1334],
+    "bounding_region": [
+      0.2482, 0.1201, 0.3437, 0.1201, 0.3437, 0.1334, 0.2482, 0.1334
+    ],
+    "ocr_score": 0.99,
+    "rotation": 0,
+    "score": 1.0,
+    "value": "4782"
+  },
+  "is_approved": false,
+  "is_document": true,
+  "is_duplicate": true,
+  "is_money_in": {
+    "score": 0.89,
+    "value": false
+  },
+  "is_transaction": {
+    "score": 1.0,
+    "value": false
+  },
+  "license_plate_number": {
+    "score": 1.0,
+    "value": null
+  },
+  "line_items": [
+    {
+      "category": "Job Supplies",
+      "country_of_origin": null,
+      "custom_fields": {},
+      "date": null,
+      "description": "RED BULL ENRGY DRNK CNS 8.4OZ 6PK",
+      "discount": 1.2,
+      "discount_price": null,
+      "discount_rate": null,
+      "end_date": null,
+      "full_description": "RED BULL ENRGY DRNK CNS 8.4OZ 6PK",
+      "gross_total": null,
+      "hsn": null,
+      "id": 1346628550,
+      "lot": null,
+      "manufacturer": null,
+      "net_total": null,
+      "normalized_description": "RED BULL ENERGY DRINK CNS 8.4OZ 6PK",
+      "order": 0,
+      "price": 9.99,
+      "quantity": 1.0,
+      "reference": null,
+      "section": null,
+      "sku": "61126943157",
+      "start_date": null,
+      "subtotal": null,
+      "tags": [],
+      "tax": null,
+      "tax_code": null,
+      "tax_rate": null,
+      "text": "RED BULL ENRGY DRNK CNS 8.4OZ 6PK\n61126943157\tA\t8.79 SALE\nREGULAR PRICE 9.99\nMYWALGREENS SAVINGS 1.20\nRETURN VALUE 8.79",
+      "total": 8.79,
+      "type": "food",
+      "unit_of_measure": null,
+      "upc": null,
+      "weight": null
+    },
+    {
+      "category": "Job Supplies",
+      "country_of_origin": null,
+      "custom_fields": {},
+      "date": null,
+      "description": "CA REDMP VAL",
+      "discount": null,
+      "discount_price": null,
+      "discount_rate": null,
+      "end_date": null,
+      "full_description": "CA REDMP VAL",
+      "gross_total": null,
+      "hsn": null,
+      "id": 1346628551,
+      "lot": null,
+      "manufacturer": null,
+      "net_total": null,
+      "normalized_description": null,
+      "order": 1,
+      "price": null,
+      "quantity": 1.0,
+      "reference": null,
+      "section": null,
+      "sku": "00000007211",
+      "start_date": null,
+      "subtotal": null,
+      "tags": [],
+      "tax": null,
+      "tax_code": null,
+      "tax_rate": null,
+      "text": "CA REDMP VAL\n00000007211\t\t0.30",
+      "total": 0.3,
+      "type": "fee",
+      "unit_of_measure": null,
+      "upc": null,
+      "weight": null
+    }
+  ],
+  "line_items_with_scores": [
+    {
+      "category": {
+        "value": "Job Supplies"
+      },
+      "country_of_origin": {
+        "value": null
+      },
+      "custom_fields": {},
+      "date": {
+        "value": null
+      },
+      "description": {
+        "bounding_box": [0, 0.0326, 0.1411, 0.7573, 0.1592],
+        "bounding_region": [
+          0.0325, 0.146, 0.7573, 0.1401, 0.7574, 0.1541, 0.0326, 0.16
+        ],
+        "ocr_score": 0.98,
+        "rotation": 0,
+        "score": 0.78,
+        "value": "RED BULL ENRGY DRNK CNS 8.4OZ 6PK"
+      },
+      "discount": {
+        "bounding_box": [0, 0.5615, 0.1785, 0.6489, 0.1909],
+        "bounding_region": [
+          0.5615, 0.1785, 0.6489, 0.1785, 0.6489, 0.1909, 0.5615, 0.1909
+        ],
+        "ocr_score": 0.99,
+        "rotation": 0,
+        "score": 1.0,
+        "value": 1.2
+      },
+      "discount_price": {
+        "value": null
+      },
+      "discount_rate": {
+        "value": null
+      },
+      "end_date": {
+        "value": null
+      },
+      "full_description": {
+        "bounding_box": [0, 0.0326, 0.1411, 0.7573, 0.1592],
+        "bounding_region": [
+          0.0325, 0.146, 0.7573, 0.1401, 0.7574, 0.1541, 0.0326, 0.16
+        ],
+        "ocr_score": 0.98,
+        "rotation": 0,
+        "score": 0.78,
+        "value": "RED BULL ENRGY DRNK CNS 8.4OZ 6PK"
+      },
+      "gross_total": {
+        "value": null
+      },
+      "hsn": {
+        "value": null
+      },
+      "id": 1346628550,
+      "lot": {
+        "value": null
+      },
+      "manufacturer": {
+        "value": null
+      },
+      "net_total": {
+        "value": null
+      },
+      "normalized_description": {
+        "value": "RED BULL ENERGY DRINK CNS 8.4OZ 6PK"
+      },
+      "order": 0,
+      "price": {
+        "bounding_box": [0, 0.4258, 0.1681, 0.5195, 0.1803],
+        "bounding_region": [
+          0.4258, 0.1681, 0.5195, 0.1681, 0.5195, 0.1803, 0.4258, 0.1803
+        ],
+        "ocr_score": 0.99,
+        "rotation": 0,
+        "score": 0.97,
+        "value": 9.99
+      },
+      "quantity": {
+        "value": 1.0
+      },
+      "reference": {
+        "value": null
+      },
+      "section": {
+        "value": null
+      },
+      "sku": {
+        "bounding_box": [0, 0.1209, 0.1571, 0.365, 0.1699],
+        "bounding_region": [
+          0.1209, 0.1571, 0.365, 0.1571, 0.365, 0.1699, 0.1209, 0.1699
+        ],
+        "ocr_score": 0.99,
+        "rotation": 0,
+        "score": 0.94,
+        "value": "61126943157"
+      },
+      "start_date": {
+        "value": null
+      },
+      "subtotal": {
+        "value": null
+      },
+      "tags": [],
+      "tax": {
+        "value": null
+      },
+      "tax_code": {
+        "value": null
+      },
+      "tax_rate": {
+        "value": null
+      },
+      "text": "RED BULL ENRGY DRNK CNS 8.4OZ 6PK\n61126943157\tA\t8.79 SALE\nREGULAR PRICE 9.99\nMYWALGREENS SAVINGS 1.20\nRETURN VALUE 8.79",
+      "total": {
+        "bounding_box": [0, 0.7319, 0.1523, 0.8223, 0.1646],
+        "bounding_region": [
+          0.7319, 0.1523, 0.8223, 0.1523, 0.8223, 0.1646, 0.7319, 0.1646
+        ],
+        "ocr_score": 0.99,
+        "rotation": 0,
+        "score": 0.95,
+        "value": 8.79
+      },
+      "type": "food",
+      "unit_of_measure": {
+        "value": null
+      },
+      "upc": {
+        "value": null
+      },
+      "weight": {
+        "value": null
+      }
+    },
+    {
+      "category": {
+        "value": "Job Supplies"
+      },
+      "country_of_origin": {
+        "value": null
+      },
+      "custom_fields": {},
+      "date": {
+        "value": null
+      },
+      "description": {
+        "bounding_box": [0, 0.0337, 0.2073, 0.3008, 0.2206],
+        "bounding_region": [
+          0.0336, 0.2082, 0.3008, 0.2069, 0.3008, 0.2196, 0.0337, 0.2208
+        ],
+        "ocr_score": 0.98,
+        "rotation": 0,
+        "score": 0.79,
+        "value": "CA REDMP VAL"
+      },
+      "discount": {
+        "value": null
+      },
+      "discount_price": {
+        "value": null
+      },
+      "discount_rate": {
+        "value": null
+      },
+      "end_date": {
+        "value": null
+      },
+      "full_description": {
+        "bounding_box": [0, 0.0337, 0.2073, 0.3008, 0.2206],
+        "bounding_region": [
+          0.0336, 0.2082, 0.3008, 0.2069, 0.3008, 0.2196, 0.0337, 0.2208
+        ],
+        "ocr_score": 0.98,
+        "rotation": 0,
+        "score": 0.79,
+        "value": "CA REDMP VAL"
+      },
+      "gross_total": {
+        "value": null
+      },
+      "hsn": {
+        "value": null
+      },
+      "id": 1346628551,
+      "lot": {
+        "value": null
+      },
+      "manufacturer": {
+        "value": null
+      },
+      "net_total": {
+        "value": null
+      },
+      "normalized_description": {
+        "value": null
+      },
+      "order": 1,
+      "price": {
+        "value": null
+      },
+      "quantity": {
+        "value": 1.0
+      },
+      "reference": {
+        "value": null
+      },
+      "section": {
+        "value": null
+      },
+      "sku": {
+        "bounding_box": [0, 0.1209, 0.2185, 0.365, 0.2312],
+        "bounding_region": [
+          0.1209, 0.2185, 0.365, 0.2185, 0.365, 0.2312, 0.1209, 0.2312
+        ],
+        "ocr_score": 0.97,
+        "rotation": 0,
+        "score": 0.93,
+        "value": "00000007211"
+      },
+      "start_date": {
+        "value": null
+      },
+      "subtotal": {
+        "value": null
+      },
+      "tags": [],
+      "tax": {
+        "value": null
+      },
+      "tax_code": {
+        "value": null
+      },
+      "tax_rate": {
+        "value": null
+      },
+      "text": "CA REDMP VAL\n00000007211\t\t0.30",
+      "total": {
+        "bounding_box": [0, 0.7329, 0.2141, 0.8232, 0.2253],
+        "bounding_region": [
+          0.7329, 0.2141, 0.8232, 0.2141, 0.8232, 0.2253, 0.7329, 0.2253
+        ],
+        "ocr_score": 0.99,
+        "rotation": 0,
+        "score": 0.8,
+        "value": 0.3
+      },
+      "type": "fee",
+      "unit_of_measure": {
+        "value": null
+      },
+      "upc": {
+        "value": null
+      },
+      "weight": {
+        "value": null
+      }
+    }
+  ],
+  "meta": {
+    "device_id": null,
+    "device_user_uuid": null,
+    "duplicates": [
+      {
+        "id": 36966933,
+        "score": 0.9,
+        "url": "https://scdn.veryfi.com/receipts/img.jpg"
+      }
+    ],
+    "fraud": {
+      "attribution": null,
+      "color": "green",
+      "decision": "Not Fraud",
+      "fraudulent_pdf": {
+        "score": 0.0
+      },
+      "images": [],
+      "pages": [],
+      "score": null,
+      "submissions": {},
+      "types": [],
+      "version": null
+    },
+    "fraud_review": {
+      "decision": null,
+      "types": []
+    },
+    "language": [
+      {
+        "score": 0.7,
+        "value": "en"
+      }
+    ],
+    "ocr_score": 0.973,
+    "owner": "mattheweng",
+    "pages": [
+      {
+        "height": 3373,
+        "is_blurry": {
+          "score": 0.97,
+          "value": false
+        },
+        "language": [
+          {
+            "score": 0.7,
+            "value": "en"
+          }
+        ],
+        "screenshot": {
+          "score": 0.9300000071525574,
+          "type": null
+        },
+        "width": 951
+      }
+    ],
+    "processed_pages": 1,
+    "source": "api",
+    "source_documents": [
+      {
+        "height": 3373,
+        "size_kb": 2399,
+        "width": 951
+      }
+    ],
+    "total_pages": 1,
+    "warnings": [
+      {
+        "message": "Line item #6 has a problem. Quantity x Price != Total",
+        "type": "line_item_amount_missmatch"
+      },
+      {
+        "message": "Line item #7 has a problem. Quantity x Price != Total",
+        "type": "line_item_amount_missmatch"
+      },
+      {
+        "message": "Line item SKU #00000007211 repeats on lines 2, 4",
+        "type": "line_item_repeats"
+      },
+      {
+        "message": "Line item Description \"CA REDMP VAL\" repeats on lines 2, 4",
+        "type": "line_item_repeats"
+      }
+    ]
+  },
+  "model": "2.61.0",
+  "notes": null,
+  "ocr_text": "Walgreens\n#03296 191 E 3RD AVE\nSAN MATEO, CA 94401\n\t650-342-2723\n117\t4782 0022 05/24/2022 1:10 PM\nRED BULL ENRGY DRNK CNS 8.4OZ 6PK\n61126943157\tA\t8.79 SALE\nREGULAR PRICE 9.99\nMYWALGREENS SAVINGS 1.20\nRETURN VALUE 8.79\nCA REDMP VAL\n00000007211\t\t0.30\nCOCA COLA MINICAN 7.5Z 6PK\n04900006101\tA\t4.99 SALE\nRETURN VALUE 4.99\nCA REDMP VAL\n00000007211\t\t0.30\nNAB OREO CKIES C/PK 5.25OZ WHSE\n04400000749\t\t2.69\nRETURN VALUE 2.69\nDORITOS NACHO\n02840032505\t\t2.00\n1 @ 2.19 or 2/4.00\nRETURN VALUE 2.00\nF/LAYS REGULAR 2.63OZ\n02840032382\t\t2.00\n1 @ 2.19 or 2/4.00\nRETURN VALUE 2.00\nSCOTCH BRITE H/D KITCHN SPONGE 3S\n02120057235\tA\t4.79\nRETURN VALUE 4.79\nPALMOLIVE DISH OXI POWER\t10OZ\n03500000168\tA\t1.49\nRETURN VALUE 1.49\nSHOPPING BAG FEE\t0.25\nSUBTOTAL\t\t27.60\nSALES TAX A=9.625%\t1.93\nTOTAL\t\t29.53\nVISA ACCT 1850\t29.53\nAUTH CODE\t\t798553\nCHANGE\t\t.00\n\nMYWALGREENS SAVINGS\tof\t1.20\nTHANK YOU FOR SHOPPING AT WALGREENS\nREDEEM $1 WALGREENS CASH REWARDS ON YOUR\nNEXT PURCHASE! WALGREENS CASH REWARDS\nCANNOT BE REDEEMED ON SOME ITEMS. FOR\nFULL DETAILS SEE MYWALGREENS.COM\nRFN# 0329-6224-7823-2205-2403\n\n*****\nmyW\nTOTAL SAVINGS\t\t$1.20\nSAVINGS VALUE\t\t4%\n$1.40 W CASH REWARDS AVAILABLE\nmyWalgreens ACCT # *********0053\n\t008\nOPENING BALANCE\t\t$1.14\nEARNED THIS VISIT\t\t$0.26\nCLOSING BALANCE\t\t$1.40",
+  "order_date": {
+    "score": 1.0,
+    "value": null
+  },
+  "payment": {
+    "card_number": {
+      "bounding_box": [0, 0.345, 0.5664, 0.4333, 0.5786],
+      "bounding_region": [
+        0.345, 0.5664, 0.4333, 0.5664, 0.4333, 0.5786, 0.345, 0.5786
+      ],
+      "ocr_score": 0.99,
+      "rotation": 0,
+      "score": 1.0,
+      "value": "1850"
+    },
+    "display_name": "Visa ***1850",
+    "terms": {
+      "score": 1.0,
+      "value": null
+    },
+    "type": {
+      "score": 0.97,
+      "value": "visa"
+    }
+  },
+  "payment_links": [],
+  "pdf_url": "https://scdn.veryfi.com/receipts/img.pdf",
+  "previous_balance": {
+    "score": 0.96,
+    "value": null
+  },
+  "purchase_order_number": {
+    "score": 0.99,
+    "value": null
+  },
+  "reference_number": "VFFFF-10000",
+  "rounding": {
+    "score": 0.99,
+    "value": null
+  },
+  "server_name": {
+    "score": 1.0,
+    "value": null
+  },
+  "service_end_date": {
+    "score": 1.0,
+    "value": null
+  },
+  "service_start_date": {
+    "score": 1.0,
+    "value": null
+  },
+  "ship_date": {
+    "score": 1.0,
+    "value": null
+  },
+  "ship_to": {
+    "address": {
+      "score": 1.0,
+      "value": null
+    },
+    "name": {
+      "score": 1.0,
+      "value": null
+    },
+    "parsed_address": null
+  },
+  "shipping": {
+    "score": 1.0,
+    "value": null
+  },
+  "status": "processed",
+  "store_number": {
+    "bounding_box": [0, 0.2744, 0.0699, 0.408, 0.0821],
+    "bounding_region": [
+      0.2744, 0.0699, 0.408, 0.0699, 0.408, 0.0821, 0.2744, 0.0821
+    ],
+    "ocr_score": 0.96,
+    "rotation": 0,
+    "score": 1.0,
+    "value": "03296"
+  },
+  "subtotal": {
+    "bounding_box": [0, 0.71, 0.5151, 0.8232, 0.5273],
+    "bounding_region": [
+      0.71, 0.5151, 0.8232, 0.5151, 0.8232, 0.5273, 0.71, 0.5273
+    ],
+    "ocr_score": 0.99,
+    "rotation": 0,
+    "score": 1.0,
+    "value": 27.6
+  },
+  "tags": [],
+  "tax": {
+    "bounding_box": [0, 0.7349, 0.5278, 0.8223, 0.5386],
+    "bounding_region": [
+      0.7349, 0.5278, 0.8223, 0.5278, 0.8223, 0.5386, 0.7349, 0.5386
+    ],
+    "ocr_score": 0.99,
+    "rotation": 0,
+    "score": 1.0,
+    "value": 1.93
+  },
+  "tax_lines": [
+    {
+      "base": null,
+      "code": "A",
+      "name": null,
+      "order": 0,
+      "rate": 9.625,
+      "total": 1.93,
+      "total_inclusive": null
+    }
+  ],
+  "tax_lines_with_scores": [
+    {
+      "base": {
+        "value": null
+      },
+      "code": {
+        "bounding_box": [0, 0.3396, 0.5293, 0.5205, 0.543],
+        "bounding_region": [
+          0.3396, 0.543, 0.3396, 0.5293, 0.5205, 0.5293, 0.5205, 0.543
+        ],
+        "ocr_score": 0.8,
+        "rotation": 0,
+        "score": 1.0,
+        "value": "A"
+      },
+      "name": {
+        "value": null
+      },
+      "order": 0,
+      "rate": {
+        "bounding_box": [0, 0.3396, 0.5293, 0.5205, 0.543],
+        "bounding_region": [
+          0.3396, 0.543, 0.3396, 0.5293, 0.5205, 0.5293, 0.5205, 0.543
+        ],
+        "ocr_score": 0.8,
+        "rotation": 0,
+        "score": 1.0,
+        "value": 9.625
+      },
+      "total": {
+        "bounding_box": [0, 0.7349, 0.5278, 0.8223, 0.5386],
+        "bounding_region": [
+          0.7349, 0.5278, 0.8223, 0.5278, 0.8223, 0.5386, 0.7349, 0.5386
+        ],
+        "ocr_score": 0.99,
+        "rotation": 0,
+        "score": 1.0,
+        "value": 1.93
+      },
+      "total_inclusive": {
+        "value": null
+      }
+    }
+  ],
+  "tip": {
+    "score": 1.0,
+    "value": null
+  },
+  "total": {
+    "bounding_box": [0, 0.71, 0.5518, 0.8203, 0.562],
+    "bounding_region": [
+      0.71, 0.5518, 0.8203, 0.5518, 0.8203, 0.562, 0.71, 0.562
+    ],
+    "ocr_score": 0.99,
+    "rotation": 0,
+    "score": 1.0,
+    "value": 29.53
+  },
+  "total_pages": 1,
+  "total_quantity": {
+    "score": 1.0,
+    "value": null
+  },
+  "total_weight": {
+    "score": 0.99,
+    "value": null
+  },
+  "tracking_number": {
+    "score": 1.0,
+    "value": null
+  },
+  "tracking_numbers": [
+    {
+      "score": 1.0,
+      "value": null
+    }
+  ],
+  "updated_date": "2025-03-25 20:57:29",
+  "vending_person": {
+    "score": 1.0,
+    "value": null
+  },
+  "vending_person_number": {
+    "score": 0.97,
+    "value": null
+  },
+  "vendor": {
+    "abn_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "account_currency": {
+      "score": 1.0,
+      "value": null
+    },
+    "account_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "address": {
+      "value": "191 E 3Rd Ave, San Mateo, CA 94401"
+    },
+    "bank_breakdown": [{}],
+    "bank_name": {
+      "score": 1.0,
+      "value": null
+    },
+    "bank_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "bank_swift": {
+      "score": 1.0,
+      "value": null
+    },
+    "biller_code": {
+      "score": 1.0,
+      "value": null
+    },
+    "category": {
+      "value": "drugstores, convenience stores, cosmetics & beauty supply"
+    },
+    "country_code": {
+      "score": 0.97,
+      "value": "US"
+    },
+    "email": {
+      "score": 1.0,
+      "value": null
+    },
+    "external_id": null,
+    "external_ids": [
+      {
+        "id": "walgreens-san-mateo-2",
+        "source": "yelp"
+      }
+    ],
+    "fax_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "iban": {
+      "score": 1.0,
+      "value": null
+    },
+    "lat": 37.564947,
+    "lng": -122.3234454,
+    "logo": "https://cdn.veryfi.com/logos/us/126568182.jpeg",
+    "logo_name": {
+      "bounding_box": [0, 0.041, 0.0202, 0.9001, 0.0688],
+      "bounding_region": [
+        0.041, 0.0202, 0.9001, 0.0202, 0.9001, 0.0688, 0.041, 0.0688
+      ],
+      "ocr_score": 1.0,
+      "rotation": 0,
+      "score": 1.0,
+      "value": "walgreens"
+    },
+    "map_url": "https://www.google.com/maps/search/?api=1&query=Walgreens+191+E+3Rd+Ave,+San+Mateo,+CA+94401",
+    "name": {
+      "rotation": 0,
+      "score": 0.98,
+      "value": "Walgreens"
+    },
+    "order_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "parsed_address": {},
+    "phone_number": {
+      "bounding_box": [0, 0.3628, 0.0937, 0.6265, 0.1068],
+      "bounding_region": [
+        0.3628, 0.0937, 0.6265, 0.0937, 0.6265, 0.1068, 0.3628, 0.1068
+      ],
+      "ocr_score": 0.99,
+      "rotation": 0,
+      "score": 1.0,
+      "value": "650-342-2723"
+    },
+    "raw_address": {
+      "bounding_box": [0, 0.2734, 0.0682, 0.7148, 0.0958],
+      "bounding_region": [
+        0.2733, 0.0703, 0.7148, 0.0678, 0.715, 0.0939, 0.2734, 0.0964
+      ],
+      "ocr_score": 0.98,
+      "rotation": 0,
+      "score": 1.0,
+      "value": "191 E 3RD AVE\nSAN MATEO, CA 94401"
+    },
+    "raw_name": {
+      "bounding_box": [0, 0.0337, 0.0187, 0.8896, 0.0629],
+      "bounding_region": [
+        0.0337, 0.0187, 0.8896, 0.0187, 0.8896, 0.0629, 0.0337, 0.0629
+      ],
+      "ocr_score": 0.98,
+      "rotation": 0,
+      "score": 1.0,
+      "value": "Walgreens"
+    },
+    "reg_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "type": {
+      "value": "drugstores, convenience stores, cosmetics & beauty supply"
+    },
+    "vat_number": {
+      "score": 1.0,
+      "value": null
+    },
+    "web": {
+      "score": 0.4,
+      "value": null
+    }
+  },
+  "vendors": [
+    {
+      "bounding_box": [0, 0.0337, 0.0187, 0.8896, 0.0629],
+      "bounding_region": [
+        0.0337, 0.0187, 0.8896, 0.0187, 0.8896, 0.0629, 0.0337, 0.0629
+      ],
+      "ocr_score": 0.98,
+      "rotation": 0,
+      "score": 1.0,
+      "value": "Walgreens"
+    },
+    {
+      "rotation": 0,
+      "score": 0.98,
+      "value": "Walgreens"
+    }
+  ],
+  "vin_number": {
+    "score": 1.0,
+    "value": null
+  },
+  "warnings": [],
+  "weights": [
+    {
+      "score": 0.99,
+      "value": null
+    }
+  ]
+}

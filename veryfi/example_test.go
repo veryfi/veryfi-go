@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/veryfi/veryfi-go/veryfi"
-	"github.com/veryfi/veryfi-go/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/v2/veryfi"
+	"github.com/veryfi/veryfi-go/v2/veryfi/scheme"
 )
 
 func ExampleClient_processDocument() {
@@ -104,7 +104,7 @@ func ExampleClient_manageDocument() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, doc := range *docs {
+	for _, doc := range docs.Documents {
 		fmt.Println(doc)
 	}
 

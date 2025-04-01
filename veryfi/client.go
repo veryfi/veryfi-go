@@ -13,7 +13,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/veryfi/veryfi-go/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/v2/veryfi/scheme"
 )
 
 // Client implements a Veryfi API Client.
@@ -43,7 +43,7 @@ func NewClientV8(opts *Options) (*Client, error) {
 		options:    opts,
 		client:     c,
 		apiVersion: "v8",
-		pkgVersion: "1.2.2",
+		pkgVersion: "1.3.0",
 	}, nil
 }
 
@@ -94,6 +94,28 @@ func (c *Client) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*sche
 	return *out, nil
 }
 
+// ProcessDetailedDocumentUpload returns the processed document with confidence scores and bounding boxes
+func (c *Client) ProcessDetailedDocumentUpload(opts scheme.DocumentUploadOptions) (*scheme.DetailedDocument, error) {
+	out := new(*scheme.DetailedDocument)
+	encodedFile, err := Base64EncodeFile(opts.FilePath)
+	if err != nil {
+		return nil, err
+	}
+
+	payload := scheme.DocumentUploadBase64Options{
+		FileData: encodedFile,
+		DocumentSharedOptions: opts.DocumentSharedOptions,
+	}
+	// Always enable confidence details and bounding boxes
+	payload.DocumentSharedOptions.ConfidenceDetails = true
+	payload.DocumentSharedOptions.BoundingBoxes = true
+	if err := c.post(documentURI, payload, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // ProcessDocumentURL returns the processed document using URL.
 func (c *Client) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
@@ -103,6 +125,19 @@ func (c *Client) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Doc
 
 	return *out, nil
 }
+
+// ProcessDetailedDocumentURL returns the processed document using URL with confidence scores and bounding boxes.
+func (c *Client) ProcessDetailedDocumentURL(opts scheme.DocumentURLOptions) (*scheme.DetailedDocument, error) {
+	out := new(*scheme.DetailedDocument)
+	opts.DocumentSharedOptions.ConfidenceDetails = true
+	opts.DocumentSharedOptions.BoundingBoxes = true
+	if err := c.post(documentURI, opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 
 // UpdateDocument updates and returns the processed document.
 func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {
@@ -115,9 +150,44 @@ func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOpt
 }
 
 // SearchDocuments returns a list of processed documents with matching queries.
-func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*[]scheme.Document, error) {
-	out := new(*[]scheme.Document)
+func (c *Client) SearchDocuments(opts scheme.DocumentSearchOptions) (*scheme.Documents, error) {
+	out := new(*scheme.Documents)
 	if err := c.get(documentURI, opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
+// SearchDetailedDocuments returns a list of processed documents with matching queries.
+func (c *Client) SearchDetailedDocuments(opts scheme.DocumentSearchOptions) (*scheme.DetailedDocuments, error) {
+	out := new(*scheme.DetailedDocuments)
+	detailedOpts := scheme.DetailedDocumentSearchOptions{
+		Q:                 opts.Q,
+		ExternalID:        opts.ExternalID,
+		Tag:               opts.Tag,
+		CreatedGT:         opts.CreatedGT,
+		CreatedGTE:        opts.CreatedGTE,
+		CreatedLT:         opts.CreatedLT,
+		CreatedLTE:        opts.CreatedLTE,
+		Status:            opts.Status,
+		DeviceID:          opts.DeviceID,
+		Owner:             opts.Owner,
+		UpdatedGT:         opts.UpdatedGT,
+		UpdatedGTE:        opts.UpdatedGTE,
+		UpdatedLT:         opts.UpdatedLT,
+		UpdatedLTE:        opts.UpdatedLTE,
+		DateGT:            opts.DateGT,
+		DateGTE:           opts.DateGTE,
+		DateLT:            opts.DateLT,
+		DateLTE:           opts.DateLTE,
+		Page:              opts.Page,
+		PageSize:          opts.PageSize,
+		TrackTotalResults: opts.TrackTotalResults,
+		BoundingBoxes:     true,
+		ConfidenceDetails: true,
+	}
+	if err := c.get(documentURI, detailedOpts, out); err != nil {
 		return nil, err
 	}
 
@@ -244,6 +314,21 @@ func (c *Client) DeleteGlobalTag(tagID string) error {
 	return nil
 }
 
+// GetDetailedDocument returns a processed document with detailed field information
+func (c *Client) GetDetailedDocument(documentID string, opts scheme.DocumentGetOptions) (*scheme.DetailedDocument, error) {
+	out := new(*scheme.DetailedDocument)
+	detailedOpts := scheme.DocumentGetDetailedOptions{
+		ReturnAuditTrail:  opts.ReturnAuditTrail,
+		ConfidenceDetails: true,
+		BoundingBoxes:     true,
+	}
+	err := c.get(fmt.Sprintf("%s%s", documentURI, documentID), detailedOpts, out)
+	if err != nil {
+		return nil, err
+	}
+	return *out, nil
+}
+
 // request returns an authorized request to Veryfi API.
 func (c *Client) request(payload interface{}, okScheme interface{}, errScheme interface{}) *resty.Request {
 	timestamp := int(time.Now().Unix())
@@ -291,6 +376,14 @@ func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) 
 	request := c.request(queryParams, okScheme, errScheme)
 	if queryParams != nil {
 		request.SetQueryParams(structToMap(queryParams))
+	}
+	// Print query parameters for debugging
+	if queryParams != nil {
+		params := structToMap(queryParams)
+		fmt.Println("Query Parameters:")
+		for key, value := range params {
+			fmt.Printf("  %s: %v\n", key, value)
+		}
 	}
 
 	_, err := request.Get(uri)
