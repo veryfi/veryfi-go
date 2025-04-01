@@ -43,7 +43,7 @@ func NewClientV8(opts *Options) (*Client, error) {
 		options:    opts,
 		client:     c,
 		apiVersion: "v8",
-		pkgVersion: "1.3.0",
+		pkgVersion: "2.1.1",
 	}, nil
 }
 
@@ -376,14 +376,6 @@ func (c *Client) get(uri string, queryParams interface{}, okScheme interface{}) 
 	request := c.request(queryParams, okScheme, errScheme)
 	if queryParams != nil {
 		request.SetQueryParams(structToMap(queryParams))
-	}
-	// Print query parameters for debugging
-	if queryParams != nil {
-		params := structToMap(queryParams)
-		fmt.Println("Query Parameters:")
-		for key, value := range params {
-			fmt.Printf("  %s: %v\n", key, value)
-		}
 	}
 
 	_, err := request.Get(uri)
