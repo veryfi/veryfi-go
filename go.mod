@@ -2,14 +2,12 @@ module github.com/veryfi/veryfi-go/v2
 
 go 1.23
 
-replace github.com/veryfi/veryfi-go => ./
-
 require (
 	github.com/creasty/defaults v1.7.0
 	github.com/go-resty/resty/v2 v2.13.1
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.9.0
-	github.com/veryfi/veryfi-go v1.2.2
+	github.com/veryfi/veryfi-go v1.3.0
 )
 
 require (
