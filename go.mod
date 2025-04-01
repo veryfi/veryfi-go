@@ -2,7 +2,7 @@ module github.com/veryfi/veryfi-go/v2
 
 go 1.23
 
-replace github.com/veryfi/veryfi-go => ./veryfi
+replace github.com/veryfi/veryfi-go => ./
 
 require (
 	github.com/creasty/defaults v1.7.0

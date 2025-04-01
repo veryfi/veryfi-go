@@ -104,7 +104,7 @@ func ExampleClient_manageDocument() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, doc := range *docs {
+	for _, doc := range docs.Documents {
 		fmt.Println(doc)
 	}
 

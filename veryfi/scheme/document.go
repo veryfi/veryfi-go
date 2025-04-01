@@ -83,7 +83,7 @@ type DocumentSearchOptions struct {
 	DateLTE           string         `json:"date__lte"`
 	Page              string         `json:"page"`
 	PageSize          string         `json:"page_size"`
-	TrackTotalResults bool           `json:"track_total_results"`
+	TrackTotalResults string         `json:"track_total_results"`
 }
 
 type DetailedDocumentSearchOptions struct {
@@ -107,7 +107,7 @@ type DetailedDocumentSearchOptions struct {
 	DateLTE           string         `json:"date__lte"`
 	Page              string         `json:"page"`
 	PageSize          string         `json:"page_size"`
-	TrackTotalResults bool           `json:"track_total_results"`
+	TrackTotalResults string         `json:"track_total_results"`
 	BoundingBoxes     bool           `json:"bounding_boxes"`
 	ConfidenceDetails bool           `json:"confidence_details"`
 }
