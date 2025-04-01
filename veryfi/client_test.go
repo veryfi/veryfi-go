@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/veryfi/veryfi-go/veryfi/scheme"
-	"github.com/veryfi/veryfi-go/veryfi/test"
+	"github.com/veryfi/veryfi-go/v2/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/v2/veryfi/test"
 )
 
 func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, string, interface{}) {

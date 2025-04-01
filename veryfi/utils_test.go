@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/veryfi/veryfi-go/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/v2/veryfi/scheme"
 )
 
 func TestUnitBuildURL(t *testing.T) {
