@@ -94,6 +94,28 @@ func (c *Client) ProcessDocumentUpload(opts scheme.DocumentUploadOptions) (*sche
 	return *out, nil
 }
 
+// ProcessDetailedDocumentUpload returns the processed document with confidence scores and bounding boxes
+func (c *Client) ProcessDetailedDocumentUpload(opts scheme.DocumentUploadOptions) (*scheme.DetailedDocument, error) {
+	out := new(*scheme.DetailedDocument)
+	encodedFile, err := Base64EncodeFile(opts.FilePath)
+	if err != nil {
+		return nil, err
+	}
+
+	payload := scheme.DocumentUploadBase64Options{
+		FileData: encodedFile,
+		DocumentSharedOptions: opts.DocumentSharedOptions,
+	}
+	// Always enable confidence details and bounding boxes
+	payload.DocumentSharedOptions.ConfidenceDetails = true
+	payload.DocumentSharedOptions.BoundingBoxes = true
+	if err := c.post(documentURI, payload, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 // ProcessDocumentURL returns the processed document using URL.
 func (c *Client) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Document, error) {
 	out := new(*scheme.Document)
@@ -103,6 +125,19 @@ func (c *Client) ProcessDocumentURL(opts scheme.DocumentURLOptions) (*scheme.Doc
 
 	return *out, nil
 }
+
+// ProcessDetailedDocumentURL returns the processed document using URL with confidence scores and bounding boxes.
+func (c *Client) ProcessDetailedDocumentURL(opts scheme.DocumentURLOptions) (*scheme.DetailedDocument, error) {
+	out := new(*scheme.DetailedDocument)
+	opts.DocumentSharedOptions.ConfidenceDetails = true
+	opts.DocumentSharedOptions.BoundingBoxes = true
+	if err := c.post(documentURI, opts, out); err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
 
 // UpdateDocument updates and returns the processed document.
 func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {

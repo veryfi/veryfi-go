@@ -950,3 +950,27 @@ func TestUnitClientV8_ProcessDocumentURL(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, expected, resp)
 }
+
+func TestUnitClientV8_ProcessDetailedDocumentUpload(t *testing.T) {
+	server, client, mockReceiptPath, expected := setUp(t, true)
+	defer server.Close()
+
+	resp, err := client.ProcessDetailedDocumentUpload(scheme.DocumentUploadOptions{
+		FilePath: mockReceiptPath,
+	})
+	assert.NotNil(t, resp)
+	assert.NoError(t, err)
+	assert.Equal(t, expected, resp)
+}
+
+func TestUnitClientV8_ProcessDetailedDocumentURL(t *testing.T) {
+	server, client, _, expected := setUp(t, true)
+	defer server.Close()
+
+	resp, err := client.ProcessDetailedDocumentURL(scheme.DocumentURLOptions{
+		FileURL: "http://cdn-dev.veryfi.com/testing/veryfi-python/receipt_public.jpg",
+	})
+	assert.NotNil(t, resp)
+	assert.NoError(t, err)
+	assert.Equal(t, expected, resp)
+}
