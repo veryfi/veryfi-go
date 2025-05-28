@@ -327,8 +327,8 @@ type DetailedField struct {
 	Value          string    `json:"value,omitempty"`
 	Score          *float64   `json:"score,omitempty"`
 	OCRScore       *float64   `json:"ocr_score,omitempty"`
-	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
-	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       *int       `json:"rotation,omitempty"`
 }
 
@@ -337,8 +337,8 @@ type DetailedFloatField struct {
 	Value          float64   `json:"value,omitempty"`
 	Score          *float64   `json:"score,omitempty"`
 	OCRScore       *float64   `json:"ocr_score,omitempty"`
-	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
-	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       *int       `json:"rotation,omitempty"`
 }
 
@@ -347,8 +347,8 @@ type DetailedDateField struct {
 	Value          string    `json:"value,omitempty"` // ISO 8601 date format
 	Score          *float64   `json:"score,omitempty"`
 	OCRScore       *float64   `json:"ocr_score,omitempty"`
-	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
-	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       *int       `json:"rotation,omitempty"`
 }
 
@@ -357,8 +357,8 @@ type DetailedBoolField struct {
 	Value          bool      `json:"value,omitempty"`
 	Score          *float64   `json:"score,omitempty"`
 	OCRScore       *float64   `json:"ocr_score,omitempty"`
-	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
-	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	BoundingBox    []float64 `json:"bounding_box,omitempty"`
+	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       *int       `json:"rotation,omitempty"`
 }
 
