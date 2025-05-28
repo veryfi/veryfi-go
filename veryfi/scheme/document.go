@@ -145,7 +145,7 @@ const (
 )
 
 type Documents struct {
-	Documents []Document    `json:"documents"`*
+	Documents []Document    `json:"documents"`
 	Meta      DocumentsMeta `json:"meta"`
 }
 
