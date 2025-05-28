@@ -24,18 +24,18 @@ type DocumentURLOptions struct {
 
 // DocumentSharedOptions describes the shared query parameters among the processing API.
 type DocumentSharedOptions struct {
-	FileName          string   `json:"file_name,omitempty"`
-	Categories        []string `json:"categories,omitempty"`
-	Tags              []string `json:"tags,omitempty"`
-	MaxPagesToProcess int      `json:"max_pages_to_process,omitempty"`
-	BoostMode         bool     `json:"boost_mode,omitempty"`
-	AutoDelete        bool     `json:"auto_delete,omitempty"`
-	DetectBlur        bool     `json:"detect_blur,omitempty"`
-	ParseAddress      bool     `json:"parse_address,omitempty"`
-	ExternalID        string   `json:"external_id,omitempty"`
-	Async             bool     `json:"async,omitempty"`
-	ConfidenceDetails bool     `json:"confidence_details,omitempty"`
-	BoundingBoxes     bool     `json:"bounding_boxes,omitempty"`
+	FileName          *string   `json:"file_name,omitempty"`
+	Categories        *[]string `json:"categories,omitempty"`
+	Tags              *[]string `json:"tags,omitempty"`
+	MaxPagesToProcess *int      `json:"max_pages_to_process,omitempty"`
+	BoostMode         *bool     `json:"boost_mode,omitempty"`
+	AutoDelete        *bool     `json:"auto_delete,omitempty"`
+	DetectBlur        *bool     `json:"detect_blur,omitempty"`
+	ParseAddress      *bool     `json:"parse_address,omitempty"`
+	ExternalID        *string   `json:"external_id,omitempty"`
+	Async             *bool     `json:"async,omitempty"`
+	ConfidenceDetails *bool     `json:"confidence_details,omitempty"`
+	BoundingBoxes     *bool     `json:"bounding_boxes,omitempty"`
 }
 
 // DocumentUpdateOptions describes the query parameters to update a document.
@@ -145,7 +145,7 @@ const (
 )
 
 type Documents struct {
-	Documents []Document    `json:"documents"`
+	Documents []Document    `json:"documents"`*
 	Meta      DocumentsMeta `json:"meta"`
 }
 
@@ -325,41 +325,41 @@ type TagOptions struct {
 // DetailedField represents a field with confidence scores and metadata
 type DetailedField struct {
 	Value          string    `json:"value,omitempty"`
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
-	BoundingBox    []float64 `json:"bounding_box,omitempty"`
-	BoundingRegion []float64 `json:"bounding_region,omitempty"`
-	Rotation       int       `json:"rotation,omitempty"`
+	Score          *float64   `json:"score,omitempty"`
+	OCRScore       *float64   `json:"ocr_score,omitempty"`
+	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
+	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	Rotation       *int       `json:"rotation,omitempty"`
 }
 
 // DetailedFloatField represents a numeric field with confidence scores
 type DetailedFloatField struct {
 	Value          float64   `json:"value,omitempty"`
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
-	BoundingBox    []float64 `json:"bounding_box,omitempty"`
-	BoundingRegion []float64 `json:"bounding_region,omitempty"`
-	Rotation       int       `json:"rotation,omitempty"`
+	Score          *float64   `json:"score,omitempty"`
+	OCRScore       *float64   `json:"ocr_score,omitempty"`
+	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
+	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	Rotation       *int       `json:"rotation,omitempty"`
 }
 
 // DetailedDateField represents a date field with confidence scores
 type DetailedDateField struct {
 	Value          string    `json:"value,omitempty"` // ISO 8601 date format
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
-	BoundingBox    []float64 `json:"bounding_box,omitempty"`
-	BoundingRegion []float64 `json:"bounding_region,omitempty"`
-	Rotation       int       `json:"rotation,omitempty"`
+	Score          *float64   `json:"score,omitempty"`
+	OCRScore       *float64   `json:"ocr_score,omitempty"`
+	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
+	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	Rotation       *int       `json:"rotation,omitempty"`
 }
 
 // DetailedBoolField represents a boolean field with confidence scores
 type DetailedBoolField struct {
 	Value          bool      `json:"value,omitempty"`
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
-	BoundingBox    []float64 `json:"bounding_box,omitempty"`
-	BoundingRegion []float64 `json:"bounding_region,omitempty"`
-	Rotation       int       `json:"rotation,omitempty"`
+	Score          *float64   `json:"score,omitempty"`
+	OCRScore       *float64   `json:"ocr_score,omitempty"`
+	BoundingBox    *[]float64 `json:"bounding_box,omitempty"`
+	BoundingRegion *[]float64 `json:"bounding_region,omitempty"`
+	Rotation       *int       `json:"rotation,omitempty"`
 }
 
 // DetailedVendor extends Vendor with detailed fields
@@ -370,7 +370,7 @@ type DetailedVendor struct {
 	BankName        *DetailedField `json:"bank_name,omitempty"`
 	BankNumber      *DetailedField `json:"bank_number,omitempty"`
 	BankSwift       *DetailedField `json:"bank_swift,omitempty"`
-	ExternalID      string         `json:"external_id,omitempty"`
+	ExternalID      *string         `json:"external_id,omitempty"`
 	FaxNumber       *DetailedField `json:"fax_number,omitempty"`
 	FullAddress     *DetailedField `json:"full_address,omitempty"`
 	IBAN            *DetailedField `json:"iban,omitempty"`
@@ -384,9 +384,9 @@ type DetailedVendor struct {
 	VATNumber       *DetailedField `json:"vat_number,omitempty"`
 	PhoneNumber     *DetailedField `json:"phone_number,omitempty"`
 	RegNumber       *DetailedField `json:"reg_number,omitempty"`
-	Logo            string         `json:"logo,omitempty"`
-	Lat             float64        `json:"lat,omitempty"`
-	Lng             float64        `json:"lng,omitempty"`
+	Logo            *string         `json:"logo,omitempty"`
+	Lat             *float64        `json:"lat,omitempty"`
+	Lng             *float64        `json:"lng,omitempty"`
 	Type            *DetailedField `json:"type"`
 }
 
