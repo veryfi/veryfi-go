@@ -12,6 +12,9 @@ import (
 	"github.com/veryfi/veryfi-go/v2/veryfi/test"
 )
 
+func float64Ptr(f float64) *float64 { return &f }
+func intPtr(i int) *int             { return &i }
+
 func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, string, interface{}) {
 	server := test.NewHTTPServer()
 	assert.NotNil(t, server)
@@ -23,7 +26,6 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 
 	var mockReceiptData string
 	var expected interface{}
-
 	if useDetailedReceipt {
 		mockReceiptData = fmt.Sprintf("%v/testdata/%v", pwd, "detailed_receipt_public.json")
 		mockResp, err := os.ReadFile(mockReceiptData)
@@ -45,119 +47,99 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 			// Detailed fields with scores
 			AccountNumber: &scheme.DetailedField{
 				Value:          "0053",
-				Score:          1.0,
-				OCRScore:       0.93,
+				Score:          float64Ptr(1.0),
+				OCRScore:       float64Ptr(0.93),
 				BoundingBox:    []float64{0, 0.4543, 0.9355, 0.7466, 0.9512},
 				BoundingRegion: []float64{0.4543, 0.9355, 0.7466, 0.9355, 0.7466, 0.9512, 0.4543, 0.9512},
 				Rotation:       0,
 			},
 			Category: &scheme.DetailedField{
 				Value: "Job Supplies",
-				Score: 0.94,
+				Score: float64Ptr(0.94),
 			},
 			CurrencyCode: &scheme.DetailedField{
 				Value: "USD",
-				Score: 0.96,
+				Score: float64Ptr(0.96),
 			},
 			Date: &scheme.DetailedDateField{
 				Value:          "2022-05-24 13:10:00",
-				Score:          1.0,
+				Score:          float64Ptr(1.0),
 				BoundingBox:    []float64{0, 0.5332, 0.1168, 0.7573, 0.131},
 				BoundingRegion: []float64{0.5332, 0.1168, 0.7573, 0.1168, 0.7573, 0.131, 0.5332, 0.131},
 				Rotation:       0,
 			},
 			DeliveryDate: &scheme.DetailedDateField{
-				Value:          "",
-				Score:          1.0,
-				OCRScore:       0.0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value:    "",
+				Score:    float64Ptr(1.0),
+				Rotation: 0,
 			},
 			Discount: &scheme.DetailedFloatField{
 				Value:          1.2,
-				Score:          0.99,
-				OCRScore:       0.98,
+				Score:          float64Ptr(0.99),
+				OCRScore:       float64Ptr(0.98),
 				BoundingBox:    []float64{0, 0.7646, 0.8789, 0.8823, 0.8906},
 				BoundingRegion: []float64{0.7646, 0.8789, 0.8823, 0.8789, 0.8823, 0.8906, 0.7646, 0.8906},
 				Rotation:       0,
 			},
 			DueDate: &scheme.DetailedDateField{
-				Value:          "",
-				Score:          1.0,
-				OCRScore:       0.0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value:    "",
+				Score:    float64Ptr(1.0),
+				Rotation: 0,
 			},
 			Insurance: &scheme.DetailedFloatField{
-				Value:          0,
-				Score:          1.0,
-				OCRScore:       0.0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: 0,
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 			InvoiceNumber: &scheme.DetailedField{
 				Value:          "4782",
-				Score:          1.0,
-				OCRScore:       0.99,
+				Score:          float64Ptr(1.0),
+				OCRScore:       float64Ptr(0.99),
 				BoundingBox:    []float64{0, 0.2482, 0.1201, 0.3438, 0.1334},
 				BoundingRegion: []float64{0.2482, 0.1201, 0.3437, 0.1201, 0.3437, 0.1334, 0.2482, 0.1334},
 				Rotation:       0,
 			},
 			OrderDate: &scheme.DetailedDateField{
-				Value:          "",
-				Score:          1,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 			PurchaseOrderNumber: &scheme.DetailedField{
-				Value:          "",
-				Score:          0.99,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(0.99),
+
+				Rotation: 0,
 			},
 			Rounding: &scheme.DetailedFloatField{
-				Value:          0,
-				Score:          0.99,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: 0,
+				Score: float64Ptr(0.99),
+
+				Rotation: 0,
 			},
 			ServiceEndDate: &scheme.DetailedDateField{
-				Value:          "",
-				Score:          1,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 			ServiceStartDate: &scheme.DetailedDateField{
-				Value:          "",
-				Score:          1,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 			ShipDate: &scheme.DetailedDateField{
-				Value:          "",
-				Score:          1,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 			StoreNumber: &scheme.DetailedField{
 				Value:    "03296",
-				Score:    1.0,
-				OCRScore: 0.96,
+				Score:    float64Ptr(1.0),
+				OCRScore: float64Ptr(0.96),
 				BoundingBox: []float64{
 					0, 0.2744, 0.0699, 0.408, 0.0821,
 				},
@@ -168,8 +150,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 			},
 			Subtotal: &scheme.DetailedFloatField{
 				Value:    27.6,
-				Score:    1.0,
-				OCRScore: 0.99,
+				Score:    float64Ptr(1.0),
+				OCRScore: float64Ptr(0.99),
 				BoundingBox: []float64{
 					0, 0.71, 0.5151, 0.8232, 0.5273,
 				},
@@ -178,10 +160,11 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				},
 				Rotation: 0,
 			},
+			Tags: []string{},
 			Tax: &scheme.DetailedFloatField{
 				Value:    1.93,
-				Score:    1.0,
-				OCRScore: 0.99,
+				Score:    float64Ptr(1.0),
+				OCRScore: float64Ptr(0.99),
 				BoundingBox: []float64{
 					0, 0.7349, 0.5278, 0.8223, 0.5386,
 				},
@@ -191,17 +174,15 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				Rotation: 0,
 			},
 			Tip: &scheme.DetailedFloatField{
-				Value:          0,
-				Score:          1,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: 0,
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 			Total: &scheme.DetailedFloatField{
 				Value:    29.53,
-				Score:    1.0,
-				OCRScore: 0.99,
+				Score:    float64Ptr(1.0),
+				OCRScore: float64Ptr(0.99),
 				BoundingBox: []float64{
 					0, 0.71, 0.5518, 0.8203, 0.562,
 				},
@@ -211,41 +192,36 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				Rotation: 0,
 			},
 			TotalWeight: &scheme.DetailedField{
-				Value:          "",
-				Score:          0.99,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(0.99),
+
+				Rotation: 0,
 			},
 			TrackingNumber: &scheme.DetailedField{
-				Value:          "",
-				Score:          1,
-				OCRScore:       0,
-				BoundingBox:    nil,
-				BoundingRegion: nil,
-				Rotation:       0,
+				Value: "",
+				Score: float64Ptr(1.0),
+
+				Rotation: 0,
 			},
 
 			// Payment information
 			Payment: &scheme.DetailedPayment{
 				CardNumber: &scheme.DetailedField{
 					Value:          "1850",
-					Score:          1.0,
-					OCRScore:       0.99,
+					Score:          float64Ptr(1.0),
+					OCRScore:       float64Ptr(0.99),
 					BoundingBox:    []float64{0, 0.345, 0.5664, 0.4333, 0.5786},
 					BoundingRegion: []float64{0.345, 0.5664, 0.4333, 0.5664, 0.4333, 0.5786, 0.345, 0.5786},
 					Rotation:       0,
 				},
 				Type: &scheme.DetailedField{
 					Value: "visa",
-					Score: 0.97,
+					Score: float64Ptr(0.97),
 				},
 				DisplayName: "Visa ***1850",
 				Terms: &scheme.DetailedField{
 					Value:    "",
-					Score:    1.0,
-					OCRScore: 0.0,
+					Score:    float64Ptr(1.0),
 					Rotation: 0,
 				},
 			},
@@ -253,69 +229,55 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 			// Vendor information
 			Vendor: &scheme.DetailedVendor{
 				ABNNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				AccountCurrency: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				AccountNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				BankName: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				BankNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				BankSwift: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				Name: &scheme.DetailedField{
 					Value: "Walgreens",
-					Score: 0.98,
+					Score: float64Ptr(0.98),
 				},
 				IBAN: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				PhoneNumber: &scheme.DetailedField{
 					Value:          "650-342-2723",
-					Score:          1.0,
-					OCRScore:       0.99,
+					Score:          float64Ptr(1.0),
+					OCRScore:       float64Ptr(0.99),
 					BoundingBox:    []float64{0, 0.3628, 0.0937, 0.6265, 0.1068},
 					BoundingRegion: []float64{0.3628, 0.0937, 0.6265, 0.0937, 0.6265, 0.1068, 0.3628, 0.1068},
 					Rotation:       0,
@@ -325,8 +287,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				},
 				RawName: &scheme.DetailedField{
 					Value:          "Walgreens",
-					Score:          1.0,
-					OCRScore:       0.98,
+					Score:          float64Ptr(1.0),
+					OCRScore:       float64Ptr(0.98),
 					BoundingBox:    []float64{0, 0.0337, 0.0187, 0.8896, 0.0629},
 					BoundingRegion: []float64{0.0337, 0.0187, 0.8896, 0.0187, 0.8896, 0.0629, 0.0337, 0.0629},
 					Rotation:       0,
@@ -335,8 +297,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					Value: "drugstores, convenience stores, cosmetics & beauty supply",
 				},
 				Logo: "https://cdn.veryfi.com/logos/us/126568182.jpeg",
-				Lat:  37.564947,
-				Lng:  -122.3234454,
+				Lat:  float64Ptr(37.564947),
+				Lng:  float64Ptr(-122.3234454),
 				ParsedAddress: &scheme.ParsedAddress{
 					City:          "",
 					Country:       "",
@@ -358,86 +320,87 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					WorldRegion:   "",
 				},
 				Email: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				VATNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				RegNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				Web: &scheme.DetailedField{
-					Value:          "",
-					Score:          0.4,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(0.4),
+
+					Rotation: 0,
 				},
 				FaxNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 			},
 
 			// Line items
 			LineItems: []scheme.LineItem{
 				{
-					Description: "RED BULL ENRGY DRNK CNS 8.4OZ 6PK",
-					ID:          1346628550,
-					Order:       0,
-					Price:       9.99,
-					Quantity:    1.0,
-					Discount:    1.2,
-					Total:       8.79,
-					SKU:         "61126943157",
-					Type:        "food",
+					Category:              "Job Supplies",
+					Description:           "RED BULL ENRGY DRNK CNS 8.4OZ 6PK",
+					FullDescription:       "RED BULL ENRGY DRNK CNS 8.4OZ 6PK",
+					NormalizedDescription: "RED BULL ENERGY DRINK CNS 8.4OZ 6PK",
+					Text:                  "RED BULL ENRGY DRNK CNS 8.4OZ 6PK\n61126943157\tA\t8.79 SALE\nREGULAR PRICE 9.99\nMYWALGREENS SAVINGS 1.20\nRETURN VALUE 8.79",
+					ID:                    1346628550,
+					Order:                 0,
+					Price:                 9.99,
+					Quantity:              1.0,
+					Discount:              1.2,
+					Total:                 8.79,
+					SKU:                   "61126943157",
+					Type:                  "food",
+					Tags:                  []string{},
 				},
 				{
-					Description: "CA REDMP VAL",
-					ID:          1346628551,
-					Order:       1,
-					Quantity:    1.0,
-					Total:       0.3,
-					SKU:         "00000007211",
-					Type:        "fee",
+					Category: "Job Supplies",
+
+					Description:     "CA REDMP VAL",
+					FullDescription: "CA REDMP VAL",
+					ID:              1346628551,
+					Order:           1,
+					Quantity:        1.0,
+					Total:           0.3,
+					SKU:             "00000007211",
+					Type:            "fee",
+					Text:            "CA REDMP VAL\n00000007211\t\t0.30",
+					Tags:            []string{},
 				},
 			},
 
 			// Line items with scores
 			LineItemsWithScores: []scheme.DetailedLineItem{
 				{
+					Category: &scheme.DetailedField{
+						Value: "Job Supplies",
+						Score: float64Ptr(0.94),
+					},
 					Date: &scheme.DetailedDateField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					Description: &scheme.DetailedField{
 						Value:    "RED BULL ENRGY DRNK CNS 8.4OZ 6PK",
-						Score:    0.78,
-						OCRScore: 0.98,
+						Score:    float64Ptr(0.78),
+						OCRScore: float64Ptr(0.98),
 						Rotation: 0,
 						BoundingBox: []float64{
 							0, 0.0326, 0.1411, 0.7573, 0.1592,
@@ -448,8 +411,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					},
 					Discount: &scheme.DetailedFloatField{
 						Value:    1.2,
-						Score:    1.0,
-						OCRScore: 0.99,
+						Score:    float64Ptr(1.0),
+						OCRScore: float64Ptr(0.99),
 						Rotation: 0,
 						BoundingBox: []float64{
 							0, 0.5615, 0.1785, 0.6489, 0.1909,
@@ -460,8 +423,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					},
 					Price: &scheme.DetailedFloatField{
 						Value:    9.99,
-						Score:    0.97,
-						OCRScore: 0.99,
+						Score:    float64Ptr(0.97),
+						OCRScore: float64Ptr(0.99),
 						Rotation: 0,
 						BoundingBox: []float64{
 							0, 0.4258, 0.1681, 0.5195, 0.1803,
@@ -471,33 +434,25 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 						},
 					},
 					Quantity: &scheme.DetailedFloatField{
-						Value:          1,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 1,
+
+						Rotation: 0,
 					},
 					Reference: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					Section: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
+					Tags: []string{},
 					Total: &scheme.DetailedFloatField{
 						Value:    8.79,
-						Score:    0.95,
-						OCRScore: 0.99,
+						Score:    float64Ptr(0.95),
+						OCRScore: float64Ptr(0.99),
 						Rotation: 0,
 						BoundingBox: []float64{
 							0, 0.7319, 0.1523, 0.8223, 0.1646,
@@ -508,8 +463,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					},
 					SKU: &scheme.DetailedField{
 						Value:    "61126943157",
-						Score:    0.94,
-						OCRScore: 0.99,
+						Score:    float64Ptr(0.94),
+						OCRScore: float64Ptr(0.99),
 						Rotation: 0,
 						BoundingBox: []float64{
 							0, 0.1209, 0.1571, 0.365, 0.1699,
@@ -519,54 +474,43 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 						},
 					},
 					Tax: &scheme.DetailedFloatField{
-						Value:          0,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 0,
+
+						Rotation: 0,
 					},
 					TaxRate: &scheme.DetailedFloatField{
-						Value:          0,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 0,
+
+						Rotation: 0,
 					},
 					UnitOfMeasure: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					UPC: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					ID:    1346628550,
 					Order: 0,
 					Type:  "food",
 				},
 				{
+					Category: &scheme.DetailedField{
+						Value: "Job Supplies",
+						Score: float64Ptr(0.94),
+					},
 					Date: &scheme.DetailedDateField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					Description: &scheme.DetailedField{
 						Value:    "CA REDMP VAL",
-						Score:    0.79,
-						OCRScore: 0.98,
+						Score:    float64Ptr(0.79),
+						OCRScore: float64Ptr(0.98),
 						Rotation: 0,
 						BoundingBox: []float64{
 							0, 0.0337, 0.2073, 0.3008, 0.2206,
@@ -576,17 +520,14 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 						},
 					},
 					Discount: &scheme.DetailedFloatField{
-						Value:          0,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value:    0,
+						Rotation: 0,
 					},
+					Tags: []string{},
 					Total: &scheme.DetailedFloatField{
 						Value:    0.3,
-						Score:    0.8,
-						OCRScore: 0.99,
+						Score:    float64Ptr(0.8),
+						OCRScore: float64Ptr(0.99),
 						BoundingBox: []float64{
 							0, 0.7329, 0.2141, 0.8232, 0.2253,
 						},
@@ -596,73 +537,49 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 						Rotation: 0,
 					},
 					UnitOfMeasure: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					UPC: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					Tax: &scheme.DetailedFloatField{
-						Value:          0,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 0,
+
+						Rotation: 0,
 					},
 					TaxRate: &scheme.DetailedFloatField{
-						Value:          0,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 0,
+
+						Rotation: 0,
 					},
 					Price: &scheme.DetailedFloatField{
-						Value:          0,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 0,
+
+						Rotation: 0,
 					},
 					Quantity: &scheme.DetailedFloatField{
-						Value:          1,
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: 1,
+
+						Rotation: 0,
 					},
 					Reference: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					Section: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					SKU: &scheme.DetailedField{
 						Value:    "00000007211",
-						Score:    0.93,
-						OCRScore: 0.97,
+						Score:    float64Ptr(0.93),
+						OCRScore: float64Ptr(0.97),
 						BoundingBox: []float64{
 							0, 0.1209, 0.2185, 0.365, 0.2312,
 						},
@@ -683,6 +600,7 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					Order: 0,
 					Rate:  9.625,
 					Total: 1.93,
+					Code:  "A",
 				},
 			},
 
@@ -691,17 +609,14 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				{
 					Order: 0,
 					Name: &scheme.DetailedField{
-						Value:          "",
-						Score:          0,
-						OCRScore:       0,
-						BoundingBox:    nil,
-						BoundingRegion: nil,
-						Rotation:       0,
+						Value: "",
+
+						Rotation: 0,
 					},
 					Rate: &scheme.DetailedFloatField{
 						Value:    9.625,
-						Score:    1.0,
-						OCRScore: 0.8,
+						Score:    float64Ptr(1.0),
+						OCRScore: float64Ptr(0.8),
 						BoundingBox: []float64{
 							0, 0.3396, 0.5293, 0.5205, 0.543,
 						},
@@ -712,8 +627,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 					},
 					Total: &scheme.DetailedFloatField{
 						Value:    1.93,
-						Score:    1.0,
-						OCRScore: 0.99,
+						Score:    float64Ptr(1.0),
+						OCRScore: float64Ptr(0.99),
 						BoundingBox: []float64{
 							0, 0.7349, 0.5278, 0.8223, 0.5386,
 						},
@@ -727,72 +642,56 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 
 			BillTo: scheme.DetailedToField{
 				Name: &scheme.DetailedField{
-					Value:          "",
-					Score:          0.95,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(0.95),
+
+					Rotation: 0,
 				},
 				Address: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				ParsedAddress: nil,
 				Email: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				VATNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				PhoneNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				RegNumber: &scheme.DetailedField{
-					Value:          "",
-					Score:          1.0,
-					OCRScore:       0.0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 			},
 
 			ShipTo: scheme.DetailedToField{
 				Name: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				Address: &scheme.DetailedField{
-					Value:          "",
-					Score:          1,
-					OCRScore:       0,
-					BoundingBox:    nil,
-					BoundingRegion: nil,
-					Rotation:       0,
+					Value: "",
+					Score: float64Ptr(1.0),
+
+					Rotation: 0,
 				},
 				ParsedAddress: nil,
 			},
@@ -970,6 +869,7 @@ func TestUnitClientV8_ProcessDetailedDocumentURL(t *testing.T) {
 	resp, err := client.ProcessDetailedDocumentURL(scheme.DocumentURLOptions{
 		FileURL: "http://cdn-dev.veryfi.com/testing/veryfi-python/receipt_public.jpg",
 	})
+	// fmt.Println(resp)
 	assert.NotNil(t, resp)
 	assert.NoError(t, err)
 	assert.Equal(t, expected, resp)
