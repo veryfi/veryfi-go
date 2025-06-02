@@ -103,7 +103,7 @@ func (c *Client) ProcessDetailedDocumentUpload(opts scheme.DocumentUploadOptions
 	}
 
 	payload := scheme.DocumentUploadBase64Options{
-		FileData: encodedFile,
+		FileData:              encodedFile,
 		DocumentSharedOptions: opts.DocumentSharedOptions,
 	}
 	// Always enable confidence details and bounding boxes
@@ -137,7 +137,6 @@ func (c *Client) ProcessDetailedDocumentURL(opts scheme.DocumentURLOptions) (*sc
 
 	return *out, nil
 }
-
 
 // UpdateDocument updates and returns the processed document.
 func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {
