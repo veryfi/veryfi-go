@@ -1,4 +1,4 @@
-module github.com/veryfi/veryfi-go/v2
+module github.com/veryfi/veryfi-go/v3
 
 go 1.23
 
@@ -16,4 +16,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/veryfi/veryfi-go/v2 => ./
+replace github.com/veryfi/veryfi-go/v3 => ./
