@@ -27,7 +27,7 @@ type DocumentSharedOptions struct {
 	FileName          string   `json:"file_name,omitempty"`
 	Categories        []string `json:"categories,omitempty"`
 	Tags              []string `json:"tags,omitempty"`
-	MaxPagesToProcess int      `json:"max_pages_to_process,omitempty"`
+	MaxPagesToProcess *int     `json:"max_pages_to_process,omitempty"`
 	BoostMode         bool     `json:"boost_mode,omitempty"`
 	AutoDelete        bool     `json:"auto_delete,omitempty"`
 	DetectBlur        bool     `json:"detect_blur,omitempty"`
@@ -125,15 +125,15 @@ type DocumentGetDetailedOptions struct {
 
 // LineItemOptions describes the query parameters to add a line to a document.
 type LineItemOptions struct {
-	Order         int     `json:"order"`
-	SKU           string  `json:"sku"`
-	Description   string  `json:"description"`
-	Category      string  `json:"category"`
-	Total         float64 `json:"total"`
-	Tax           float64 `json:"tax"`
-	Price         float64 `json:"price"`
-	UnitOfMeasure string  `json:"unit_of_measure"`
-	Quantity      float64 `json:"quantity"`
+	Order         int      `json:"order"`
+	SKU           *string  `json:"sku"`
+	Description   *string  `json:"description"`
+	Category      *string  `json:"category"`
+	Total         *float64 `json:"total"`
+	Tax           *float64 `json:"tax"`
+	Price         *float64 `json:"price"`
+	UnitOfMeasure *string  `json:"unit_of_measure"`
+	Quantity      *float64 `json:"quantity"`
 }
 
 type DocumentStatus string
@@ -156,14 +156,20 @@ type DocumentsMeta struct {
 	TotalResults     int `json:"total_results"`
 }
 
+type Barcode struct {
+	Data           string    `json:"data"`
+	Type           string    `json:"type"`
+	BoundingRegion []float64 `json:"bounding_region"`
+}
+
 // Document describes the response.
 type Document struct {
 	AccountingEntryType     string         `json:"accounting_entry_type"`
 	AccountNumber           string         `json:"account_number"`
-	Balance                 string         `json:"balance"`
-	Barcodes                []string       `json:"barcodes"`
+	Balance                 float64        `json:"balance"`
+	Barcodes                []Barcode      `json:"barcodes"`
 	BillTo                  ToField        `json:"bill_to"`
-	Cashback                string         `json:"cashback"`
+	Cashback                float64        `json:"cashback"`
 	Category                string         `json:"category"`
 	Created                 string         `json:"created_date"`
 	CountryCode             string         `json:"country_code"`
@@ -194,7 +200,7 @@ type Document struct {
 	IsMoneyIn               bool           `json:"is_money_in"`
 	IsTransaction           bool           `json:"is_transaction"`
 	LicensePlateNumber      string         `json:"license_plate_number"`
-	LineItems               []LineItem     `json:"line_items_with_scores"`
+	LineItems               []LineItem     `json:"line_items"`
 	Model                   string         `json:"model"`
 	Notes                   string         `json:"notes"`
 	OCRText                 string         `json:"ocr_text"`
@@ -204,6 +210,7 @@ type Document struct {
 	PDFURL                  string         `json:"pdf_url"`
 	PreviousBalance         float64        `json:"previous_balance"`
 	PurchaseOrderNumber     string         `json:"purchase_order_number"`
+	ReferenceNumber         string         `json:"reference_number"`
 	Rounding                float64        `json:"rounding"`
 	ServerName              string         `json:"server_name"`
 	ServiceEndDate          string         `json:"service_end_date"`
@@ -214,9 +221,9 @@ type Document struct {
 	Status                  DocumentStatus `json:"status"`
 	StoreNumber             string         `json:"store_number"`
 	Subtotal                float64        `json:"subtotal"`
-	Tags                    []string       `json:"tags"`
+	Tags                    []Tag          `json:"tags"`
 	Tax                     float64        `json:"tax"`
-	TaxLines                []TaxLine      `json:"tax_lines_with_scores"`
+	TaxLines                []TaxLine      `json:"tax_lines"`
 	Tip                     float64        `json:"tip"`
 	Total                   float64        `json:"total"`
 	TotalQuantity           float64        `json:"total_quantity"`
@@ -320,9 +327,9 @@ type LineItem struct {
 
 // ProductInfo describes the product info in a document response.
 type ProductInfo struct {
-	Brand               string   `json:"brand"`
+	Brand               *string  `json:"brand"`
 	Category            []string `json:"category"`
-	ExpandedDescription string   `json:"expanded_description"`
+	ExpandedDescription *string  `json:"expanded_description"`
 }
 
 // TaxLine describes the tax line response.
@@ -382,9 +389,9 @@ type TagOptions struct {
 
 // DetailedField represents a field with confidence scores and metadata
 type DetailedField struct {
-	Value          string    `json:"value,omitempty"`
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
+	Value          *string   `json:"value,omitempty"`
+	Score          *float64  `json:"score,omitempty"`
+	OCRScore       *float64  `json:"ocr_score,omitempty"`
 	BoundingBox    []float64 `json:"bounding_box,omitempty"`
 	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       int       `json:"rotation,omitempty"`
@@ -392,9 +399,9 @@ type DetailedField struct {
 
 // DetailedFloatField represents a numeric field with confidence scores
 type DetailedFloatField struct {
-	Value          float64   `json:"value,omitempty"`
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
+	Value          *float64  `json:"value,omitempty"`
+	Score          *float64  `json:"score,omitempty"`
+	OCRScore       *float64  `json:"ocr_score,omitempty"`
 	BoundingBox    []float64 `json:"bounding_box,omitempty"`
 	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       int       `json:"rotation,omitempty"`
@@ -402,9 +409,9 @@ type DetailedFloatField struct {
 
 // DetailedDateField represents a date field with confidence scores
 type DetailedDateField struct {
-	Value          string    `json:"value,omitempty"` // ISO 8601 date format
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
+	Value          *string   `json:"value,omitempty"` // ISO 8601 date format
+	Score          *float64  `json:"score,omitempty"`
+	OCRScore       *float64  `json:"ocr_score,omitempty"`
 	BoundingBox    []float64 `json:"bounding_box,omitempty"`
 	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       int       `json:"rotation,omitempty"`
@@ -412,9 +419,9 @@ type DetailedDateField struct {
 
 // DetailedBoolField represents a boolean field with confidence scores
 type DetailedBoolField struct {
-	Value          bool      `json:"value,omitempty"`
-	Score          float64   `json:"score,omitempty"`
-	OCRScore       float64   `json:"ocr_score,omitempty"`
+	Value          *bool     `json:"value,omitempty"`
+	Score          *float64  `json:"score,omitempty"`
+	OCRScore       *float64  `json:"ocr_score,omitempty"`
 	BoundingBox    []float64 `json:"bounding_box,omitempty"`
 	BoundingRegion []float64 `json:"bounding_region,omitempty"`
 	Rotation       int       `json:"rotation,omitempty"`
@@ -428,7 +435,7 @@ type DetailedVendor struct {
 	BankName        *DetailedField `json:"bank_name,omitempty"`
 	BankNumber      *DetailedField `json:"bank_number,omitempty"`
 	BankSwift       *DetailedField `json:"bank_swift,omitempty"`
-	ExternalID      string         `json:"external_id,omitempty"`
+	ExternalID      *string        `json:"external_id,omitempty"`
 	FaxNumber       *DetailedField `json:"fax_number,omitempty"`
 	FullAddress     *DetailedField `json:"full_address,omitempty"`
 	IBAN            *DetailedField `json:"iban,omitempty"`
@@ -442,9 +449,9 @@ type DetailedVendor struct {
 	VATNumber       *DetailedField `json:"vat_number,omitempty"`
 	PhoneNumber     *DetailedField `json:"phone_number,omitempty"`
 	RegNumber       *DetailedField `json:"reg_number,omitempty"`
-	Logo            string         `json:"logo,omitempty"`
-	Lat             float64        `json:"lat,omitempty"`
-	Lng             float64        `json:"lng,omitempty"`
+	Logo            *string        `json:"logo,omitempty"`
+	Lat             *float64       `json:"lat,omitempty"`
+	Lng             *float64       `json:"lng,omitempty"`
 	Type            *DetailedField `json:"type"`
 }
 
@@ -462,13 +469,14 @@ type DetailedToField struct {
 // DetailedPayment represents payment information with confidence scores
 type DetailedPayment struct {
 	CardNumber  *DetailedField `json:"card_number"`
-	DisplayName string         `json:"display_name"`
+	DisplayName *string        `json:"display_name"`
 	Terms       *DetailedField `json:"terms"`
 	Type        *DetailedField `json:"type"`
 }
 
 // DetailedLineItem extends LineItem with confidence scores
 type DetailedLineItem struct {
+	Category      *DetailedField      `json:"category"`
 	Date          *DetailedDateField  `json:"date"`
 	Description   *DetailedField      `json:"description"`
 	Discount      *DetailedFloatField `json:"discount"`
@@ -480,19 +488,23 @@ type DetailedLineItem struct {
 	Section       *DetailedField      `json:"section"`
 	SKU           *DetailedField      `json:"sku"`
 	UPC           *DetailedField      `json:"upc"`
+	Tags          []string            `json:"tags"`
 	Tax           *DetailedFloatField `json:"tax"`
 	TaxRate       *DetailedFloatField `json:"tax_rate"`
 	Total         *DetailedFloatField `json:"total"`
-	Type          string              `json:"type"`
+	Type          *string             `json:"type"`
 	UnitOfMeasure *DetailedField      `json:"unit_of_measure"`
 }
 
 // DetailedTaxLine extends TaxLine with confidence scores
 type DetailedTaxLine struct {
-	Order int                 `json:"order"`
-	Name  *DetailedField      `json:"name"`
-	Rate  *DetailedFloatField `json:"rate"`
-	Total *DetailedFloatField `json:"total"`
+	Order          int                 `json:"order"`
+	Name           *DetailedField      `json:"name"`
+	Rate           *DetailedFloatField `json:"rate"`
+	Total          *DetailedFloatField `json:"total"`
+	Base           *DetailedFloatField `json:"base"`
+	Code           *DetailedField      `json:"code"`
+	TotalInclusive *DetailedFloatField `json:"total_inclusive"`
 }
 
 type DetailedDocuments struct {
@@ -504,17 +516,18 @@ type DetailedDocuments struct {
 type DetailedDocument struct {
 	ABNNumber           *DetailedField      `json:"abn_number"`
 	AccountNumber       *DetailedField      `json:"account_number"`
+	Barcodes            []Barcode           `json:"barcodes"`
 	BillTo              DetailedToField     `json:"bill_to"`
 	CardNumber          *DetailedField      `json:"card_number"`
 	Category            *DetailedField      `json:"category"`
-	Created             *DetailedField      `json:"created"`
+	Created             string              `json:"created_date"`
 	CurrencyCode        *DetailedField      `json:"currency_code"`
 	Date                *DetailedDateField  `json:"date"`
 	DeliveryDate        *DetailedDateField  `json:"delivery_date"`
 	Discount            *DetailedFloatField `json:"discount"`
-	ReferenceNumber     string              `json:"reference_number"`
+	ReferenceNumber     *string             `json:"reference_number"`
 	DueDate             *DetailedDateField  `json:"due_date"`
-	ExternalID          string              `json:"external_id"`
+	ExternalID          *string             `json:"external_id"`
 	ID                  int                 `json:"id"`
 	ImgFileName         string              `json:"img_file_name"`
 	ImgThumbnailURL     string              `json:"img_thumbnail_url"`
@@ -537,6 +550,7 @@ type DetailedDocument struct {
 	Status              DocumentStatus      `json:"status"`
 	StoreNumber         *DetailedField      `json:"store_number"`
 	Subtotal            *DetailedFloatField `json:"subtotal"`
+	Tags                []Tag               `json:"tags"`
 	Tax                 *DetailedFloatField `json:"tax"`
 	TaxLines            []TaxLine           `json:"tax_lines"`
 	TaxLinesWithScores  []DetailedTaxLine   `json:"tax_lines_with_scores"`
@@ -544,7 +558,7 @@ type DetailedDocument struct {
 	Total               *DetailedFloatField `json:"total"`
 	TotalWeight         *DetailedField      `json:"total_weight"`
 	TrackingNumber      *DetailedField      `json:"tracking_number"`
-	Updated             string              `json:"updated"`
+	Updated             *string             `json:"updated_date"`
 	VATNumber           *DetailedField      `json:"vat_number"`
 	Vendor              *DetailedVendor     `json:"vendor"`
 	VendorIban          *DetailedField      `json:"vendor_iban"`
