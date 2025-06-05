@@ -71,6 +71,8 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				Value: stringPtr("Job Supplies"),
 				Score: float64Ptr(0.94),
 			},
+			Created: "2025-03-25 20:57:21",
+			Updated: stringPtr("2025-03-25 20:57:29"),
 			CurrencyCode: &scheme.DetailedField{
 				Value: stringPtr("USD"),
 				Score: float64Ptr(0.96),

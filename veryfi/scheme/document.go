@@ -171,7 +171,7 @@ type Document struct {
 	BillTo                  ToField        `json:"bill_to"`
 	Cashback                float64        `json:"cashback"`
 	Category                string         `json:"category"`
-	Created                 string         `json:"created"`
+	Created                 string         `json:"created_date"`
 	CountryCode             string         `json:"country_code"`
 	CurrencyCode            string         `json:"currency_code"`
 	Date                    string         `json:"date"`
@@ -230,7 +230,7 @@ type Document struct {
 	TotalWeight             string         `json:"total_weight"`
 	TrackingNumber          string         `json:"tracking_number"`
 	TrackingNumbers         []string       `json:"tracking_numbers"`
-	Updated                 string         `json:"updated"`
+	Updated                 string         `json:"updated_date"`
 	VendingPerson           string         `json:"vending_person"`
 	VendingPersonNumber     string         `json:"vending_person_number"`
 	Vendor                  Vendor         `json:"vendor"`
@@ -520,7 +520,7 @@ type DetailedDocument struct {
 	BillTo              DetailedToField     `json:"bill_to"`
 	CardNumber          *DetailedField      `json:"card_number"`
 	Category            *DetailedField      `json:"category"`
-	Created             DetailedField       `json:"created"`
+	Created             string              `json:"created_date"`
 	CurrencyCode        *DetailedField      `json:"currency_code"`
 	Date                *DetailedDateField  `json:"date"`
 	DeliveryDate        *DetailedDateField  `json:"delivery_date"`
@@ -558,7 +558,7 @@ type DetailedDocument struct {
 	Total               *DetailedFloatField `json:"total"`
 	TotalWeight         *DetailedField      `json:"total_weight"`
 	TrackingNumber      *DetailedField      `json:"tracking_number"`
-	Updated             *string             `json:"updated"`
+	Updated             *string             `json:"updated_date"`
 	VATNumber           *DetailedField      `json:"vat_number"`
 	Vendor              *DetailedVendor     `json:"vendor"`
 	VendorIban          *DetailedField      `json:"vendor_iban"`
