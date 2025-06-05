@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/veryfi/veryfi-go/v2/veryfi/scheme"
+	"github.com/veryfi/veryfi-go/v3/veryfi/scheme"
 )
 
 func cleanUp(t *testing.T, documentID int) {
