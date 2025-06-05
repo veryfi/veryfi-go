@@ -9,6 +9,14 @@ import (
 	"github.com/veryfi/veryfi-go/v2/veryfi/scheme"
 )
 
+func float64Ptr(v float64) *float64 {
+	return &v
+}
+
+func stringPtr(v string) *string {
+	return &v
+}
+
 func ExampleClient_processDocument() {
 	timeout, err := time.ParseDuration("10s")
 	if err != nil {
@@ -153,8 +161,8 @@ func ExampleClient_manageLineItem() {
 	// Add a line item.
 	resp, err := client.AddLineItem(documentID, scheme.LineItemOptions{
 		Order:       1,
-		Description: "Example",
-		Total:       1.0,
+		Description: stringPtr("Example"),
+		Total:       float64Ptr(1.0),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -180,8 +188,8 @@ func ExampleClient_manageLineItem() {
 	// Update a line item.
 	resp, err = client.UpdateLineItem(documentID, lineItemID, scheme.LineItemOptions{
 		Order:       6,
-		Description: "Example",
-		Total:       6.6,
+		Description: stringPtr("Example"),
+		Total:       float64Ptr(6.6),
 	})
 	if err != nil {
 		log.Fatal(err)
