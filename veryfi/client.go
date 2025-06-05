@@ -60,7 +60,18 @@ func createClient(opts *Options) (*resty.Client, error) {
 		SetTimeout(opts.HTTP.Timeout).
 		SetRetryCount(int(opts.HTTP.Retry.Count)).
 		SetRetryWaitTime(opts.HTTP.Retry.WaitTime).
-		SetRetryMaxWaitTime(opts.HTTP.Retry.MaxWaitTime)
+		SetRetryMaxWaitTime(opts.HTTP.Retry.MaxWaitTime).
+		OnAfterResponse(func(c *resty.Client, resp *resty.Response) error {
+			if resp.IsError() && resp.Error() != nil {
+				errorStruct := resp.Error().(*scheme.Error)
+				errorStruct.Status = resp.RawResponse.Status
+				body := resp.Body()
+				if len(body) > 0 {
+					c.JSONUnmarshal(body, errorStruct)
+				}
+			}
+			return nil
+		})
 
 	return client, nil
 }
@@ -103,7 +114,7 @@ func (c *Client) ProcessDetailedDocumentUpload(opts scheme.DocumentUploadOptions
 	}
 
 	payload := scheme.DocumentUploadBase64Options{
-		FileData: encodedFile,
+		FileData:              encodedFile,
 		DocumentSharedOptions: opts.DocumentSharedOptions,
 	}
 	// Always enable confidence details and bounding boxes
@@ -137,7 +148,6 @@ func (c *Client) ProcessDetailedDocumentURL(opts scheme.DocumentURLOptions) (*sc
 
 	return *out, nil
 }
-
 
 // UpdateDocument updates and returns the processed document.
 func (c *Client) UpdateDocument(documentID string, opts scheme.DocumentUpdateOptions) (*scheme.Document, error) {
@@ -410,14 +420,15 @@ func check(err error, errResp *scheme.Error) error {
 		return errors.Wrap(err, "fail to make a request to Veryfi")
 	}
 
-	// Parse down to a more meaningful error.
-	if *errResp != (scheme.Error{}) {
+	// HTTP errors are handled by OnAfterResponse, but we still check for
+	// any structured errors that might not have triggered HTTP error status codes
+	if errResp != nil && *errResp != (scheme.Error{}) {
 		ctx := ""
 		if len(errResp.Error) > 0 {
 			ctx = errResp.Error
 		}
-		if len(errResp.Message) > 0 {
-			ctx = errResp.Message
+		if errResp.Details != nil {
+			ctx = fmt.Sprintf("%v", errResp.Details)
 		}
 
 		return errors.Errorf(
