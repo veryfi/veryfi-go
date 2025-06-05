@@ -4,5 +4,5 @@ package scheme
 type Error struct {
 	Status  string `json:"status"`
 	Error   string `json:"error"`
-	Message string `json:"message"`
+	Details any    `json:"details"`
 }
