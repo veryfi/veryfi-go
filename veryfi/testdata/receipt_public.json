@@ -8,7 +8,7 @@
     "card_number": "",
     "cashback": 0.0,
     "category": "",
-    "created": "2021-06-22 20:11:10",
+    "created_date": "2021-06-22 20:11:10",
     "currency_code": "USD",
     "date": "2021-06-22 16:11:10",
     "discount": 0.0,
@@ -67,7 +67,7 @@
     "tip": 0.0,
     "total": 97.66,
     "tracking_number": "",
-    "updated": "2021-06-22 20:11:11",
+    "updated_date": "2021-06-22 20:11:11",
     "vat_number": "",
     "vendor": {
         "address": "",
