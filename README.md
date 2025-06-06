@@ -181,7 +181,13 @@ To learn more about Veryfi visit <https://www.veryfi.com/>.
 Below is a introduction to the Go SDK. We're gonna walkthrough a problem and solve it together:
 
 > Let’s say we are faced with a challenge where we have to capture and extract data from thousands (or even millions) of backlogged receipts. We don’t want to do it manually because copying and pasting from files to files takes a lot of time and is often error-prone. Also, different receipts have different forms and styles, finding the meaningful data across a huge pile of files can be a tedious task. What is even better is if we could extract the receipts and see the processing in real-time where the results can be returned almost immediately in seconds, not hours. So now, what is the best way that we can solve this?
-
+> 
+If you prefer a video format, here is the link to our Youtube channel →
 [Link to blog post →](https://www.veryfi.com/go/)
 
-If you prefer a video format, here is the link to our Youtube channel →
+
+## Releases
+
+For a patch or minor version release, create a tagged release.
+
+For a major version release, update `github.com/veryfi/veryfi-go/v` in the code, create a tagged release.
