@@ -20,6 +20,10 @@ func stringPtr(v string) *string {
 	return &v
 }
 
+func boolPtr(v bool) *bool {
+	return &v
+}
+
 func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, string, interface{}) {
 	server := test.NewHTTPServer()
 	assert.NotNil(t, server)
@@ -78,6 +82,7 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				Score: float64Ptr(0.96),
 			},
 			Date: &scheme.DetailedDateField{
+				Enriched:       boolPtr(true),
 				Value:          stringPtr("2022-05-24 13:10:00"),
 				Score:          float64Ptr(1.0),
 				BoundingBox:    []float64{0, 0.5332, 0.1168, 0.7573, 0.131},

@@ -76,6 +76,7 @@
     ],
     "rotation": 0,
     "score": 1.0,
+    "enriched": true,
     "value": "2022-05-24 13:10:00"
   },
   "default_category": {
