@@ -389,6 +389,7 @@ type TagOptions struct {
 
 // DetailedField represents a field with confidence scores and metadata
 type DetailedField struct {
+	Enriched       *bool     `json:"enriched"`
 	Value          *string   `json:"value,omitempty"`
 	Score          *float64  `json:"score,omitempty"`
 	OCRScore       *float64  `json:"ocr_score,omitempty"`
@@ -399,6 +400,7 @@ type DetailedField struct {
 
 // DetailedFloatField represents a numeric field with confidence scores
 type DetailedFloatField struct {
+	Enriched       *bool     `json:"enriched"`
 	Value          *float64  `json:"value,omitempty"`
 	Score          *float64  `json:"score,omitempty"`
 	OCRScore       *float64  `json:"ocr_score,omitempty"`
@@ -409,6 +411,7 @@ type DetailedFloatField struct {
 
 // DetailedDateField represents a date field with confidence scores
 type DetailedDateField struct {
+	Enriched       *bool     `json:"enriched"`
 	Value          *string   `json:"value,omitempty"` // ISO 8601 date format
 	Score          *float64  `json:"score,omitempty"`
 	OCRScore       *float64  `json:"ocr_score,omitempty"`
@@ -419,6 +422,7 @@ type DetailedDateField struct {
 
 // DetailedBoolField represents a boolean field with confidence scores
 type DetailedBoolField struct {
+	Enriched       *bool     `json:"enriched"`
 	Value          *bool     `json:"value,omitempty"`
 	Score          *float64  `json:"score,omitempty"`
 	OCRScore       *float64  `json:"ocr_score,omitempty"`
