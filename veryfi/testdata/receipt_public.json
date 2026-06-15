@@ -12,6 +12,7 @@
     "currency_code": "USD",
     "date": "2021-06-22 16:11:10",
     "discount": 0.0,
+    "document_type": "receipt",
     "due_date": "",
     "external_id": "",
     "id": 36966934,
