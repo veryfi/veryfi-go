@@ -64,11 +64,11 @@ func createClient(opts *Options) (*resty.Client, error) {
 		OnAfterResponse(func(c *resty.Client, resp *resty.Response) error {
 			if resp.IsError() && resp.Error() != nil {
 				errorStruct := resp.Error().(*scheme.Error)
-				errorStruct.Status = resp.RawResponse.Status
 				body := resp.Body()
 				if len(body) > 0 {
 					c.JSONUnmarshal(body, errorStruct)
 				}
+				errorStruct.Status = resp.RawResponse.Status
 			}
 			return nil
 		})
