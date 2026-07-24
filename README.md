@@ -114,6 +114,21 @@ func main() {
 }
 ```
 
+### Authentication
+
+The SDK supports two credential formats, auto-detected from the value you pass as `APIKey`:
+
+- **Client-scoped keys (recommended)** start with `vrfk_` and are sent as `Authorization: Bearer <key>`. They are not tied to a user, so you can leave `Username` empty:
+
+```go
+client, err := veryfi.NewClientV8(&veryfi.Options{
+	ClientID: "YOUR_CLIENT_ID",
+	APIKey:   "vrfk_YOUR_CLIENT_SCOPED_KEY", // Username not required
+})
+```
+
+- **Standard (legacy) keys** are sent as `Authorization: apikey <username>:<key>` and require both `Username` and `APIKey` (as shown in the example above).
+
 A successful response will look something like this:
 ```
 &{ABNNumber: AccountNumber: BillToAddress: BillToName: BillToVATNumber: CardNumber: Category: Created:2021-05-20 19:21:38 CurrencyCode:USD Date:2019-02-26 00:00:00 DeliveryDate: Discount:0 DocumentReferenceNumber: DueDate:2019-02-26 ExternalID: ID:23002226 ImgFileName:3947f571-a41b-4b79-abc7-c0d9805c8610.png ImgThumbnailURL:https://scdn.veryfi.com/receipts/3947f571-a41b-4b79-abc7-c0d9805c8610_1_t.png?Expires=1621538559&Signature=BokBYv9jyJcXbCXu49DqxHwRdAWEgG8xfMw7LHujXSCA5y4kGd-QaBDwMzMCgCuM0Ezdrv3lgAZa0Cr8A5DKAzymXxnfdEiV46w~iy1zGPRgx6IkqvllB4bWqHFdwuu88CJarfIjvkcaygcECiFHg3RSKuuN4eGUYDP~fK8ER~Awb9Cr5FpTbTMc9kOfyc~vii2Mikg3TBiTbcdshhjgD2oRI4nFh1fpwRpfHAArIR-ijYAetjFEOQycUiu6WnzWAyEV9RCP9KcrKOnY5eKD-mm5mKuGQGXX1OT2AGw80klF1epx7XppeER9kALF1s8Dq87s8gdnnVsrstEF3~e8Yg__&Key-Pair-Id=APKAJCILBXEJFZF4DCHQ ImgURL:https://scdn.veryfi.com/receipts/3947f571-a41b-4b79-abc7-c0d9805c8610.png?Expires=1621538559&Signature=G7T6n7~Gpr1Pi5rfPRn1GoOeTlKZnVxLbWSZf~svnNpytILXvN9tg7y-Ib39lcifHeM6vjVfm4Pa4k63-ri~SySGFq-RWtF4IjQGM3Hw4~8wHB-sPhorn4JeVd~e~CpaUgFJbGSRnbb1cmBDFdkuBMbLkdC7m5ifwE10kanUU87Q~vpDYLkQINzfylHJk21rwtSPvIiEX8rudLK1F1BGl7TWvx-o7BT~PTCJ-RsA~j4eGuOprDXpt5Achpf-LMUa-iRCpMFupWVOZFPGln8rDqp-TcpryTawTbNlajg0nFDtF1eqBlbfoEycb-ZECtV4KECZtle5T7rBqhGQsmUxNQ__&Key-Pair-Id=APKAJCILBXEJFZF4DCHQ Insurance: InvoiceNumber:   US-001 IsDuplicate:0 LineItems:[] OCRText:
