@@ -43,7 +43,7 @@ func NewClientV8(opts *Options) (*Client, error) {
 		options:    opts,
 		client:     c,
 		apiVersion: "v8",
-		pkgVersion: "2.1.1",
+		pkgVersion: "2.1.2",
 	}, nil
 }
 
@@ -64,11 +64,11 @@ func createClient(opts *Options) (*resty.Client, error) {
 		OnAfterResponse(func(c *resty.Client, resp *resty.Response) error {
 			if resp.IsError() && resp.Error() != nil {
 				errorStruct := resp.Error().(*scheme.Error)
-				errorStruct.Status = resp.RawResponse.Status
 				body := resp.Body()
 				if len(body) > 0 {
 					c.JSONUnmarshal(body, errorStruct)
 				}
+				errorStruct.Status = resp.RawResponse.Status
 			}
 			return nil
 		})
@@ -348,12 +348,25 @@ func (c *Client) request(payload interface{}, okScheme interface{}, errScheme in
 			"Content-Type":               "application/json",
 			"Accept":                     "application/json",
 			"Client-Id":                  c.options.ClientID,
-			"Authorization":              fmt.Sprintf("apikey %s:%s", c.options.Username, c.options.APIKey),
+			"Authorization":              authorizationHeader(c.options),
 			"X-Veryfi-Request-Timestamp": strconv.Itoa(timestamp),
 			"X-Veryfi-Request-Signature": c.generateSignature(payload, timestamp),
 		}).
 		SetResult(okScheme).
 		SetError(errScheme)
+}
+
+// bearerKeyPrefix identifies new client-scoped API keys, which authenticate as a Bearer token.
+const bearerKeyPrefix = "vrfk_"
+
+// authorizationHeader builds the Authorization header value. Client-scoped keys (prefixed with
+// "vrfk_") are sent as `Bearer <key>` and need no username; all other keys use the legacy
+// `apikey <username>:<key>` format.
+func authorizationHeader(o *Options) string {
+	if strings.HasPrefix(o.APIKey, bearerKeyPrefix) {
+		return "Bearer " + o.APIKey
+	}
+	return fmt.Sprintf("apikey %s:%s", o.Username, o.APIKey)
 }
 
 // setBaseURL returns a client that uses Veryfi's base URL.

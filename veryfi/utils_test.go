@@ -111,3 +111,16 @@ func TestUnitStructToMap(t *testing.T) {
 		assert.Equal(t, tt.expected, out)
 	}
 }
+
+// structToMap must be nil-safe: GetLineItems/GetTags/etc. pass nil query params, which previously
+// panicked (reflect.TypeOf(nil).NumField()).
+func TestUnitStructToMapNilSafe(t *testing.T) {
+	assert.NotPanics(t, func() {
+		assert.Equal(t, map[string]string{}, structToMap(nil))
+	})
+
+	var nilOpts *scheme.DocumentSearchOptions
+	assert.NotPanics(t, func() {
+		assert.Equal(t, map[string]string{}, structToMap(nilOpts))
+	})
+}

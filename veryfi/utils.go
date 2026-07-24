@@ -38,13 +38,27 @@ func buildURL(host string, path ...string) string {
 	return u.String()
 }
 
-// structToMap converts a struct of string fields to a map[string]string.
+// structToMap converts a struct of string fields to a map[string]string. It is nil-safe: a nil
+// interface, a nil pointer, or a non-struct value yields an empty map (some callers, e.g.
+// GetLineItems/GetTags, pass nil query params).
 func structToMap(s interface{}) map[string]string {
 	out := map[string]string{}
+	if s == nil {
+		return out
+	}
 
-	fields := reflect.TypeOf(s)
 	values := reflect.ValueOf(s)
+	for values.Kind() == reflect.Ptr {
+		if values.IsNil() {
+			return out
+		}
+		values = values.Elem()
+	}
+	if values.Kind() != reflect.Struct {
+		return out
+	}
 
+	fields := values.Type()
 	for i := 0; i < fields.NumField(); i++ {
 		field := fields.Field(i).Tag.Get("json")
 		value := fmt.Sprint(values.Field(i))
