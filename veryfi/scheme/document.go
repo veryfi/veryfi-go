@@ -181,6 +181,7 @@ type Document struct {
 	Discount                float64        `json:"discount"`
 	DocumentReferenceNumber string         `json:"document_reference_number"`
 	DocumentTitle           string         `json:"document_title"`
+	DocumentType            string         `json:"document_type"`
 	DuplicateOf             int            `json:"duplicate_of"`
 	DueDate                 string         `json:"due_date"`
 	ExchangeRate            float64        `json:"exch_rate"`
@@ -529,6 +530,7 @@ type DetailedDocument struct {
 	Date                *DetailedDateField  `json:"date"`
 	DeliveryDate        *DetailedDateField  `json:"delivery_date"`
 	Discount            *DetailedFloatField `json:"discount"`
+	DocumentType        *DetailedField      `json:"document_type"`
 	ReferenceNumber     *string             `json:"reference_number"`
 	DueDate             *DetailedDateField  `json:"due_date"`
 	ExternalID          *string             `json:"external_id"`

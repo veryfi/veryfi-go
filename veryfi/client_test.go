@@ -105,6 +105,10 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 				BoundingRegion: []float64{0.7646, 0.8789, 0.8823, 0.8789, 0.8823, 0.8906, 0.7646, 0.8906},
 				Rotation:       0,
 			},
+			DocumentType: &scheme.DetailedField{
+				Value: stringPtr("receipt"),
+				Score: float64Ptr(0.99),
+			},
 			DueDate: &scheme.DetailedDateField{
 				Value:          nil,
 				Score:          float64Ptr(1.0),
@@ -862,6 +866,7 @@ func setUp(t *testing.T, useDetailedReceipt bool) (test.HTTPServer, *Client, str
 			Created:       "2021-06-22 20:11:10",
 			CurrencyCode:  "USD",
 			Date:          "2021-06-22 16:11:10",
+			DocumentType:  "receipt",
 			ID:            36966934,
 			ImgFileName:   "7a0371f1-f695-4f9b-9e2b-da54cdf189fc.jpg",
 			InvoiceNumber: "98",
