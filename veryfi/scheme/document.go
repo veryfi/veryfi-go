@@ -22,6 +22,17 @@ type DocumentURLOptions struct {
 	DocumentSharedOptions
 }
 
+// ThinkingMode is an extra LLM pass on the line items of a document.
+type ThinkingMode string
+
+const (
+	// ThinkingLight runs the light thinking pass.
+	ThinkingLight ThinkingMode = "light"
+
+	// ThinkingDeep runs the deep thinking pass. It takes longer than ThinkingLight.
+	ThinkingDeep ThinkingMode = "deep"
+)
+
 // DocumentSharedOptions describes the shared query parameters among the processing API.
 type DocumentSharedOptions struct {
 	FileName          string   `json:"file_name,omitempty"`
@@ -36,6 +47,11 @@ type DocumentSharedOptions struct {
 	Async             bool     `json:"async,omitempty"`
 	ConfidenceDetails bool     `json:"confidence_details,omitempty"`
 	BoundingBoxes     bool     `json:"bounding_boxes,omitempty"`
+
+	// Thinking runs an extra LLM pass on the line items: ThinkingLight or ThinkingDeep.
+	// Leave it empty to turn it off. It only takes effect if thinking mode is enabled
+	// for your account.
+	Thinking ThinkingMode `json:"thinking,omitempty"`
 }
 
 // DocumentUpdateOptions describes the query parameters to update a document.
