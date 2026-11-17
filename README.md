@@ -114,6 +114,17 @@ func main() {
 }
 ```
 
+Run thinking on the line items with the `Thinking` option (`scheme.ThinkingLight` or `scheme.ThinkingDeep`; leave it empty to turn it off). `ThinkingDeep` takes longer than `ThinkingLight`. It only takes effect if thinking mode is enabled for your account.
+
+```go
+resp, err := client.ProcessDocumentUpload(scheme.DocumentUploadOptions{
+	FilePath: "YOUR_FILE_PATH",
+	DocumentSharedOptions: scheme.DocumentSharedOptions{
+		Thinking: scheme.ThinkingLight,
+	},
+})
+```
+
 ### Authentication
 
 The SDK supports two credential formats, auto-detected from the value you pass as `APIKey`:
